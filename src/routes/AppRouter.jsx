@@ -1,17 +1,23 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Auth from '../components/Auth'
+import Main from '../components/Main'
 import NavBottom from '../components/NavBottom'
 import NavTop from '../components/NavTop'
+import UserInfo from '../components/UserInfo'
+import Products from '../pages/Products'
+import Recomendation from '../pages/Recomendation'
 
 const AppRouter = () => {
   return (
     <>
       <NavTop />
       <Routes>
-        <Route path="/" />
-        <Route path="/auth" />
-        <Route path="/finance" />
-        <Route path="UserInfo" />
+        <Route path="/" element={<Main />} />
+        <Route path="/recomendation" element={<Recomendation />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/userinfo" element={<UserInfo />} />
       </Routes>
       <NavBottom />
     </>
