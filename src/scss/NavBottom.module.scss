@@ -1,0 +1,18 @@
+@import './font';
+@import './color';
+
+.navbutton {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  bottom: 0;
+  top: 0;
+  height: 70px;
+  & button {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+  }
+}
