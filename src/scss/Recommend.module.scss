@@ -1,0 +1,63 @@
+@import './font';
+@import './color';
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  @include center();
+  flex-direction: column;
+  margin: auto;
+  margin-top: 120px;
+}
+.contentTop {
+  display: block;
+  line-height: 20px;
+  text-align: left;
+  border: 1px solid $menuTitle;
+  width: 256px;
+  height: 64px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-sizing: border-box;
+  padding-left: 12px;
+  & h2 {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'SDGothicB';
+    line-height: 22px;
+    margin-top: 8px;
+  }
+  & p {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'SDGothicB';
+  }
+}
+.contentMiddle {
+  display: block;
+  line-height: 20px;
+  text-align: left;
+  border: 1px solid $menuTitle;
+  width: 256px;
+  height: 64px;
+  margin-top: 22px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-sizing: border-box;
+  padding-left: 12px;
+  & h2 {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'SDGothicB';
+    line-height: 22px;
+    margin-top: 8px;
+  }
+  & p {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'SDGothicB';
+  }
+}
