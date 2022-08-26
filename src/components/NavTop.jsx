@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
 import iPhone from '../assets/iphone.png'
-import iPhoneDark from '../assets/iphonedark.png'
 import { ShoppingCartOutlined, SearchOutlined } from '@ant-design/icons'
 import { Space, Popup } from 'antd-mobile'
 
 const NavTop = () => {
-  const [visible, setVisible] = useState(false)
   const notLogin = [
     { label: '회원가입', route: 'signup' },
     { label: '로그인', route: 'signin' },
@@ -17,29 +15,36 @@ const NavTop = () => {
     { label: '관심상품', route: 'liked' },
     { label: '로그아웃', route: 'logout' },
   ]
-  const isLogin = window.sessionStorage.getItem('token')
-  const options = isLogin ? logined : notLogin
-  const dark = false
-  const iconColor = dark ? 'rgba(235, 235, 245, 0.6)' : '#888888'
-  const notch = dark ? iPhoneDark : iPhone
 
-  const logo = () => {
+  const [visible, setVisible] = useState(false)
+  const [options, setOptions] = useState(notLogin)
+
+  const isLogin = window.sessionStorage.getItem('token')
+
+  useEffect(() => {
+    if (isLogin) {
+      setOptions(logined)
+    }
+  }, [isLogin])
+
+  const logout = () => {
     console.log('Logout!')
+    setOptions(notLogin)
   }
   return (
     <div>
       <div className={styles.top}>
-        <img className={styles.notch} src={notch} alt='iphone notch' />
+        <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
           <Space>
             <Link to='products'>
               <SearchOutlined
-                style={{ fontSize: '20px', color: iconColor, marginTop: '1px' }}
+                style={{ fontSize: '20px', color: '#888888', marginTop: '1px' }}
               />
             </Link>
             <Link to='basket'>
               <ShoppingCartOutlined
-                style={{ fontSize: '22px', color: iconColor }}
+                style={{ fontSize: '22px', color: '#888888' }}
               />
             </Link>
             <div
