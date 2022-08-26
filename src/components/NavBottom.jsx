@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const NavBottom = () => {
-  return <div>NavBottom</div>
-}
+  return <div>NavBottom</div>;
+};
 
-export default NavBottom
+export default NavBottom;
