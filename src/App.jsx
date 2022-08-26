@@ -1,11 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import AppRouter from './routes/AppRouter'
 
 function App() {
   const [count, setCount] = useState(0)
 
-  return <div className="App"></div>
+  return (
+    <div className="App">
+      <div>미니 프로젝트 2조!</div>
+      <AppRouter />
+    </div>
+  )
 }
 
 export default App

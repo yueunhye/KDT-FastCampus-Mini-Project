@@ -1,0 +1,35 @@
+// 색상 변수 지정
+
+// $primary: #f2555a;
+// $font-navy: #141432;
+
+// light theme
+
+$mainBG: #fff;
+$hbgBarColor: #888888;
+$menuBG: rgba(237, 237, 237, 0.8);
+$menuTitle: rgb(0, 0, 0, 0.7);
+$menuTitleSpan: rgb(0, 122, 255, 0.7);
+$menuTitleBG: rgb(255, 255, 255, 0.4);
+$menuList: rgb(60, 60, 67, 0.6);
+$red: #ff3b30;
+$blue: #007aff;
+$modalBorder: rgb(0, 0, 0, 0.2);
+$modalBG: rgba(237, 237, 237, 0.8);
+$modalBtn: #dedede;
+
+// dark theme
+.dark {
+  $mainBG: #292929;
+  $hbgBarColor: rgba(235, 235, 245, 0.6);
+  $menuBG: rgba(30, 30, 30, 0.75);
+  $menuTitle: #fff;
+  $menuTitleSpan: #0a84ff;
+  $menuTitleBG: rgba(255, 255, 255, 0.05);
+  $menuList: rgba(235, 235, 235, 0.737);
+  $red: #ff3b30;
+  $blue: #0a84ff;
+  $modalBorder: rgb(84, 84, 84, 0.6);
+  $modalBG: rgba(30, 30, 30, 0.6);
+  $modalBtn: #1c1c1e;
+}
