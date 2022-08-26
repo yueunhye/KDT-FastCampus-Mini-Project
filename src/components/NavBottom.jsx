@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 const NavBottom = () => {
   return (
@@ -14,6 +16,7 @@ const NavBottom = () => {
       }}
     >
       NavBottom
+      <Link to='products'>버튼</Link>
     </div>
   )
 }
