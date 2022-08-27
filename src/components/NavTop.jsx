@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
 import iPhone from '../assets/iphone.png'
-import { ShoppingCartOutlined, SearchOutlined } from '@ant-design/icons'
+import { ShoppingCartOutlined } from '@ant-design/icons'
+import { SearchOutline } from 'antd-mobile-icons'
 import { Space, Popup } from 'antd-mobile'
 
 const NavTop = () => {
@@ -32,14 +33,19 @@ const NavTop = () => {
     setOptions(notLogin)
   }
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.top}>
         <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
           <Space>
             <Link to='products'>
-              <SearchOutlined
-                style={{ fontSize: '20px', color: '#888888', marginTop: '1px' }}
+              <SearchOutline
+                style={{
+                  fontSize: '20px',
+                  color: '#888888',
+                  marginTop: '1px',
+                  fontWeight: 700,
+                }}
               />
             </Link>
             <Link to='basket'>
@@ -91,14 +97,22 @@ const NavTop = () => {
                 <div
                   key={option.route}
                   className={styles.logout}
-                  onClick={logout}
+                  onClick={() => {
+                    setVisible(false)
+                    logout()
+                  }}
                 >
                   {option.label}
                 </div>
               )
             }
             return (
-              <div key={option.route}>
+              <div
+                key={option.route}
+                onClick={() => {
+                  setVisible(false)
+                }}
+              >
                 <Link className={styles.menuList} to={option.route}>
                   {option.label}
                 </Link>
