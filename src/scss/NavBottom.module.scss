@@ -1,18 +1,32 @@
-@import './font';
-@import './color';
+@import './main.scss';
 
-.navbutton {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: auto;
+.navContainer {
+  position: fixed;
   bottom: 0;
-  top: 0;
-  height: 70px;
-  & button {
-    border: none;
-    outline: none;
-    background: none;
-    cursor: pointer;
+  background-color: #55a3ff;
+  height: 64px;
+  width: 100vw;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-family: 'SDGothicM';
+
+  .inner {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 14px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      .activeItem {
+        text-align: center;
+        color: #f6fff8;
+      }
+
+      .normalItem {
+        text-align: center;
+      }
+    }
   }
 }
