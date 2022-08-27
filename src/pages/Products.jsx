@@ -1,11 +1,10 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import Search from '~/components/Search'
 
 const Products = () => {
   return (
   <div>
-    {/* Products */}
-    <Outlet />
+    < Search />
   </div>
   )
 }

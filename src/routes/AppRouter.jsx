@@ -9,7 +9,7 @@ import UserInfo from '~/components/UserInfo'
 import Consume from '~/pages/Consume'
 import Products from '~/pages/Products'
 import Recomendation from '~/pages/Recomendation'
-import Search from '~/components/Search'
+
 
 
 const AppRouter = () => {
@@ -20,10 +20,7 @@ const AppRouter = () => {
         <Route path='/' element={<Main />} />
         <Route path='/recomendation' element={<Recomendation />} />
         <Route path='/auth' element={<Auth />} />
-        <Route path='/products' element={<Products />} />
-        <Route path="/products" element={<Products />} >
-          <Route index element={<Search />} />
-        </Route>
+        <Route path="/products" element={<Products />} />
         <Route path='/userinfo' element={<UserInfo />} />
         <Route paht='/wisdom' element={<Consume />} />
       </Routes>
