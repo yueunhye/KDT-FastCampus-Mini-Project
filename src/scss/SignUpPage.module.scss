@@ -79,11 +79,11 @@
   }
   input {
     width: 250px;
-    height: 23px;
+    height: 25px;
     border: 0.7px solid $inputBorder;
     border-radius: 10px;
     background-color: $inputBG;
-    padding: 2.5px 13px;
+    padding: 3px 13px;
     font-size: 13px;
     &::placeholder {
       color: #d1d1d6;
@@ -113,12 +113,12 @@
     padding-top: 5px;
   }
   input {
-    width: 59px;
-    height: 23px;
+    width: 65px;
+    height: 25px;
     border: 0.7px solid $inputBorder;
     border-radius: 10px;
     background-color: $inputBG;
-    padding: 2.5px 13px;
+    padding: 3px 10px;
     font-size: 13px;
     &::placeholder {
       color: #d1d1d6;
@@ -133,8 +133,8 @@
     padding: 10px 3px;
   }
   .select {
-    width: 82px;
-    height: 29.4px;
+    width: 83px;
+    height: 31.4px;
     border: 0.7px solid $inputBorder;
     border-radius: 10px;
     background-color: $inputBG;
