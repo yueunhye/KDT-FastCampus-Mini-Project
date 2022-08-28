@@ -37,8 +37,8 @@ const NavBottom = () => {
     <div className={styles.navContainer}>
       <nav>
         <Space size='large' className={styles.inner}>
-          {data.map(({ title, path, icons }) => (
-            <Link to={path} className={styles.links}>
+          {data.map(({ title, path, icons }, index) => (
+            <Link key={index} to={path} className={styles.links}>
               <div
                 className={`${
                   pathname === path ? styles.activeItem : styles.normalItem
