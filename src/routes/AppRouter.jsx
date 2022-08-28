@@ -10,7 +10,7 @@ import Recomendation from '../pages/Recomendation'
 import SignUpPage from '~/components/signup'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
-
+import DetailProduct from '../pages/DetailProduct'
 const AppRouter = () => {
   return (
     <>
@@ -24,6 +24,7 @@ const AppRouter = () => {
         <Route path='/userinfo' element={<UserInfo />} />
         <Route path='/consume' element={<Consume />} />
         <Route path='/basket' element={<Basket />} />
+        <Route path='/detail' element={<DetailProduct />} />
       </Routes>
       <NavBottom />
     </>

@@ -14,7 +14,6 @@ function Search() {
     const { data } = await getProduct()
     setProducts(data)
   }
-
   useEffect(() => {
     getData()
   }, [])
