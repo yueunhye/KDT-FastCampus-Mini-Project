@@ -1,7 +1,8 @@
-import { createSlice, combineReducers } from '@reduxjs/toolkit'
+import { createSlice, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { favoriteReducer } from './slices/favoriteSlice'
+import { basketReducer } from './slices/basketSlice'
 
 const persistConfig = {
   key: 'root',
@@ -9,13 +10,15 @@ const persistConfig = {
   whitelist: ['basket', 'favorite'],
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-export const rootReducer = createCombineReducers({
+export const rootReducer = combineReducers({
   basket: basketReducer,
   favorite: favoriteReducer,
 })
 
-export const store = configureStore({
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = configureStore({
   reducer: persistedReducer,
 })
+
+export default store
