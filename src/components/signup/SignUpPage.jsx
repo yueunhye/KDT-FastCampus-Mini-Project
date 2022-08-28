@@ -4,12 +4,11 @@ import {
   UserOutline,
   PhonebookOutline,
 } from 'antd-mobile-icons'
-import cards from '~/assets/cards.png'
-import box from '~/assets/box.png'
 import React, { useEffect, useState } from 'react'
 import styles from '~/scss/SignUpPage.module.scss'
 import { Link } from 'react-router-dom'
 import Alert from '../modal/Alert'
+import Decoration from '../deco/Decoration'
 
 function SignUpPage() {
   const [name, setName] = useState('')
@@ -36,18 +35,14 @@ function SignUpPage() {
       name,
       email: id + '@' + email,
       password,
-      phone,
+      phoneNumber: phone,
     }
     console.log(data)
   }
 
   return (
     <div className={styles.signUp}>
-      <div>
-        <div className={styles.circle}></div>
-        <img className={styles.cards} src={cards} alt='card' />
-        <img className={styles.box} src={box} alt='card' />
-      </div>
+      <Decoration />
       <div className={styles.container}>
         <div className={styles.title}>
           <p>나를 위한</p>
@@ -143,7 +138,7 @@ function SignUpPage() {
           가입하기
         </button>
         <p className={styles.gologin}>이미 회원이시라면?</p>
-        <Link to='/login' className={styles.loginbtn}>
+        <Link to='/signin' className={styles.loginbtn}>
           <span>로그인하러 Go!</span>
         </Link>
       </div>
