@@ -6,7 +6,7 @@ function Modal(props) {
 
   return (
     <div
-      className={open ? `${style.OpenModal} ${style.Modal}` : '{style.Modal}'}
+      className={open ? `${style.OpenModal} ${style.Modal}` : `${style.Modal}`}
     >
       {open ? (
         <section>
