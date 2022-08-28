@@ -38,7 +38,7 @@ const NavBottom = () => {
       <nav>
         <Space size='large' className={styles.inner}>
           {data.map(({ title, path, icons }) => (
-            <Link to={path} className={styles.links}>
+            <Link key={path} to={path} className={styles.links}>
               <div
                 className={`${
                   pathname === path ? styles.activeItem : styles.normalItem
