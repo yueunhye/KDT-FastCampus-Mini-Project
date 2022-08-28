@@ -8,6 +8,8 @@ import UserInfo from '../components/UserInfo'
 import Products from '../pages/Products'
 import Recomendation from '../pages/Recomendation'
 import SignUpPage from '~/components/signup'
+import Basket from '../pages/Basket'
+import Consume from '../pages/Consume'
 
 const AppRouter = () => {
   return (
@@ -20,6 +22,8 @@ const AppRouter = () => {
         <Route path='/auth' element={<Auth />} />
         <Route path='/products' element={<Products />} />
         <Route path='/userinfo' element={<UserInfo />} />
+        <Route path='/consume' element={<Consume />} />
+        <Route path='/basket' element={<Basket />} />
       </Routes>
       <NavBottom />
     </>
