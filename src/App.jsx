@@ -5,8 +5,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <div>미니 프로젝트 2조!</div>
+    <div className='App'>
+      <div style={{ position: 'fixed' }}>미니 프로젝트 2조!</div>
       <AppRouter />
     </div>
   )
