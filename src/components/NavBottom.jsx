@@ -1,5 +1,5 @@
 import React from 'react'
-import { Space, Button } from 'antd-mobile'
+import { Space } from 'antd-mobile'
 import {
   CreditCardFilled,
   ShoppingFilled,

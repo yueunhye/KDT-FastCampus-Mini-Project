@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     // 절대 경로 설정
-    alias: [{ find: '~', replacement: `${__dirname}/src` }]
-  }
+    alias: [{ find: '~', replacement: `${__dirname}/src` }],
+  },
 })
