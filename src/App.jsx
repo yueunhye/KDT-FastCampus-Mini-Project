@@ -6,6 +6,7 @@ function App() {
 
   return (
     <div className='App'>
+      <div style={{ position: 'fixed' }}>미니 프로젝트 2조!</div>
       <AppRouter />
     </div>
   )
