@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '~/components/modal/Modal'
-import style from '../scss/Search.module.scss'
+import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
 import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
