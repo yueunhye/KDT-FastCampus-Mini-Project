@@ -9,6 +9,7 @@ import Products from '../pages/Products'
 import Recomendation from '../pages/Recomendation'
 import SignUpPage from '~/components/signup'
 import Basket from '../pages/Basket'
+import Consume from '../pages/Consume'
 
 const AppRouter = () => {
   return (
