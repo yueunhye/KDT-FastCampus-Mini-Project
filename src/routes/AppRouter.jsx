@@ -8,9 +8,11 @@ import UserInfo from '../components/UserInfo'
 import Products from '../pages/Products'
 import Recomendation from '../pages/Recomendation'
 import SignUpPage from '~/components/signup'
+import SignIn from '~/components/signin'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
 import DetailProduct from '../pages/DetailProduct'
+
 const AppRouter = () => {
   return (
     <>
@@ -18,6 +20,7 @@ const AppRouter = () => {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/signin' element={<SignIn />} />
         <Route path='/recomendation' element={<Recomendation />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/products' element={<Products />} />
