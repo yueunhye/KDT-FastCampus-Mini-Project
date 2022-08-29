@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Modal from '~/components/Modal'
-import style from '../scss/Search.module.scss'
+import Modal from '~/components/modal/Modal'
+import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
 import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
+import { useGetProductsQuery } from '~/store/apis/productApi'
 
 function Search() {
   const buttonData = [
@@ -21,18 +22,21 @@ function Search() {
   const [clickData, setClickData] = useState(buttonData)
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
 
-  const getData = async () => {
-    const { data } = await getProduct()
-    setProducts(data)
+
+  const { data: products, error, isLoading } = useGetProductsQuery()
+  // const getData = async () => {
+  //   const { data } = await getProduct()
+  //   setProducts(data)
+  // }
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+  const toogleButton = () => {
+    setIsClick(isClick => !isClick)
   }
 
-  useEffect(() => {
-    getData()
-  }, [])
-
-  console.log(products)
   const openModal = () => {
     setModal(true)
   }
@@ -67,32 +71,38 @@ function Search() {
         <input placeholder='Search...' />
       </span>
 
-      {products.map((product, index) => (
-        <div
-          key={index}
-          className={
-            product.tag === '적금'
-              ? `${style.Card} ${style.orange}`
-              : product.tag[0] === '대출'
-              ? `${style.Card} ${style.blue}`
-              : product.tag[0] === '카드'
-              ? `${style.Card} ${style.green}`
-              : product.tag[0] === '펀드'
-              ? `${style.Card} ${style.pink}`
-              : `${style.Card} ${style.red}`
-          }
-          onClick={openModal}
-        >
-          <h2>{product.companyName}</h2>
-          <HeartOutlined />
-          <h3>{product.description}</h3>
-          <div className={style.details}>
-            <p>{product.details.slice(0, 2)}</p>
-            <p>{product.details.slice(4, 7)}</p>
-            <p>{product.details.slice(9, 12)}</p>
+      {error ? (
+        <div>에러가 발생했습니다</div>
+      ) : isLoading ? (
+        <div>로딩중...</div>
+      ) : (
+        products?.map((product, index) => (
+          <div
+            key={index}
+            className={
+              product.tag === '적금'
+                ? `${style.Card} ${style.orange}`
+                : product.tag[0] === '대출'
+                ? `${style.Card} ${style.blue}`
+                : product.tag[0] === '카드'
+                ? `${style.Card} ${style.green}`
+                : product.tag[0] === '펀드'
+                ? `${style.Card} ${style.pink}`
+                : `${style.Card} ${style.red}`
+            }
+            onClick={openModal}
+          >
+            <h2>{product.companyName}</h2>
+            <HeartOutlined />
+            <h3>{product.description}</h3>
+            <div className={style.details}>
+              <p>{product.details.slice(0, 2)}</p>
+              <p>{product.details.slice(4, 7)}</p>
+              <p>{product.details.slice(9, 12)}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
       {/* <div className={`${style.Card} ${style.orange}`} onClick={openModal}>
         <h2>productName</h2>
         <h3>description</h3>
