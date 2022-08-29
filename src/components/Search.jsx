@@ -6,7 +6,20 @@ import { getProduct } from '../utils/getProduct'
 import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
 
 function Search() {
-  const [isClick, setIsClick] = useState(false)
+  const buttonData = [
+    { id: 1, productsName: "대출" },
+    { id: 2, productsName: "펀드" },
+    { id: 3, productsName: "카드" },
+    { id: 4, productsName: "청약" },
+    { id: 5, productsName: "적금" },
+    { id: 6, productsName: "청년" },
+    { id: 7, productsName: "멤버십" },
+    { id: 8, productsName: "코로나" },
+    { id: 9, productsName: "서울" },
+    { id: 10, productsName: "담보" }
+  ]
+  const [clickData, setClickData] = useState(buttonData)
+  const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
   const [products, setProducts] = useState([])
 
@@ -20,53 +33,34 @@ function Search() {
   }, [])
 
   console.log(products)
-  const toogleButton = () => {
-    setIsClick(isClick => !isClick)
-  }
   const openModal = () => {
     setModal(true)
   }
   const closeModal = () => {
     setModal(false)
   }
-  const changeButton = isClick ? `${style.On}` : `${style.Off}`
+
 
   return (
     <section>
       {/* SearchAll */}
       <h1>상품을 검색해주세요</h1>
       <div className={style.Button}>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        {/* <button onClick={()=> toogleButton()} style={{backgroundColor:changeColor()}}>버튼</button> */}
+        {clickData.map((item)=>(
+          <button onClick={()=>{
+            !checkedButtons.includes(item)
+              ? setCheckedButtons((checkedButtons)=>[...checkedButtons, item])
+              : setCheckedButtons(checkedButtons.filter((button)=> button !== item))
+          }}
+          className={
+            checkedButtons.includes(item)
+              ? `${style.On}`
+              : `${style.Off}`
+          }>
+            {item.productsName}
+            </button>
+        ))}
+
       </div>
 
       <span className={style.Search}>
