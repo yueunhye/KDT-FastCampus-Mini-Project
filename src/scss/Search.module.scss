@@ -22,10 +22,11 @@ h1 {
     border: none;
     border-radius: 0.9rem;
     margin: 0.1rem;
-    padding: 0.4rem 0.9rem;
+    padding: 0.4rem 0;
     font-weight: 400;
-    text-align: center;
     color: #fff;
+    justify-content: center;
+    width: 3.5rem;
   }
 }
 .On {
