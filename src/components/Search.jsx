@@ -3,20 +3,25 @@ import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
-import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
+import {
+  StarOutlined,
+  StarFilled,
+  HeartOutlined,
+  SwapRightOutlined,
+} from '@ant-design/icons'
 
 function Search() {
   const buttonData = [
-    { id: 1, productsName: '대출' },
-    { id: 2, productsName: '펀드' },
-    { id: 3, productsName: '카드' },
-    { id: 4, productsName: '청약' },
-    { id: 5, productsName: '적금' },
-    { id: 6, productsName: '청년' },
-    { id: 7, productsName: '멤버십' },
-    { id: 8, productsName: '코로나' },
-    { id: 9, productsName: '서울' },
-    { id: 10, productsName: '담보' },
+    { id: 1, tagContent: '대출' },
+    { id: 2, tagContent: '펀드' },
+    { id: 3, tagContent: '카드' },
+    { id: 4, tagContent: '멤버십' },
+    { id: 5, tagContent: '적금' },
+    { id: 6, tagContent: '청년' },
+    { id: 7, tagContent: '제테크' },
+    { id: 8, tagContent: '코로나' },
+    { id: 9, tagContent: '문화' },
+    { id: 10, tagContent: '담보' },
   ]
   const [clickData, setClickData] = useState(buttonData)
   const [checkedButtons, setCheckedButtons] = useState([])
@@ -33,6 +38,7 @@ function Search() {
   const toogleButton = () => {
     setIsClick(isClick => !isClick)
   }
+  const [searchInput, setSearchInput] = useState()
 
   const openModal = () => {
     setModal(true)
@@ -43,11 +49,12 @@ function Search() {
 
   return (
     <section>
-      {/* SearchAll */}
       <h1>상품을 검색해주세요</h1>
+      <h1>{searchInput}</h1>
       <div className={style.Button}>
         {clickData.map(item => (
           <button
+            key={item.id}
             onClick={() => {
               !checkedButtons.includes(item)
                 ? setCheckedButtons(checkedButtons => [...checkedButtons, item])
@@ -59,13 +66,16 @@ function Search() {
               checkedButtons.includes(item) ? `${style.On}` : `${style.Off}`
             }
           >
-            {item.productsName}
+            {item.tagContent}
           </button>
         ))}
       </div>
 
       <span className={style.Search}>
-        <input placeholder='Search...' />
+        <input
+          placeholder='Search...'
+          onChange={event => setSearchInput(event.target.value)}
+        />
       </span>
 
       {error ? (
@@ -87,34 +97,21 @@ function Search() {
                 ? `${style.Card} ${style.pink}`
                 : `${style.Card} ${style.red}`
             }
-            onClick={openModal}
           >
-            <h2>{product.companyName}</h2>
-            <HeartOutlined />
-            <h3>{product.description}</h3>
-            <div className={style.details}>
-              <p>{product.details.slice(0, 2)}</p>
-              <p>{product.details.slice(4, 7)}</p>
-              <p>{product.details.slice(9, 12)}</p>
-            </div>
+            <h2>
+              {product.companyName}
+              <StarOutlined style={{ fontSize: '20px' }} />
+            </h2>
+            <h3>{product.productName}</h3>
+            <h4>{product.description}</h4>
+            <p onClick={openModal}>
+              신청하기
+              <SwapRightOutlined />
+            </p>
           </div>
         ))
       )}
-      {/* <div className={`${style.Card} ${style.orange}`} onClick={openModal}>
-        <h2>productName</h2>
-        <h3>description</h3>
-        <p>details</p>
-        <p>details</p>
-        <p>details</p>
-      </div>
 
-      <div className={`${style.Card} ${style.green}`} onClick={openModal}>
-        <h2>productName</h2>
-        <h3>description</h3>
-        <p>details</p>
-        <p>details</p>
-        <p>details</p>
-      </div> */}
       <Modal open={modal} close={closeModal} />
     </section>
   )
