@@ -9,10 +9,12 @@ $hbgBarHeight: 2px;
 .top {
   display: block;
   position: fixed;
+  padding-bottom: 10px;
   top: 0;
-  z-index: 99;
+  z-index: 999;
   font-family: 'Nanum Gothic', sans-serif;
   background-color: $mainBG;
+  box-shadow: 2px 0 5px 0.5px rgba(0, 0, 0, 0.18);
 }
 .notch {
   display: block;
