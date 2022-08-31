@@ -3,12 +3,11 @@ import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
-import {
-  StarOutlined,
-  StarFilled,
-  HeartOutlined,
-  SwapRightOutlined,
-} from '@ant-design/icons'
+
+import { useDispatch } from 'react-redux'
+import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
+import Card from './Card'
+import { useNavigate } from 'react-router-dom'
 
 function Search() {
   const buttonData = [
@@ -27,6 +26,8 @@ function Search() {
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
   const [products, setProducts] = useState([])
+
+  const navigate = useNavigate()
 
   const getData = async () => {
     const { data } = await getProduct()
@@ -50,6 +51,9 @@ function Search() {
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <button onClick={() => navigate('/favorite')}>관심상품 이동</button>
+      </div>
       <h1>{searchInput}</h1>
       <div className={style.Button}>
         {clickData.map(item => (
@@ -78,39 +82,9 @@ function Search() {
         />
       </span>
 
-      {error ? (
-        <div>에러가 발생했습니다</div>
-      ) : isLoading ? (
-        <div>로딩중...</div>
-      ) : (
-        products?.map((product, index) => (
-          <div
-            key={index}
-            className={
-              product.tag === '적금'
-                ? `${style.Card} ${style.orange}`
-                : product.tag[0] === '대출'
-                ? `${style.Card} ${style.blue}`
-                : product.tag[0] === '카드'
-                ? `${style.Card} ${style.green}`
-                : product.tag[0] === '펀드'
-                ? `${style.Card} ${style.pink}`
-                : `${style.Card} ${style.red}`
-            }
-          >
-            <h2>
-              {product.companyName}
-              <StarOutlined style={{ fontSize: '20px' }} />
-            </h2>
-            <h3>{product.productName}</h3>
-            <h4>{product.description}</h4>
-            <p onClick={openModal}>
-              신청하기
-              <SwapRightOutlined />
-            </p>
-          </div>
-        ))
-      )}
+      {products?.map((product, index) => (
+        <Card key={index} productData={product} openModal={openModal} />
+      ))}
 
       <Modal open={modal} close={closeModal} />
     </section>

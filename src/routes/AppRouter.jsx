@@ -12,6 +12,7 @@ import SignIn from '~/components/signin'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
 import DetailProduct from '../pages/DetailProduct'
+import Favorite from '../components/Favorite'
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
         <Route path='/consume' element={<Consume />} />
         <Route path='/basket' element={<Basket />} />
         <Route path='/detail' element={<DetailProduct />} />
+        <Route path='/favorite' element={<Favorite />} />
       </Routes>
       <NavBottom />
     </>
