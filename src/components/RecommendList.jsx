@@ -1,14 +1,19 @@
 import React from 'react'
 import styles from '../scss/Recommend.module.scss'
-import { RightOutline } from 'antd-mobile-icons'
-import { useNavigate } from 'react-router-dom'
+// import { RightOutline } from 'antd-mobile-icons'
+import RecommedModal from './modal/RecommendModal'
+import { useState } from 'react'
 
 const RecommendList = ({ name, recommend }) => {
   console.log('recommend?', recommend)
-  const navigate = useNavigate()
+  const [modal, setModal] = useState(false)
 
-  const detailHandler = () => {
-    navigate(`/detail`)
+  const modalClose = () => {
+    if (modal) {
+      setModal()
+    } else {
+      setModal(!modal)
+    }
   }
 
   return (
@@ -32,15 +37,30 @@ const RecommendList = ({ name, recommend }) => {
       </div>
       <div>
         <div className={styles.recommendCard}>
-          {recommend.slice(0, 1).map(card => (
-            <div key={card.id} className={styles.cardContainer}>
+          {recommend.slice(0, 2).map(card => (
+            <div
+              onClick={modalClose}
+              key={card.id}
+              className={
+                card.tag === '적금'
+                  ? `${styles.cardContainer} ${styles.orange}`
+                  : product.tag[0] === '대출'
+                  ? `${styles.cardContainer} ${styles.blue}`
+                  : product.tag[0] === '카드'
+                  ? `${styles.cardContainer} ${styles.green}`
+                  : product.tag[0] === '펀드'
+                  ? `${styles.cardContainer} ${styles.pink}`
+                  : `${styles.cardContainer} ${styles.red}`
+              }
+            >
               <h2>{card.tag}</h2>
               <h3>
                 {card.photo} {card.companyName}
               </h3>
               <h4>{card.productName}</h4>
               <h5>{card.description}</h5>
-              <RightOutline className={styles.icon} onClick={detailHandler} />
+              {/* <RightOutline className={styles.icon} onClick={openModal} /> */}
+              {modal && <RecommedModal modalClose={modalClose} />}
             </div>
           ))}
         </div>
