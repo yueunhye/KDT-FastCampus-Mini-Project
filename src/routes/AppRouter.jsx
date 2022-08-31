@@ -11,6 +11,7 @@ import SignUpPage from '~/components/signup'
 import SignIn from '~/components/signin'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
+import Favorite from '../components/Favorite'
 
 import Application from '../pages/Application'
 const AppRouter = () => {
@@ -27,7 +28,7 @@ const AppRouter = () => {
         <Route path='/userinfo' element={<UserInfo />} />
         <Route path='/consume' element={<Consume />} />
         <Route path='/basket' element={<Basket />} />
-
+        <Route path='/favorite' element={<Favorite />} />
         <Route path='/application' element={<Application />} />
       </Routes>
       <NavBottom />
