@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { favoriteReducer } from './slices/favoriteSlice'
 import { basketReducer } from './slices/basketSlice'
+import { recommendReducer } from './slices/recommendSlice'
 
 const persistConfig = {
   key: 'root',

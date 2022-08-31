@@ -27,8 +27,7 @@ function Search() {
   console.log('clickData', clickData)
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
-
-  const [searchInput, setSearchInput] = useState()
+  const [products, setProducts] = useState([])
 
   const navigate = useNavigate()
 
