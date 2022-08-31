@@ -13,6 +13,7 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   basket: basketReducer,
   favorite: favoriteReducer,
+  recommed: recommendReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

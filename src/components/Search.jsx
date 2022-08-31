@@ -22,10 +22,13 @@ function Search() {
     { id: 9, tagContent: '문화' },
     { id: 10, tagContent: '담보' },
   ]
+  const [filterBtn, setFilterBtn] = useState(false)
   const [clickData, setClickData] = useState(buttonData)
+  console.log('clickData', clickData)
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
-  const [products, setProducts] = useState([])
+
+  const [searchInput, setSearchInput] = useState()
 
   const navigate = useNavigate()
 
@@ -74,7 +77,6 @@ function Search() {
           </button>
         ))}
       </div>
-
       <span className={style.Search}>
         <input
           placeholder='Search...'
