@@ -6,7 +6,7 @@ import { basketReducer } from './slices/basketSlice'
 import { productApi } from './apis/productApi'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import logger from 'redux-logger'
-
+import { recommendReducer } from './slices/recommendSlice'
 const persistConfig = {
   key: 'root',
   storage,
@@ -16,6 +16,7 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   basket: basketReducer,
   favorite: favoriteReducer,
+  recommed: recommendReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
