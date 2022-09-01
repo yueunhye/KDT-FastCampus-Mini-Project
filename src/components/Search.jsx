@@ -38,6 +38,7 @@ function Search() {
   useEffect(() => {
     getData()
   }, [])
+
   const toogleButton = () => {
     setIsClick(isClick => !isClick)
   }

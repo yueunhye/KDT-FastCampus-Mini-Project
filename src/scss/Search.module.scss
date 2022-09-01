@@ -4,7 +4,6 @@ section {
   margin: 5rem auto 0 auto;
   width: 80%;
 }
-
 h1 {
   margin-bottom: 1rem;
   font-weight: 900;
@@ -23,7 +22,7 @@ h1 {
     border-radius: 0.9rem;
     margin: 0.1rem;
     padding: 0.4rem 0;
-    font-weight: 400;
+    font-weight: 500;
     color: #fff;
     justify-content: center;
     width: 3.5rem;
@@ -54,7 +53,6 @@ h1 {
     border: 1px solid #999;
   }
 }
-
 .Card {
   width: 18rem;
   height: 9rem;
@@ -200,6 +198,15 @@ h1 {
       font-size: 1rem;
       text-align: center;
       border-bottom: 1px solid #dee2e6;
+      .cart {
+        font-size: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .cartIcon {
+          transform: translateX(18px);
+        }
+      }
     }
     > main {
       padding: 5rem;

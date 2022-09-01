@@ -12,8 +12,9 @@ import SignIn from '~/components/signin'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
 import Favorite from '../components/Favorite'
-
 import Application from '../pages/Application'
+
+
 const AppRouter = () => {
   return (
     <>
