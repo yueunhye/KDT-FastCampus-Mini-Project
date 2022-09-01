@@ -13,8 +13,9 @@ import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
 import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
-
 import Application from '../pages/Application'
+
+
 const AppRouter = () => {
   return (
     <>

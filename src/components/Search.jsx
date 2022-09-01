@@ -39,8 +39,14 @@ function Search() {
     getData()
   }, [])
 
+
+  const toogleButton = () => {
+    setIsClick(isClick => !isClick)
+  }
+
   const [searchInput, setSearchInput] = useState("")
   // console.log('searchInput',searchInput)
+
 
 
   const openModal = () => {
