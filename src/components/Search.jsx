@@ -24,7 +24,7 @@ function Search() {
   ]
   const [filterBtn, setFilterBtn] = useState(false)
   const [clickData, setClickData] = useState(buttonData)
-  console.log('clickData', clickData)
+  // console.log('clickData', clickData)
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
   const [products, setProducts] = useState([])
@@ -38,16 +38,18 @@ function Search() {
   useEffect(() => {
     getData()
   }, [])
-  const toogleButton = () => {
-    setIsClick(isClick => !isClick)
-  }
-  const [searchInput, setSearchInput] = useState()
+
+  const [searchInput, setSearchInput] = useState("")
+  // console.log('searchInput',searchInput)
+
 
   const openModal = () => {
     setModal(true)
+    document.body.style.overflow = 'hidden';
   }
   const closeModal = () => {
     setModal(false)
+    document.body.style.overflow = 'unset';
   }
 
   return (
@@ -56,7 +58,6 @@ function Search() {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <button onClick={() => navigate('/favorite')}>관심상품 이동</button>
       </div>
-      <h1>{searchInput}</h1>
       <div className={style.Button}>
         {clickData.map(item => (
           <button
