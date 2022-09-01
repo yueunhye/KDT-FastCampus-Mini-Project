@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
+import { useGetProductsQuery } from '~/store/api/financeApi'
 
 function Search() {
   const buttonData = [
@@ -27,29 +28,37 @@ function Search() {
   // console.log('clickData', clickData)
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
 
   const navigate = useNavigate()
 
-  const getData = async () => {
-    const { data } = await getProduct()
-    setProducts(data)
+  // const getData = async () => {
+  //   const { data } = await getProduct()
+  //   setProducts(data)
+  // }
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+
+  console.log(import.meta.env.VITE_API_URL)
+
+  const { data: products, isLoading, isError } = useGetProductsQuery()
+  console.log(products)
+
+  const toogleButton = () => {
+    setIsClick(isClick => !isClick)
   }
-  useEffect(() => {
-    getData()
-  }, [])
 
-  const [searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState('')
   // console.log('searchInput',searchInput)
-
 
   const openModal = () => {
     setModal(true)
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'
   }
   const closeModal = () => {
     setModal(false)
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = 'unset'
   }
 
   return (

@@ -59,7 +59,6 @@ const RecommendList = ({ name, recommend }) => {
               </h3>
               <h4>{card.productName}</h4>
               <h5>{card.description}</h5>
-              {/* <RightOutline className={styles.icon} onClick={openModal} /> */}
               {modal && <RecommedModal modalClose={modalClose} />}
             </div>
           ))}

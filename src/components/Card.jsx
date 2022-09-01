@@ -2,25 +2,22 @@ import React from 'react'
 
 import style from '~/scss/Search.module.scss'
 import { StarOutlined, StarFilled, SwapRightOutlined } from '@ant-design/icons'
-import { useSelector, useDispatch } from 'react-redux'
-import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
+// import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
 
 const Card = ({ productData, openModal }) => {
-  const favorite = useSelector(state => state.favorite.favorite)
+  // const isFavorite = favorite?.some(
+  //   item => item.productName === productData.productName,
+  // )
 
-  const isFavorite = favorite?.some(
-    item => item.productName === productData.productName,
-  )
+  // const dispatch = useDispatch()
 
-  const dispatch = useDispatch()
-
-  const onStarClick = product => {
-    console.log(isFavorite)
-    isFavorite
-      ? dispatch(removeFavorite(product))
-      : dispatch(addFavorite(product))
-    console.log(favorite)
-  }
+  // const onStarClick = product => {
+  //   console.log(isFavorite)
+  //   isFavorite
+  //     ? dispatch(removeFavorite(product))
+  //     : dispatch(addFavorite(product))
+  //   console.log(favorite)
+  // }
 
   return (
     <div
@@ -39,11 +36,11 @@ const Card = ({ productData, openModal }) => {
       <h2>
         {productData?.companyName}
         <button id={style.favStar} onClick={() => onStarClick(productData)}>
-          {isFavorite ? (
+          {/* {isFavorite ? (
             <StarFilled style={{ fontSize: '20px' }} />
           ) : (
             <StarOutlined style={{ fontSize: '20px' }} />
-          )}
+          )} */}
         </button>
       </h2>
       <h3>{productData?.productName}</h3>
