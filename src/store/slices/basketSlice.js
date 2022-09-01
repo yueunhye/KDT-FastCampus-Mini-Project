@@ -13,4 +13,4 @@ export const basketSlice = createSlice({
 })
 
 export const basketReducer = basketSlice.reducer
-export const { addBasket } = favoriteSlice.actions
+export const { addBasket } = basketSlice.actions

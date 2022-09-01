@@ -16,13 +16,12 @@
   height: 100%;
   .recommendText {
     @include center();
-    border-radius: 16px;
     width: 88px;
     height: 30px;
     transform: translate(-80px, 30px);
-    background: linear-gradient(40deg, lightCyan, skyBlue, deepSkyBlue);
+    // background: linear-gradient(40deg, lightCyan, skyBlue, deepSkyBlue);
     & h3 {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       font-family: 'SDGothicA';
     }
@@ -32,7 +31,7 @@
   display: block;
   line-height: 20px;
   text-align: left;
-  border: 1px solid $menuTitle;
+  // border: 1px solid $menuTitle;
   width: 286px;
   height: 74px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -55,7 +54,7 @@
   display: block;
   line-height: 20px;
   text-align: left;
-  border: 1px solid $menuTitle;
+  // border: 1px solid $menuTitle;
   width: 286px;
   height: 74px;
   margin-top: 22px;
@@ -74,15 +73,16 @@
     font-size: 14px;
     font-weight: 600;
     font-family: 'SDGothicB';
+    color: $inputFocus;
   }
 }
-
 .recommendCard {
   @include center();
+  flex-direction: column;
   margin: auto;
   right: 0;
   left: 0;
-  margin-top: 30px;
+  margin-top: 24px;
   box-sizing: border-box;
   .cardContainer {
     width: 18rem;
@@ -96,7 +96,6 @@
     margin: 1.5rem auto;
     text-align: left;
     box-shadow: 0px 2px 5px #999;
-    background: linear-gradient(40deg, lightCyan, skyBlue, deepSkyBlue);
   }
   & h2 {
     font-size: 20px;
@@ -131,5 +130,45 @@
     font-family: 'SDGothicL';
     transform: translate(250px, 20px);
     cursor: pointer;
+  }
+}
+.orange {
+  background: linear-gradient(40deg, Violet, Orange);
+}
+.blue {
+  background: linear-gradient(40deg, lightCyan, skyBlue, deepSkyBlue);
+}
+.green {
+  background: linear-gradient(40deg, yellow, lightGreen);
+}
+.pink {
+  background: linear-gradient(40deg, lightCyan, pink);
+}
+.red {
+  background: linear-gradient(40deg, lightCyan, red);
+}
+
+// 신청완료 페이지
+
+.main {
+  position: relative;
+  .success {
+    position: absolute;
+    @include center();
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 600px;
+    font-size: 84px;
+    color: $menuTitleSpan;
+  }
+  & p {
+    font-size: 18px;
+    font-weight: 600;
+    color: $menuTitle;
+    margin-top: 20px;
   }
 }

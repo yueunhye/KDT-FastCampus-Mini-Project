@@ -1,21 +1,18 @@
-import { createSlice, combineReducers } from '@reduxjs/toolkit'
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import { favoriteReducer } from './slices/favoriteSlice'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/query'
+import { createLogger } from 'redux-logger'
+import { financeApi } from './api/financeApi'
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['basket', 'favorite'],
-}
+const logger = createLogger()
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-export const rootReducer = createCombineReducers({
-  basket: basketReducer,
-  favorite: favoriteReducer,
+const rootReducer = combineReducers({
+  [financeApi.reducerPath]: financeApi.reducer,
 })
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat([logger, financeApi.middleware]),
 })
+
+setupListeners(store.dispatch)

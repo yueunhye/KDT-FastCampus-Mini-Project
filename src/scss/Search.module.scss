@@ -4,7 +4,6 @@ section {
   margin: 5rem auto 0 auto;
   width: 80%;
 }
-
 h1 {
   margin-bottom: 1rem;
   font-weight: 900;
@@ -24,16 +23,24 @@ h1 {
     border: none;
     border-radius: 0.9rem;
     margin: 0.1rem;
-    padding: 0.4rem 0.9rem;
-    font-weight: 400;
-    text-align: center;
+    padding: 0.4rem 0;
+    font-weight: 500;
     color: #fff;
+    justify-content: center;
+    width: 3.5rem;
     &:hover {
       cursor: pointer;
       background-color: #82bcff;
     }
   }
+  .kategorie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }
+
 .On {
   background-color: #55a3ff;
 }
@@ -53,10 +60,11 @@ h1 {
     border: 1px solid #999;
   }
 }
-
 .Card {
   width: 18rem;
-  height: 8rem;
+  height: 9rem;
+  padding: 1rem;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -65,18 +73,26 @@ h1 {
   margin: 1.5rem auto;
   box-shadow: 0px 2px 5px #999;
   > h2 {
-    width: 85%;
+    width: 100%;
     font-size: 1rem;
     font-weight: 900;
+    display: flex;
+    justify-content: space-between;
   }
   > h3 {
-    width: 85%;
-    font-size: 1rem;
+    width: 100%;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  > h4 {
+    width: 100%;
+    font-size: 0.8rem;
   }
   > p {
-    width: 70%;
+    width: 100%;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
+    display: inline-block;
     text-align: right;
   }
 }
@@ -94,11 +110,6 @@ h1 {
 }
 .red {
   background: linear-gradient(40deg, lightCyan, red);
-}
-
-.details {
-  display: flex;
-  justify-content: center;
 }
 
 .Modal {
@@ -137,6 +148,92 @@ h1 {
       color: #868686;
       font-size: 1rem;
       font-weight: 500;
+    }
+  }
+}
+.OpenModal {
+  display: flex;
+  align-items: center;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-bg-show 0.3s;
+}
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#favStar {
+  border: 0;
+  outline: 0;
+  background-color: inherit;
+}
+// recommend modal
+.RecommendModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+  > section {
+    width: 90%;
+    max-width: 39rem;
+    margin: 0 auto;
+    border-radius: 0.7rem;
+    background-color: #fff;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+    > header {
+      padding: 1.2rem;
+      color: #868686;
+      font-size: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+      .cart {
+        font-size: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .cartIcon {
+          transform: translateX(18px);
+        }
+      }
+    }
+    > main {
+      padding: 5rem;
+      text-align: left;
+      font-size: 1rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+    > footer {
+      padding: 0.9rem 1rem;
+      text-align: center;
+    }
+    > footer button {
+      display: inline-block;
+      border: none;
+      outline: none;
+      padding: 8px 14px;
+      color: #868686;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-left: 10px;
     }
   }
 }
