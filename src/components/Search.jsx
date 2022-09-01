@@ -5,27 +5,64 @@ import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
 import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
 import { FilterOutline } from 'antd-mobile-icons'
+import { useDispatch } from 'react-redux'
+import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
+import Card from './Card'
+import { useNavigate } from 'react-router-dom'
+import { useGetProductsQuery } from '~/store/api/financeApi'
 
 function Search() {
+  const buttonData = [
+    { id: 1, tagContent: '대출' },
+    { id: 2, tagContent: '펀드' },
+    { id: 3, tagContent: '카드' },
+    { id: 4, tagContent: '멤버십' },
+    { id: 5, tagContent: '적금' },
+    { id: 6, tagContent: '청년' },
+    { id: 7, tagContent: '제테크' },
+    { id: 8, tagContent: '코로나' },
+    { id: 9, tagContent: '문화' },
+    { id: 10, tagContent: '담보' },
+  ]
+  const [filterBtn, setFilterBtn] = useState(false)
+  const [clickData, setClickData] = useState(buttonData)
+  // console.log('clickData', clickData)
+  const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
-  const [products, setProducts] = useState([])
-  const [visible, setVisible] = useState(false)
+  // const [products, setProducts] = useState([])
 
-  const getData = async () => {
-    const { data } = await getProduct()
-    setProducts(data)
+
+  const navigate = useNavigate()
+
+  // const getData = async () => {
+  //   const { data } = await getProduct()
+  //   setProducts(data)
+  // }
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+
+
+  console.log(import.meta.env.VITE_API_URL)
+
+  const { data: products, isLoading, isError } = useGetProductsQuery()
+  console.log(products)
+
+  const toogleButton = () => {
+    setIsClick(isClick => !isClick)
   }
-  useEffect(() => {
-    getData()
-  }, [])
 
-  // console.log(products)
+  const [searchInput, setSearchInput] = useState('')
+  // console.log('searchInput',searchInput)
+
 
   const openModal = () => {
     setModal(true)
+    document.body.style.overflow = 'hidden'
   }
   const closeModal = () => {
     setModal(false)
+    document.body.style.overflow = 'unset'
   }
 
   let selectTag = []
@@ -53,9 +90,9 @@ function Search() {
     '문화',
     '담보',
   ]
+  
   return (
     <section>
-      {/* SearchAll */}
       <h1>상품을 검색해주세요</h1>
       <FilterOutline onClick={() => setVisible(visible => !visible)} />
       {visible ? (
@@ -75,52 +112,17 @@ function Search() {
           })}
         </div>
       ) : null}
-
       <span className={style.Search}>
-        <input placeholder='Search...' />
+        <input
+          placeholder='Search...'
+          onChange={event => setSearchInput(event.target.value)}
+        />
       </span>
 
-      {products.map((product, index) => (
-        <div
-          key={index}
-          className={
-            product.tag === '적금'
-              ? `${style.Card} ${style.orange}`
-              : product.tag[0] === '대출'
-              ? `${style.Card} ${style.blue}`
-              : product.tag[0] === '카드'
-              ? `${style.Card} ${style.green}`
-              : product.tag[0] === '펀드'
-              ? `${style.Card} ${style.pink}`
-              : `${style.Card} ${style.red}`
-          }
-          onClick={openModal}
-        >
-          <h2>{product.companyName}</h2>
-          <HeartOutlined />
-          <h3>{product.description}</h3>
-          <div className={style.details}>
-            <p>{product.details.slice(0, 2)}</p>
-            <p>{product.details.slice(4, 7)}</p>
-            <p>{product.details.slice(9, 12)}</p>
-          </div>
-        </div>
+      {products?.map((product, index) => (
+        <Card key={index} productData={product} openModal={openModal} />
       ))}
-      {/* <div className={`${style.Card} ${style.orange}`} onClick={openModal}>
-        <h2>productName</h2>
-        <h3>description</h3>
-        <p>details</p>
-        <p>details</p>
-        <p>details</p>
-      </div>
 
-      <div className={`${style.Card} ${style.green}`} onClick={openModal}>
-        <h2>productName</h2>
-        <h3>description</h3>
-        <p>details</p>
-        <p>details</p>
-        <p>details</p>
-      </div> */}
       <Modal open={modal} close={closeModal} />
     </section>
   )
