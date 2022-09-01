@@ -3,6 +3,8 @@ import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
+import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
+import { FilterOutline } from 'antd-mobile-icons'
 import { useDispatch } from 'react-redux'
 import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
 import Card from './Card'
@@ -85,6 +87,7 @@ function Search() {
     '문화',
     '담보',
   ]
+
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
