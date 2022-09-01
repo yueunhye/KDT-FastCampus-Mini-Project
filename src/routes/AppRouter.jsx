@@ -11,7 +11,6 @@ import SignUpPage from '~/components/signup'
 import SignIn from '~/components/signin'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
-import DetailProduct from '../pages/DetailProduct'
 import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
 
