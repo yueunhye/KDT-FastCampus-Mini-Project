@@ -11,6 +11,8 @@ import SignUpPage from '~/components/signup'
 import SignIn from '~/components/signin'
 import Basket from '../pages/Basket'
 import Consume from '../pages/Consume'
+import DetailProduct from '../pages/DetailProduct'
+import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
 
 import Application from '../pages/Application'
@@ -22,6 +24,7 @@ const AppRouter = () => {
         <Route path='/' element={<Main />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/userdetail' element={<UserDetailPage />} />
         <Route path='/recomendation' element={<Recomendation />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/products' element={<Products />} />
