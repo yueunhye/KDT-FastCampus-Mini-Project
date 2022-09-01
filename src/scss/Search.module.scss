@@ -12,12 +12,14 @@ h1 {
   text-align: center;
 }
 
-.Button {
+.ButtonGroup {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  > button {
+  margin-top: 10px;
+  width: 380px;
+  & > input {
     display: flex;
     border: none;
     border-radius: 0.9rem;
@@ -26,6 +28,10 @@ h1 {
     font-weight: 400;
     text-align: center;
     color: #fff;
+    &:hover {
+      cursor: pointer;
+      background-color: #82bcff;
+    }
   }
 }
 .On {

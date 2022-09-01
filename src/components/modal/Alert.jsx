@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import '~/scss/Alert.scss'
 
-function Alert({ title, detail, confirm }) {
-  const [close, setClose] = useState(false)
+function Alert({ title, detail, confirm, open }) {
+  const [visible, setVisible] = useState(open)
 
   return (
     <div>
-      {close ? (
-        ''
-      ) : (
+      {visible ? (
         <div
           className='mask'
           onClick={() => {
-            setClose('none')
+            setVisible(false)
           }}
         >
           <div className='alertbox'>
@@ -23,14 +21,14 @@ function Alert({ title, detail, confirm }) {
             <div
               className='confirm'
               onClick={() => {
-                setClose(true)
+                setVisible(false)
               }}
             >
               <span>{confirm}</span>
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   )
 }

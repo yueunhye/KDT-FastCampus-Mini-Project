@@ -4,11 +4,12 @@ import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
 import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
+import { FilterOutline } from 'antd-mobile-icons'
 
 function Search() {
-  const [isClick, setIsClick] = useState(false)
   const [modal, setModal] = useState(false)
   const [products, setProducts] = useState([])
+  const [visible, setVisible] = useState(false)
 
   const getData = async () => {
     const { data } = await getProduct()
@@ -18,55 +19,62 @@ function Search() {
     getData()
   }, [])
 
-  console.log(products)
-  const toogleButton = () => {
-    setIsClick(isClick => !isClick)
-  }
+  // console.log(products)
+
   const openModal = () => {
     setModal(true)
   }
   const closeModal = () => {
     setModal(false)
   }
-  const changeButton = isClick ? `${style.On}` : `${style.Off}`
 
+  let selectTag = []
+
+  const changeButton = (tag, event) => {
+    if (selectTag.includes(tag)) {
+      selectTag = selectTag.filter(item => item !== tag)
+      event.target.style.backgroundColor = '#a6cfff'
+    } else {
+      selectTag.push(tag)
+      event.target.style.backgroundColor = '#55a3ff'
+    }
+    console.log(selectTag)
+  }
+
+  const searchTag = [
+    '대출',
+    '펀드',
+    '적금',
+    '카드',
+    '멤버십',
+    '청년',
+    '재테크',
+    '코로나',
+    '문화',
+    '담보',
+  ]
   return (
     <section>
       {/* SearchAll */}
       <h1>상품을 검색해주세요</h1>
-      <div className={style.Button}>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        <button onClick={toogleButton} className={changeButton}>
-          버튼
-        </button>
-        {/* <button onClick={()=> toogleButton()} style={{backgroundColor:changeColor()}}>버튼</button> */}
-      </div>
+      <FilterOutline onClick={() => setVisible(visible => !visible)} />
+      {visible ? (
+        <div className={style.ButtonGroup}>
+          {searchTag.map(tag => {
+            return (
+              <input
+                type='button'
+                key={tag}
+                value={tag}
+                onClick={e => changeButton(tag, e)}
+                className={
+                  selectTag.includes(tag) ? `${style.On}` : `${style.Off}`
+                }
+              />
+            )
+          })}
+        </div>
+      ) : null}
 
       <span className={style.Search}>
         <input placeholder='Search...' />
