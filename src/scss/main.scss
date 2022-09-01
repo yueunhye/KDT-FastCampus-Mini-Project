@@ -3,5 +3,7 @@
 
 .App {
   width: 100vw;
-  height: 100vh;
+  background-color: $mainBG;
+  position: absolute;
+  z-index: -4;
 }
