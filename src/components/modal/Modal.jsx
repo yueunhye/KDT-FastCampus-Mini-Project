@@ -1,11 +1,13 @@
 import React from 'react'
 import style from '~/scss/Search.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 function Modal(props) {
+  const navigate = useNavigate()
   const { open, close } = props
 
   return (
-    <div
+    <div onClick={close}
       className={open ? `${style.OpenModal} ${style.Modal}` : `${style.Modal}`}
     >
       {open ? (
@@ -15,7 +17,7 @@ function Modal(props) {
             <br /> 회원가입 후 이용해 주세요
           </header>
           <footer>
-            <p onClick={close}>확인</p>
+            <p onClick={() => navigate('/signup')}>확인</p> 
           </footer>
         </section>
       ) : null}
