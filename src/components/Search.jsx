@@ -3,7 +3,8 @@ import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import axios from 'axios'
 import { getProduct } from '../utils/getProduct'
-
+import { StarOutlined, StarFilled, HeartOutlined } from '@ant-design/icons'
+import { FilterOutline } from 'antd-mobile-icons'
 import { useDispatch } from 'react-redux'
 import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
 import Card from './Card'
@@ -61,31 +62,53 @@ function Search() {
     document.body.style.overflow = 'unset'
   }
 
+  let selectTag = []
+
+  const changeButton = (tag, event) => {
+    if (selectTag.includes(tag)) {
+      selectTag = selectTag.filter(item => item !== tag)
+      event.target.style.backgroundColor = '#a6cfff'
+    } else {
+      selectTag.push(tag)
+      event.target.style.backgroundColor = '#55a3ff'
+    }
+    console.log(selectTag)
+  }
+
+  const searchTag = [
+    '대출',
+    '펀드',
+    '적금',
+    '카드',
+    '멤버십',
+    '청년',
+    '재테크',
+    '코로나',
+    '문화',
+    '담보',
+  ]
+
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button onClick={() => navigate('/favorite')}>관심상품 이동</button>
-      </div>
-      <div className={style.Button}>
-        {clickData.map(item => (
-          <button
-            key={item.id}
-            onClick={() => {
-              !checkedButtons.includes(item)
-                ? setCheckedButtons(checkedButtons => [...checkedButtons, item])
-                : setCheckedButtons(
-                    checkedButtons.filter(button => button !== item),
-                  )
-            }}
-            className={
-              checkedButtons.includes(item) ? `${style.On}` : `${style.Off}`
-            }
-          >
-            {item.tagContent}
-          </button>
-        ))}
-      </div>
+      <FilterOutline onClick={() => setVisible(visible => !visible)} />
+      {visible ? (
+        <div className={style.ButtonGroup}>
+          {searchTag.map(tag => {
+            return (
+              <input
+                type='button'
+                key={tag}
+                value={tag}
+                onClick={e => changeButton(tag, e)}
+                className={
+                  selectTag.includes(tag) ? `${style.On}` : `${style.Off}`
+                }
+              />
+            )
+          })}
+        </div>
+      ) : null}
       <span className={style.Search}>
         <input
           placeholder='Search...'
