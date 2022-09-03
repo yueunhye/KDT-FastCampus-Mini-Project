@@ -1,37 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
-import axios from 'axios'
-import { getProduct } from '../utils/getProduct'
-
-import { useDispatch } from 'react-redux'
-import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
-import { useGetProductsQuery } from '~/store/api/financeApi'
+import { useGetProductsQuery, useGetSearchMutation } from '~/store/api/financeApi'
+import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
+
 
 function Search() {
-  const buttonData = [
-    { id: 1, tagContent: '대출' },
-    { id: 2, tagContent: '펀드' },
-    { id: 3, tagContent: '카드' },
-    { id: 4, tagContent: '멤버십' },
-    { id: 5, tagContent: '적금' },
-    { id: 6, tagContent: '청년' },
-    { id: 7, tagContent: '제테크' },
-    { id: 8, tagContent: '코로나' },
-    { id: 9, tagContent: '문화' },
-    { id: 10, tagContent: '담보' },
-  ]
-  const [filterBtn, setFilterBtn] = useState(false)
-  const [clickData, setClickData] = useState(buttonData)
-  // console.log('clickData', clickData)
-  const [checkedButtons, setCheckedButtons] = useState([])
-  const [modal, setModal] = useState(false)
-  // const [products, setProducts] = useState([])
-
+  const [visible, setVisible] = useState(false)
   const navigate = useNavigate()
+  const tags = ['대출', '펀드', '카드', '멤버십', '적금']
+  const tagContents = ['청년', '재테크', '코로나', '문화', '담보']
+  const [checkedTag, setCheckedTag] = useState([])
+  const [checkedTagContent, setCheckedTagContent] = useState([])
+  const [searchInput, setSearchInput] = useState('')
+  const [ isClicked, setIsClicked ] = useState(false)
+  const [modal, setModal] = useState(false)
+  const { data: products, isLoading, isError } = useGetProductsQuery()
+  const [ search, {data: getSearch, error, loading } ] = useGetSearchMutation()
+  
 
+  const data = {
+    query: searchInput,
+    tag: checkedTag,
+    tagContent: checkedTagContent
+  }
+  console.log(data)
   // const getData = async () => {
   //   const { data } = await getProduct()
   //   setProducts(data)
@@ -40,17 +35,17 @@ function Search() {
   //   getData()
   // }, [])
 
-  console.log(import.meta.env.VITE_API_URL)
+  // console.log(import.meta.env.VITE_API_URL)
 
-  const { data: products, isLoading, isError } = useGetProductsQuery()
-  console.log(products)
-
-  const toogleButton = () => {
-    setIsClick(isClick => !isClick)
+  const asyncUpFetch = () => {
+    setIsClicked(true)
+    search(data)
   }
-
-  const [searchInput, setSearchInput] = useState('')
-  // console.log('searchInput',searchInput)
+  const handlerKeyPress = e => {
+    if(e.key === 'Enter') {
+      asyncUpFetch()
+    }
+  }
 
   const openModal = () => {
     setModal(true)
@@ -64,39 +59,81 @@ function Search() {
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {/* <div style={{ display: 'flex', jusrifyContent: 'center'}}>
         <button onClick={() => navigate('/favorite')}>관심상품 이동</button>
+      </div> */}
+      <div className={style.searchContainer}>
+        <div className={style.search} onKeyPress={handlerKeyPress} >
+          <input
+            placeholder='Search...'
+            onChange={event => setSearchInput(event.target.value)}
+          />
+          <SearchOutline fontSize={20} className={style.searchBtn} onClick={asyncUpFetch} />
+        </div>
+        <div>
+          <FilterOutline
+            fontSize={25}
+            className={style.filterBtn}
+            onClick={() => setVisible(visible => !visible)}
+          />
+        </div>
       </div>
-      <div className={style.Button}>
-        {clickData.map(item => (
+      {visible ? (
+      <div className={style.ButtonGroup}>
+        <div>
+        {tags.map(item => (
           <button
-            key={item.id}
+            key={item}
             onClick={() => {
-              !checkedButtons.includes(item)
-                ? setCheckedButtons(checkedButtons => [...checkedButtons, item])
-                : setCheckedButtons(
-                    checkedButtons.filter(button => button !== item),
-                  )
-            }}
-            className={
-              checkedButtons.includes(item) ? `${style.On}` : `${style.Off}`
+              !checkedTag.includes(item)
+                ? setCheckedTag(checkedTag => [...checkedTag, item])
+                : setCheckedTag(checkedTag.filter(button => button !== item))
+                }}
+            className={checkedTag.includes(item) ? `${style.On}` : `${style.Off}`
             }
           >
-            {item.tagContent}
+            {item}
           </button>
         ))}
+        </div>
+        <div>
+          {tagContents.map(item => (
+            <button
+            key={item}
+            onClick={() => {
+              !checkedTagContent.includes(item)
+                ? setCheckedTagContent(checkedTagContent => [...checkedTagContent,item,])
+                : setCheckedTagContent(checkedTagContent.filter(button => button !== item))
+                }}
+            className={checkedTagContent.includes(item) ? `${style.On}` : `${style.Off}`}
+            >
+              {item}
+            </button>
+          ))}
+          </div>
+          <button className={style.resultBtn} onClick={asyncUpFetch}>
+            필터링된 결과 보기
+            <RightOutline />
+          </button>
       </div>
-      <span className={style.Search}>
-        <input
-          placeholder='Search...'
-          onChange={event => setSearchInput(event.target.value)}
-        />
-      </span>
-
-      {products?.map((product, index) => (
-        <Card key={index} productData={product} openModal={openModal} />
-      ))}
-
+      ): null}
+      {
+        isLoading 
+        ? (<div>로딩...</div>)
+        : isError 
+        ? (<div>에러발생</div>)
+        : isClicked === false 
+        ? (
+          products?.map((product, index) => (
+            <Card key={index} productData={product} openModal={openModal} />
+            ))
+          )
+        : (
+          getSearch && getSearch.map((product, index) => (
+            <Card key={index} productData={product} openModal={openModal} />
+            ))
+          )     
+      }
       <Modal open={modal} close={closeModal} />
     </section>
   )
