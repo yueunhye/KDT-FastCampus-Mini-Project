@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../scss/Recommend.module.scss'
-// import { RightOutline } from 'antd-mobile-icons'
 import RecommedModal from './modal/RecommendModal'
+import Card from '../components/Card'
 import { useState } from 'react'
+import { Tabs, Swiper } from 'antd-mobile'
+import { useRef } from 'react'
+
+const tagData = [
+  { key: 'loan', title: '대출' },
+  { key: 'saving', title: '적금' },
+  { key: 'fund', title: '펀드' },
+]
 
 const RecommendList = ({ name, recommend }) => {
-  console.log('recommend?', recommend)
-  const [modal, setModal] = useState(false)
+  const [filterList, setFilterList] = useState([])
+  const [filterTag, setFilterTag] = useState('대출')
+  const [deList, setDeList] = useState([])
+  const [fundList, setFundList] = useState([])
+  const [countList, setCountList] = useState([])
 
+  console.log('recommend?', recommend)
+
+  const [activeIndex, setActiveIndex] = useState(1)
+  const clickRef = useRef(null)
+
+  const [modal, setModal] = useState(false)
   const modalClose = () => {
     if (modal) {
       setModal()
@@ -16,8 +33,37 @@ const RecommendList = ({ name, recommend }) => {
     }
   }
 
+  // const filterTagHandler = selectedTag => {
+  //   setFilterList(() => recommend.filter(item => item?.tag === selectedTag))
+  //   console.log('filterList', filterList)
+  // }
+
+  useEffect(() => {
+    if (recommend !== []) {
+      setDeList(recommend.filter(item => item.tag[0] === '대출'))
+      setFundList(recommend.filter(item => item.tag[0] === '펀드'))
+      setCountList(recommend.filter(item => item.tag === '적금'))
+    }
+
+    // switch () {
+    //   case '대출':
+    //     setDeList([...deList, item])
+    //     break
+    //   case '펀드':
+    //     setFundList([...fundList, item])
+    //     break
+    //   case '적금':
+    //     setCountList([...countList, item])
+    //     break
+    //   default:
+    //     break
+    // }
+  }, [recommend])
+
+  console.log('왓어?', deList, fundList, countList)
+
   return (
-    <>
+    <div className={styles.recommend}>
       <div className={styles.content}>
         <div className={styles.contentTop}>
           {name.map(user => (
@@ -31,41 +77,59 @@ const RecommendList = ({ name, recommend }) => {
           ))}
           <p>회원님의 신청 가능한 대출금 현황.</p>
         </div>
-        <div className={styles.recommendText}>
-          <h3>추천상품</h3>
+      </div>
+      <div className={styles.tabsBox}>
+        <div className={styles.tabs}>
+          <Tabs
+            activeKey={tagData[activeIndex].key}
+            onChange={key => {
+              const index = tagData.findIndex(item => item.key === key)
+              clickRef.current?.swipeTo(index)
+              setActiveIndex(index)
+            }}
+          >
+            {tagData.map(tag => (
+              <Tabs.Tab title={tag.title} key={tag.key} />
+            ))}
+          </Tabs>
         </div>
       </div>
-      <div>
-        <div className={styles.recommendCard}>
-          {recommend.slice(0, 2).map(card => (
-            <div
-              onClick={modalClose}
-              key={card.id}
-              className={
-                card.tag === '적금'
-                  ? `${styles.cardContainer} ${styles.orange}`
-                  : product.tag[0] === '대출'
-                  ? `${styles.cardContainer} ${styles.blue}`
-                  : product.tag[0] === '카드'
-                  ? `${styles.cardContainer} ${styles.green}`
-                  : product.tag[0] === '펀드'
-                  ? `${styles.cardContainer} ${styles.pink}`
-                  : `${styles.cardContainer} ${styles.red}`
-              }
-            >
-              <h2>{card.tag}</h2>
-              <h3>
-                {card.photo} {card.companyName}
-              </h3>
-              <h4>{card.productName}</h4>
-              <h5>{card.description}</h5>
-              {/* <RightOutline className={styles.icon} onClick={openModal} /> */}
-              {modal && <RecommedModal modalClose={modalClose} />}
+
+      <div className={styles.swiper}>
+        <Swiper
+          indicator={() => null}
+          ref={clickRef}
+          defaultIndex={activeIndex}
+          onIndexChange={index => {
+            setActiveIndex(index)
+          }}
+        >
+          <Swiper.Item>
+            <div onClick={modalClose}>
+              {deList.map(item => (
+                <Card productData={item} key={item.title} />
+              ))}
             </div>
-          ))}
-        </div>
+          </Swiper.Item>
+          <Swiper.Item>
+            <div onClick={modalClose}>
+              {countList.map(item => (
+                <Card productData={item} key={item.title} />
+              ))}
+            </div>
+          </Swiper.Item>
+          <Swiper.Item>
+            <div onClick={modalClose}>
+              {fundList.map(item => (
+                <Card productData={item} key={item.title} />
+              ))}
+            </div>
+          </Swiper.Item>
+        </Swiper>
       </div>
-    </>
+
+      <div>{modal && <RecommedModal modalClose={modalClose} />}</div>
+    </div>
   )
 }
 

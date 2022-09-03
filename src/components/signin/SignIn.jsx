@@ -4,19 +4,29 @@ import styles from '~/scss/SignIn.module.scss'
 import { Link } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
+import axios from 'axios'
 
 function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [alert, setAlert] = useState(false)
 
-  const signUp = () => {
+  const signIn = async () => {
     if (!email || !password) {
       setAlert(true)
+      console.log(alert)
+      return
     }
     const data = {
       email,
       password,
+    }
+
+    try {
+      const res = await axios.post('https://conan.pll0123.com/login', data)
+      console.log(res)
+    } catch (error) {
+      setAlert(true)
     }
     console.log(data)
   }
@@ -63,7 +73,7 @@ function SignIn() {
             />
           </div>
         </div>
-        <button className={styles.btn} onClick={signUp}>
+        <button className={styles.btn} onClick={signIn}>
           로그인
         </button>
         <p className={styles.goSignUp}>Share We가 처음이신가요?</p>
@@ -76,10 +86,9 @@ function SignIn() {
           title={'존재하지 않는 회원정보'}
           detail={'아이디와 비밀번호를 다시 확인해주세요.'}
           confirm={'확인'}
+          open={alert}
         />
-      ) : (
-        ''
-      )}
+      ) : null}
     </div>
   )
 }
