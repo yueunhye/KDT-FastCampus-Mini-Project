@@ -10,7 +10,7 @@ export const financeApi = createApi({
   // endpoints 는 url 주소의 파라미터를 정리하기 위한 키값
   endpoints: builder => ({
     getProducts: builder.query({
-      query: () => `products/customized`,
+      query: () => `products`,
       transformResponse: response => {
         return response.data
       },
