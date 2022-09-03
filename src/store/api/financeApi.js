@@ -10,14 +10,26 @@ export const financeApi = createApi({
   // endpoints 는 url 주소의 파라미터를 정리하기 위한 키값
   endpoints: builder => ({
     getProducts: builder.query({
-      query: () => `products/customized`,
+      query: () => `products`,
       transformResponse: response => {
         return response.data
       },
     }),
+
+    getSearch: builder.mutation({
+      query: ({ query, tag, tagContent }) => ({
+        url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,
+        method: 'GET',
+      }),
+      transformResponse: (response) => {
+        return response.data
+      }
+    })
+  }),
+})
+
+export const { useGetProductsQuery, useGetSearchMutation } = financeApi
+
     // addFacorite: builder.mutation({
     //   query: productId => `products/${productId}`,
     // }),
-  }),
-})
-export const { useGetProductsQuery } = financeApi
