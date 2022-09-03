@@ -12,7 +12,16 @@ export const financeApi = createApi({
         return response.data
       },
     }),
+    getSearch: builder.mutation({
+      query: ({ query, tag, tagContent }) => ({
+        url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,
+        method: 'GET',
+      }),
+      transformResponse: (response) => {
+        return response.data
+      }
+    })
   }),
 })
 
-export const { useGetProductsQuery } = financeApi
+export const { useGetProductsQuery, useGetSearchMutation } = financeApi
