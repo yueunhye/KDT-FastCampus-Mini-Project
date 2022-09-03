@@ -36,15 +36,6 @@
   }
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  font-family: 'SDGothicM';
-}
-
 .title {
   font-family: 'SDGothicEB';
   font-size: 22px;
@@ -80,9 +71,6 @@
   text-align: center;
   -ms-text-align-last: center;
   -moz-text-align-last: center;
-  &::placeholder {
-    color: #d1d1d6;
-  }
 }
 
 .input {
@@ -152,6 +140,34 @@ input[type='checkbox']:checked {
 
 input[type='checkbox']:checked::after {
   display: block;
+}
+
+.ButtonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  & > input[type='button'] {
+    display: flex;
+    border: none;
+    border-radius: 0.9rem;
+    margin: 0.1rem;
+    padding: 0.4rem 0.9rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    &:hover {
+      cursor: pointer;
+      background-color: #82bcff;
+    }
+  }
+}
+.On {
+  background-color: #55a3ff;
+}
+.Off {
+  background-color: #a6cfff;
 }
 
 .btn {

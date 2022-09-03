@@ -9,6 +9,7 @@ import styles from '~/scss/SignUpPage.module.scss'
 import { Link } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
+import axios from 'axios'
 
 function SignUpPage() {
   const [name, setName] = useState('')
@@ -30,12 +31,20 @@ function SignUpPage() {
   const signUp = () => {
     if (!name || !id || !password || !phone) {
       setAlert(true)
+      console.log(alert)
+      return
     }
     const data = {
       name,
       email: id + '@' + email,
       password,
       phoneNumber: phone,
+    }
+
+    try {
+      axios.post('https://conan.pll0123.com/join', data)
+    } catch (error) {
+      console.log(error)
     }
     console.log(data)
   }
@@ -147,10 +156,9 @@ function SignUpPage() {
           title={'회원가입 실패'}
           detail={'정보를 모두 입력했는지 확인해주세요.'}
           confirm={'확인'}
+          open={alert}
         />
-      ) : (
-        ''
-      )}
+      ) : null}
     </div>
   )
 }

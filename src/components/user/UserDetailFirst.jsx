@@ -1,10 +1,9 @@
 import { DoubleRightOutlined } from '@ant-design/icons'
 import { Radio, Space } from 'antd-mobile'
-import React, { useEffect, useState } from 'react'
-import { jobs, houses, assets, pay } from '~/data/userDetails'
-import styles from '~/scss/UserDetailPage.module.scss'
+import React, { useState } from 'react'
+import { jobs, houses, assets, pay, interests } from '~/data/userDetails'
+import styles from '~/scss/UserDetailFirst.module.scss'
 import Alert from '~/components/modal/Alert'
-import UserDetailBG from '../deco/UserDetailBG'
 import { Link } from 'react-router-dom'
 
 function UserDetailFirst() {
@@ -18,6 +17,17 @@ function UserDetailFirst() {
   const [over14, setOver14] = useState(false)
   const [visible1, setVisible1] = useState(false)
   const [visible2, setVisible2] = useState(false)
+  const [interest, setInterest] = useState([])
+
+  const changeButton = (tag, event) => {
+    if (interest.includes(tag)) {
+      setInterest(interest.filter(item => item !== tag))
+      event.target.style.backgroundColor = '#a6cfff'
+    } else {
+      setInterest([...interest, tag])
+      event.target.style.backgroundColor = '#55a3ff'
+    }
+  }
 
   const submit = () => {
     if (birth === '' || car === '') {
@@ -32,19 +42,29 @@ function UserDetailFirst() {
       return
     }
 
-    const age = new Date().getFullYear() - Number(birth.substring(0, 4))
-    const data = { age, job, realEstate, car, asset, salary }
+    let age
+    const justAge = new Date().getFullYear() - Number(birth.substring(0, 4))
+
+    switch (justAge) {
+      case justAge < 35:
+        age = '19~34'
+        break
+      case 35 <= justAge < 60:
+        age = '35~60'
+        break
+      case 60 <= justAge:
+        age = '60~'
+    }
+
+    const data = { age, job, realEstate, car, asset, salary, interest }
 
     console.log(data)
   }
 
-  const detailPass = () => {}
-
   return (
     <div>
-      <UserDetailBG />
       <div className={styles.firstAsk}>
-        <Link to='/' onClick={detailPass} className={styles.passbtn}>
+        <Link to='/' className={styles.passbtn}>
           <div className={styles.nextSet}>다음에 설정하기</div>
           <DoubleRightOutlined style={{ color: '#888888' }} />
         </Link>
@@ -119,6 +139,7 @@ function UserDetailFirst() {
                     '--icon-size': '18px',
                     '--font-size': '13px',
                     '--gap': '6px',
+                    backgroundColor: '#fff',
                     fontFamily: 'sans-serif',
                   }}
                 >
@@ -176,9 +197,33 @@ function UserDetailFirst() {
               })}
             </select>
           </div>
+          <div className={styles.question}>
+            <div className={styles.label}>
+              <span>흥미/관심사</span>가 궁금해요!
+            </div>
+            <div>
+              <div className={styles.ButtonGroup}>
+                {interests.map(tag => {
+                  return (
+                    <input
+                      type='button'
+                      key={tag}
+                      value={tag}
+                      onClick={e => changeButton(tag, e)}
+                      className={
+                        interest.includes(tag)
+                          ? `${styles.On}`
+                          : `${styles.Off}`
+                      }
+                    />
+                  )
+                })}
+              </div>
+            </div>
+          </div>
           <div className={styles.lastCheck} style={{ marginTop: '10px' }}>
             <label className={styles.checkboxLabel} htmlFor='agree'>
-              만 14세 이상입니다.
+              만 19세 이상입니다.
             </label>
             <input
               className={styles.checkbox}

@@ -1,12 +1,16 @@
 import React from 'react'
 import UserDetailFirst from './UserDetailFirst'
-import styles from '~/scss/UserDetailPage.module.scss'
+import UserDetailEdit from './UserDetailEdit'
+import UserDetailBG from '../deco/UserDetailBG'
+import '~/scss/main.scss'
 
 function UserDetailPage() {
   return (
     <div>
-      <div className={styles.container}>
-        <UserDetailFirst />
+      <div className='container'>
+        <UserDetailBG />
+        {/* <UserDetailFirst /> */}
+        <UserDetailEdit />
       </div>
     </div>
   )

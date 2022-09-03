@@ -13,7 +13,7 @@ function Modal(props) {
       {open ? (
         <section>
           <header>
-            자세한 내용및 추천상품을 받고 싶다면
+            자세한 내용 및 추천상품을 받고 싶다면
             <br /> 회원가입 후 이용해 주세요
           </header>
           <footer>
