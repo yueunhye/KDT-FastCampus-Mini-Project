@@ -7,12 +7,15 @@ import axios from 'axios'
 const Favorite = () => {
   const url = 'https://conan.pll0123.com/members/cart'
   const getFavorite = async () => {
-    const data = await axios.get('/api/products/3', {
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY2MjMwMjIyMH0.Ksab_hqDdsRwJFq7-YnItmOJrdF1GbvrRHylYXnrHDLzhCueZ9IkYx0I_6fg3zzX6eZfYMqfhHh4YtdCIvxkjw'
+    const data = await axios.get(
+      'https://conan.pll0123.com/products/customized',
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY2MjMxMjQ3Nn0.s6y0a4WQQVok2LbsXcXDnPFg8q_IVIS1t8-RorE5gWlJLciugA1pI2wPLM0-qs7GzGFZZZOLKOpA6jaFm89Wbg'
+        }
       }
-    })
+    )
     console.log(data)
   }
 
