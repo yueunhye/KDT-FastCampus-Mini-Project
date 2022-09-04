@@ -5,7 +5,7 @@ export const financeApi = createApi({
   // reducerPath 는 financeApi에 대한 이름
   reducerPath: 'financeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL,
+    baseUrl: import.meta.env.VITE_API_URL
   }),
   // endpoints 는 url 주소의 파라미터를 정리하기 위한 키값
   endpoints: builder => ({
@@ -13,8 +13,8 @@ export const financeApi = createApi({
       query: () => `products/customized`,
       transformResponse: response => {
         return response.data
-      },
-    }),
+      }
+    })
     // 토큰업데이트
     // updateToken: builder.mutation({
     //   query: tokens => ({
@@ -47,12 +47,12 @@ export const financeApi = createApi({
     //     body: { id },
     //   }),
     // }),
-  }),
+  })
 })
 export const {
   useGetProductsQuery,
   useGetFavoriteQuery,
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
-  useUpdateTokenMutation,
+  useUpdateTokenMutation
 } = financeApi
