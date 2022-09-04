@@ -9,7 +9,7 @@ import Products from '../pages/Products'
 import Recomendation from '../pages/Recomendation'
 import SignUpPage from '~/components/signup'
 import SignIn from '~/components/signin'
-import Basket from '../pages/Basket'
+import Cart from '../pages/Cart'
 import Consume from '../pages/Consume'
 import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
@@ -30,7 +30,7 @@ const AppRouter = () => {
         <Route path='/products' element={<Products />} />
         <Route path='/userinfo' element={<UserInfo />} />
         <Route path='/consume' element={<Consume />} />
-        <Route path='/basket' element={<Basket />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/favorite' element={<Favorite />} />
         <Route path='/application' element={<Application />} />
       </Routes>

@@ -17,12 +17,10 @@ function Search() {
   const [searchInput, setSearchInput] = useState('')
   const [isClicked, setIsClicked] = useState(false)
   const [modal, setModal] = useState(false)
-  const { data: products, isLoading, isError } = useGetProductsQuery()
-  const [search, { data: getSearch, error, loading }] = useGetSearchMutation()
-  const [ isClicked, setIsClicked ] = useState(false)
-  const [modal, setModal] = useState(false)
-  const { data: products, isLoading, isError } = useGetProductsQuery()
-  const [ search, {data: getSearch, error, loading } ] = useGetSearchMutation()
+
+  // const [products, setProducts] = useState([])
+  const [visible, setVisible] = useState(false)
+  const navigate = useNavigate()
 
 
   const data = {
@@ -40,7 +38,8 @@ function Search() {
   //   getData()
   // }, [])
 
-  // console.log(import.meta.env.VITE_API_URL)
+  const { data: products, isLoading, isError } = useGetProductsQuery()
+  console.log(products)
 
   const asyncUpFetch = () => {
     setIsClicked(true)

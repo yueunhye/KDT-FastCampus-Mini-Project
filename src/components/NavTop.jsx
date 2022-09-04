@@ -48,7 +48,7 @@ const NavTop = () => {
                 }}
               />
             </Link>
-            <Link to='basket'>
+            <Link to='/cart'>
               <ShoppingCartOutlined
                 style={{ fontSize: '22px', color: '#888888' }}
               />
