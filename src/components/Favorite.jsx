@@ -5,14 +5,17 @@ import { useGetFavoriteQuery } from '../store/api/financeApi'
 import axios from 'axios'
 
 const Favorite = () => {
-  const url = 'https://conan.pll0123.com/members/cart'
+  const url = 'https://conan.pll0123.com/'
   const getFavorite = async () => {
-    const data = await axios.get('/api/products/3', {
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY2MjMwMjIyMH0.Ksab_hqDdsRwJFq7-YnItmOJrdF1GbvrRHylYXnrHDLzhCueZ9IkYx0I_6fg3zzX6eZfYMqfhHh4YtdCIvxkjw'
+    const data = await axios.get(
+      'https://conan.pll0123.com/products/customized',
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY2MjMxMzM0MH0.E8-_uh0rpjRhKkKbc-sGA_QHO1U_g6avHCYhwcGe1hCV4VOBwBNuscyoeLuxX8hTULG8qctH352tGI3h8PCcrQ'
+        }
       }
-    })
+    )
     console.log(data)
   }
 
