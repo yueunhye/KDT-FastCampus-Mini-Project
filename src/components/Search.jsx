@@ -3,9 +3,9 @@ import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
+
 import { useGetProductsQuery, useGetSearchMutation } from '~/store/api/financeApi'
 import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
-
 
 function Search() {
   const [visible, setVisible] = useState(false)
@@ -15,16 +15,21 @@ function Search() {
   const [checkedTag, setCheckedTag] = useState([])
   const [checkedTagContent, setCheckedTagContent] = useState([])
   const [searchInput, setSearchInput] = useState('')
+  const [isClicked, setIsClicked] = useState(false)
+  const [modal, setModal] = useState(false)
+  const { data: products, isLoading, isError } = useGetProductsQuery()
+  const [search, { data: getSearch, error, loading }] = useGetSearchMutation()
   const [ isClicked, setIsClicked ] = useState(false)
   const [modal, setModal] = useState(false)
   const { data: products, isLoading, isError } = useGetProductsQuery()
   const [ search, {data: getSearch, error, loading } ] = useGetSearchMutation()
-  
+
 
   const data = {
     query: searchInput,
     tag: checkedTag,
     tagContent: checkedTagContent
+
   }
   console.log(data)
   // const getData = async () => {
@@ -69,6 +74,7 @@ function Search() {
             onChange={event => setSearchInput(event.target.value)}
           />
           <SearchOutline fontSize={20} className={style.searchBtn} onClick={asyncUpFetch} />
+
         </div>
         <div>
           <FilterOutline
