@@ -2,15 +2,45 @@ import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import { getProduct } from '../utils/getProduct'
 import styles from '../scss/Consume.module.scss'
+import { Tabs, Swiper } from 'antd-mobile'
+import { useRef } from 'react'
+import RecommedModal from '../components/modal/RecommendModal'
+
+const tagData = [
+  { key: 'card', title: '카드' },
+  { key: 'membership', title: '맴버십' },
+]
 
 const Consume = () => {
   const [consumProduct, setConsumProduct] = useState([])
   const [userName, setUserName] = useState([{ id: 1, title: '신문수' }])
+  const [card, setCard] = useState([])
+  const [memBerShip, setMemBerShip] = useState([])
+  const [activeIndex, setActiveIndex] = useState(1)
+  const conSumRef = useRef(null)
+  const [modal, setModal] = useState(false)
+
+  const modalClose = () => {
+    if (modal) {
+      setModal()
+    } else {
+      setModal(!modal)
+    }
+  }
+
   const getData = async () => {
     const { data } = await getProduct()
     setConsumProduct(data)
   }
   console.log('consumProduct?', consumProduct)
+
+  useEffect(() => {
+    if (consumProduct) {
+      setCard(consumProduct.filter(item => item.tag[0] === '카드'))
+      setMemBerShip(consumProduct.filter(item => item.tag[0] === '멤버십'))
+    }
+  }, [consumProduct])
+
   useEffect(() => {
     getData()
   }, [])
@@ -19,8 +49,8 @@ const Consume = () => {
     <>
       <div className={styles.consumeContent}>
         <div className={styles.consumeText}>
-          {userName.map(name => (
-            <h3>{name.title}</h3>
+          {userName.map((name, idx) => (
+            <h3 key={idx}>{name.title}</h3>
           ))}
           <p>
             회원님에 현명한 소비를 위한
@@ -28,12 +58,51 @@ const Consume = () => {
             맞춤형 카드와 멤버십 상품을 추천 드립니다.
           </p>
         </div>
-        <div>
-          {consumProduct.map((item, index) => (
-            <Card productData={item} key={index} />
-          ))}
+
+        <div className={styles.tabsBox}>
+          <div className={styles.tabs}>
+            <Tabs
+              activeKey={tagData[activeIndex].key}
+              onChange={key => {
+                const index = tagData.findIndex(item => item.key === key)
+                conSumRef.current?.swipeTo(index)
+                setActiveIndex(index)
+              }}
+            >
+              {tagData.map(tag => (
+                <Tabs.Tab title={tag.title} key={tag.key} />
+              ))}
+            </Tabs>
+          </div>
+        </div>
+
+        <div className={styles.swiper}>
+          <Swiper
+            indicator={() => null}
+            ref={conSumRef}
+            defaultIndex={activeIndex}
+            onIndexChange={index => {
+              setActiveIndex(index)
+            }}
+          >
+            <Swiper.Item>
+              <div onClick={modalClose}>
+                {card.map(item => (
+                  <Card productData={item} key={item.title} />
+                ))}
+              </div>
+            </Swiper.Item>
+            <Swiper.Item>
+              <div onClick={modalClose}>
+                {memBerShip.map(item => (
+                  <Card productData={item} key={item.title} />
+                ))}
+              </div>
+            </Swiper.Item>
+          </Swiper>
         </div>
       </div>
+      <div>{modal && <RecommedModal modalClose={modalClose} />}</div>
     </>
   )
 }
