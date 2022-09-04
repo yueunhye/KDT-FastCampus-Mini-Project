@@ -3,31 +3,31 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const financeApi = createApi({
   reducerPath: 'financeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL,
+    baseUrl: '/api'
   }),
   endpoints: builder => ({
     getProducts: builder.query({
-      query: () => 'products',
+      query: () => '/products',
       transformResponse: response => {
         return response.data
-      },
+      }
     }),
     getRecommend: builder.query({
       query: () => '/products/customized',
       transformResponse: response => {
         return response.data
-      },
+      }
     }),
     getSearch: builder.mutation({
       query: ({ query, tag, tagContent }) => ({
         url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,
-        method: 'GET',
+        method: 'GET'
       }),
       query: () => `products`,
       transformResponse: response => {
         return response.data
-      },
-    }),
+      }
+    })
     // 토큰업데이트
     // updateToken: builder.mutation({
     //   query: tokens => ({
@@ -60,7 +60,7 @@ export const financeApi = createApi({
     //     body: { id },
     //   }),
     // }),
-  }),
+  })
 })
 export const {
   useGetProductsQuery,
@@ -68,4 +68,6 @@ export const {
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
   useUpdateTokenMutation,
+  useGetSearchMutation,
+  useGetRecommendQuery
 } = financeApi
