@@ -1,8 +1,17 @@
 @import './main.scss';
 
+@keyframes slidein {
+  from {
+    margin-top: -1%;
+    opacity: 0;
+  }
+  to {
+    margin-top: 15px;
+    opacity: 1;
+  }
+}
 section {
-  margin: 5rem auto 0 auto;
-  width: 80%;
+  margin: 120px auto 100px;
 }
 h1 {
   margin-bottom: 1rem;
@@ -10,27 +19,76 @@ h1 {
   font-size: 1.3rem;
   text-align: center;
 }
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  .search {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    input {
+      width: 220px;
+      height: 28px;
+      border: 0.7px solid $inputBorder;
+      border-radius: 10px;
+      background-color: $inputBG;
+      padding: 3px 14px;
+      font-size: 14px;
+      &::placeholder {
+        color: $hbgBarColor;
+      }
+      &:focus {
+        border: 0.7px solid $inputFocus;
+        outline: none;
+        box-shadow: 0 0 1.5px $inputFocus;
+      }
+    }
+    .searchBtn {
+      position: absolute;
+      right: 2px;
+      z-index: 2;
+      color: $hbgBarColor;
+      margin: 7px;
+    }
+  }
+  .filterBtn {
+    color: $hbgBarColor;
+    margin-left: 8px;
+  }
+}
 
 .ButtonGroup {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin-top: 10px;
-  width: 380px;
-  & > input {
+  margin: 15px auto;
+  width: 325px;
+  height: 110px;
+  background-color: #dfeefa;
+  border-radius: 8px;
+  padding: 15px;
+  animation-duration: 0.3s;
+  animation-name: slidein;
+  position: relative;
+  div {
     display: flex;
-    border: none;
-    border-radius: 0.9rem;
-    margin: 0.1rem;
-    padding: 0.4rem 0;
-    font-weight: 500;
-    color: #fff;
-    justify-content: center;
-    width: 3.5rem;
-    &:hover {
-      cursor: pointer;
-      background-color: #82bcff;
+    button {
+      display: flex;
+      border: none;
+      border-radius: 0.9rem;
+      padding: 0.4rem 0;
+      margin: 4px 3px;
+      font-weight: 500;
+      color: #fff;
+      justify-content: center;
+      width: 3.5rem;
+      // &:hover {
+      //   cursor: pointer;
+      //   background-color: #5da8ff;
+      // }
     }
   }
   .kategorie {
@@ -39,26 +97,22 @@ h1 {
     align-items: center;
     flex-wrap: wrap;
   }
+  .resultBtn {
+    background-color: transparent;
+    color: #8a9bae;
+    font-family: 'SDGothicB';
+    font-size: 18px;
+    border: none;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+  }
 }
-
 .On {
   background-color: #55a3ff;
 }
 .Off {
   background-color: #a6cfff;
-}
-
-.Search {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  > input {
-    width: 18rem;
-    display: block;
-    height: 2.8rem;
-    border-radius: 0.8rem;
-    border: 1px solid #999;
-  }
 }
 .Card {
   width: 18rem;
