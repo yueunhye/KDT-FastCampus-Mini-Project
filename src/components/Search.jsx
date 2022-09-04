@@ -30,7 +30,7 @@ function Search() {
   const [checkedButtons, setCheckedButtons] = useState([])
   const [modal, setModal] = useState(false)
   // const [products, setProducts] = useState([])
-
+  const [visible, setVisible] = useState(false)
   const navigate = useNavigate()
 
   // const getData = async () => {
@@ -40,8 +40,6 @@ function Search() {
   // useEffect(() => {
   //   getData()
   // }, [])
-
-  console.log(import.meta.env.VITE_API_URL)
 
   const { data: products, isLoading, isError } = useGetProductsQuery()
   console.log(products)
