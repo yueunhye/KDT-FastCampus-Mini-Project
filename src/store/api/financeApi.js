@@ -23,6 +23,7 @@ export const financeApi = createApi({
         url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,
         method: 'GET',
       }),
+      query: () => `products`,
       transformResponse: response => {
         return response.data
       },
