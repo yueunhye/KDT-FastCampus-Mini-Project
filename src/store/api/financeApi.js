@@ -7,21 +7,21 @@ export const financeApi = createApi({
   }),
   endpoints: builder => ({
     getProducts: builder.query({
-      query: () => 'products',
+      query: () => '/products',
       transformResponse: response => {
         return response.data
-      },
+      }
     }),
     getRecommend: builder.query({
       query: () => '/products/customized',
       transformResponse: response => {
         return response.data
-      },
+      }
     }),
     getSearch: builder.mutation({
       query: ({ query, tag, tagContent }) => ({
         url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,
-        method: 'GET',
+        method: 'GET'
       }),
       query: () => `products`,
       transformResponse: response => {
@@ -67,5 +67,7 @@ export const {
   useGetFavoriteQuery,
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
-  useUpdateTokenMutation
+  useUpdateTokenMutation,
+  useGetSearchMutation,
+  useGetRecommendQuery
 } = financeApi

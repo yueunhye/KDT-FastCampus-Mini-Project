@@ -4,7 +4,10 @@ import style from '~/scss/Search.module.scss'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
 
-import { useGetProductsQuery, useGetSearchMutation } from '~/store/api/financeApi'
+import {
+  useGetProductsQuery,
+  useGetSearchMutation
+} from '~/store/api/financeApi'
 import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
 
 function Search() {
@@ -19,15 +22,11 @@ function Search() {
   const [modal, setModal] = useState(false)
 
   // const [products, setProducts] = useState([])
-  const [visible, setVisible] = useState(false)
-  const navigate = useNavigate()
-
 
   const data = {
     query: searchInput,
     tag: checkedTag,
     tagContent: checkedTagContent
-
   }
   console.log(data)
   // const getData = async () => {
@@ -46,7 +45,7 @@ function Search() {
     search(data)
   }
   const handlerKeyPress = e => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       asyncUpFetch()
     }
   }
@@ -67,13 +66,16 @@ function Search() {
         <button onClick={() => navigate('/favorite')}>관심상품 이동</button>
       </div> */}
       <div className={style.searchContainer}>
-        <div className={style.search} onKeyPress={handlerKeyPress} >
+        <div className={style.search} onKeyPress={handlerKeyPress}>
           <input
             placeholder='Search...'
             onChange={event => setSearchInput(event.target.value)}
           />
-          <SearchOutline fontSize={20} className={style.searchBtn} onClick={asyncUpFetch} />
-
+          <SearchOutline
+            fontSize={20}
+            className={style.searchBtn}
+            onClick={asyncUpFetch}
+          />
         </div>
         <div>
           <FilterOutline
@@ -84,61 +86,70 @@ function Search() {
         </div>
       </div>
       {visible ? (
-      <div className={style.ButtonGroup}>
-        <div>
-        {tags.map(item => (
-          <button
-            key={item}
-            onClick={() => {
-              !checkedTag.includes(item)
-                ? setCheckedTag(checkedTag => [...checkedTag, item])
-                : setCheckedTag(checkedTag.filter(button => button !== item))
+        <div className={style.ButtonGroup}>
+          <div>
+            {tags.map(item => (
+              <button
+                key={item}
+                onClick={() => {
+                  !checkedTag.includes(item)
+                    ? setCheckedTag(checkedTag => [...checkedTag, item])
+                    : setCheckedTag(
+                        checkedTag.filter(button => button !== item)
+                      )
                 }}
-            className={checkedTag.includes(item) ? `${style.On}` : `${style.Off}`
-            }
-          >
-            {item}
-          </button>
-        ))}
-        </div>
-        <div>
-          {tagContents.map(item => (
-            <button
-            key={item}
-            onClick={() => {
-              !checkedTagContent.includes(item)
-                ? setCheckedTagContent(checkedTagContent => [...checkedTagContent,item,])
-                : setCheckedTagContent(checkedTagContent.filter(button => button !== item))
+                className={
+                  checkedTag.includes(item) ? `${style.On}` : `${style.Off}`
+                }
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          <div>
+            {tagContents.map(item => (
+              <button
+                key={item}
+                onClick={() => {
+                  !checkedTagContent.includes(item)
+                    ? setCheckedTagContent(checkedTagContent => [
+                        ...checkedTagContent,
+                        item
+                      ])
+                    : setCheckedTagContent(
+                        checkedTagContent.filter(button => button !== item)
+                      )
                 }}
-            className={checkedTagContent.includes(item) ? `${style.On}` : `${style.Off}`}
-            >
-              {item}
-            </button>
-          ))}
+                className={
+                  checkedTagContent.includes(item)
+                    ? `${style.On}`
+                    : `${style.Off}`
+                }
+              >
+                {item}
+              </button>
+            ))}
           </div>
           <button className={style.resultBtn} onClick={asyncUpFetch}>
             필터링된 결과 보기
             <RightOutline />
           </button>
-      </div>
-      ): null}
-      {
-        isLoading 
-        ? (<div>로딩...</div>)
-        : isError 
-        ? (<div>에러발생</div>)
-        : isClicked === false 
-        ? (
-          products?.map((product, index) => (
-            <Card key={index} productData={product} openModal={openModal} />
-            ))
-          )
-        : (
-          getSearch && getSearch.map((product, index) => (
-            <Card key={index} productData={product} openModal={openModal} />
-            ))
-          )     
-      }
+        </div>
+      ) : null}
+      {isLoading ? (
+        <div>로딩...</div>
+      ) : isError ? (
+        <div>에러발생</div>
+      ) : isClicked === false ? (
+        products?.map((product, index) => (
+          <Card key={index} productData={product} openModal={openModal} />
+        ))
+      ) : (
+        getSearch &&
+        getSearch.map((product, index) => (
+          <Card key={index} productData={product} openModal={openModal} />
+        ))
+      )}
       <Modal open={modal} close={closeModal} />
     </section>
   )
