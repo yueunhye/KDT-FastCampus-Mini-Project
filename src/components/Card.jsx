@@ -21,26 +21,16 @@ const Card = ({ productData, openModal }) => {
 
   return (
     <div
-      className={
-        productData?.tag === '적금'
-          ? `${style.Card} ${style.orange}`
-          : productData?.tag[0] === '대출'
-          ? `${style.Card} ${style.blue}`
-          : productData?.tag[0] === '카드'
-          ? `${style.Card} ${style.green}`
-          : productData?.tag[0] === '펀드'
-          ? `${style.Card} ${style.pink}`
-          : `${style.Card} ${style.red}`
-      }
-    >
+      className={style.Card}>
+      <h5><img src={productData?.logo}></img></h5>
       <h2>
         {productData?.companyName}
         <button id={style.favStar} onClick={() => onStarClick(productData)}>
           {/* {isFavorite ? (
             <StarFilled style={{ fontSize: '20px' }} />
-          ) : (
-            <StarOutlined style={{ fontSize: '20px' }} />
-          )} */}
+            ) : (
+              <StarOutlined style={{ fontSize: '20px' }} />
+            )} */}
         </button>
       </h2>
       <h3>{productData?.productName}</h3>

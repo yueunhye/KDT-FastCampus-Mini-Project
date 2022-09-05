@@ -9,8 +9,8 @@ function UserDetailPage() {
     <div>
       <div className='container'>
         <UserDetailBG />
-        {/* <UserDetailFirst /> */}
-        <UserDetailEdit />
+        <UserDetailFirst />
+        {/* <UserDetailEdit /> */}
       </div>
     </div>
   )
