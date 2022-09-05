@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { setCookie, getCookie, removeCookie } from '../../utils/cookie'
+import { setCookie, removeCookie } from '../../utils/cookie'
 
 const initialState = {
   name: '',
   phoneNumber: '',
   isNotFirst: false,
-  modalVisible: false,
+  modalVisible: false
 }
 
 export const userSlice = createSlice({
@@ -21,7 +21,7 @@ export const userSlice = createSlice({
       })
       setCookie({
         accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken,
+        refreshToken: action.payload.refreshToken
       })
     },
     logOut(state) {
@@ -30,8 +30,8 @@ export const userSlice = createSlice({
       })
       removeCookie('accessToken')
       removeCookie('refreshToken')
-    },
-  },
+    }
+  }
 })
 
 export const { openModal, setUser, logOut } = userSlice.actions
