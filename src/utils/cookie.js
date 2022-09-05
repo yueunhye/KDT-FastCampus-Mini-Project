@@ -2,10 +2,17 @@ import { Cookies } from 'react-cookie'
 
 const cookies = new Cookies()
 
-export const setCookie = token => {
-  return cookies.set('refreshToken', token, { path: '/' })
+export const setCookie = ({ accessToken, refreshToken }) => {
+  cookies.set('refreshToken', refreshToken, { path: '/' })
+  cookies.set('accessToken', accessToken, { path: '/' })
+  return
 }
 
-export const getCookie = () => {
-  return cookies.get('refreshToken')
+export const getCookie = token => {
+  console.log(token, cookies.get(token))
+  return cookies.get(token)
+}
+
+export const removeCookie = token => {
+  return cookies.remove(token)
 }
