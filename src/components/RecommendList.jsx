@@ -13,18 +13,15 @@ const tagData = [
 ]
 
 const RecommendList = ({ name, recommend }) => {
-  const [filterList, setFilterList] = useState([])
-  const [filterTag, setFilterTag] = useState('대출')
   const [deList, setDeList] = useState([])
   const [fundList, setFundList] = useState([])
   const [countList, setCountList] = useState([])
-
-  console.log('recommend?', recommend)
 
   const [activeIndex, setActiveIndex] = useState(1)
   const clickRef = useRef(null)
 
   const [modal, setModal] = useState(false)
+
   const modalClose = () => {
     if (modal) {
       setModal()
@@ -33,31 +30,12 @@ const RecommendList = ({ name, recommend }) => {
     }
   }
 
-  // const filterTagHandler = selectedTag => {
-  //   setFilterList(() => recommend.filter(item => item?.tag === selectedTag))
-  //   console.log('filterList', filterList)
-  // }
-
   useEffect(() => {
-    if (recommend !== []) {
+    if (recommend) {
       setDeList(recommend.filter(item => item.tag[0] === '대출'))
       setFundList(recommend.filter(item => item.tag[0] === '펀드'))
       setCountList(recommend.filter(item => item.tag === '적금'))
     }
-
-    // switch () {
-    //   case '대출':
-    //     setDeList([...deList, item])
-    //     break
-    //   case '펀드':
-    //     setFundList([...fundList, item])
-    //     break
-    //   case '적금':
-    //     setCountList([...countList, item])
-    //     break
-    //   default:
-    //     break
-    // }
   }, [recommend])
 
   console.log('왓어?', deList, fundList, countList)

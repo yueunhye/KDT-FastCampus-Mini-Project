@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import RecommendList from '../components/RecommendList'
 import { getProduct } from '../utils/getProduct'
+import { useGetRecommendQuery } from '../store/api/financeApi'
 
 const userName = [
   {
@@ -13,6 +14,8 @@ const userName = [
 const Recomendation = () => {
   const [name, setName] = useState(userName)
   const [recommend, setRecommend] = useState([])
+  const { data: getRecommend, error, loading } = useGetRecommendQuery()
+  console.log('getRecommend???', getRecommend)
 
   const getProductDust = async () => {
     const { data } = await getProduct()

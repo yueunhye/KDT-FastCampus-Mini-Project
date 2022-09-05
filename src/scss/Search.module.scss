@@ -18,6 +18,7 @@ h1 {
   font-weight: 900;
   font-size: 1.3rem;
   text-align: center;
+  color: $blue;
 }
 .searchContainer {
   display: flex;
@@ -115,9 +116,9 @@ h1 {
   background-color: #a6cfff;
 }
 .Card {
-  width: 18rem;
-  height: 9rem;
-  padding: 1rem;
+  width: 19rem;
+  height: 13rem;
+  padding: .1rem 1rem;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -125,13 +126,18 @@ h1 {
   justify-content: center;
   border-radius: 0.8rem;
   margin: 1.5rem auto;
-  box-shadow: 0px 2px 5px #999;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.3);
+  box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
+  border-left: 1px solid rgba(255,255,255,0.3);
+  border-top: 1px solid rgba(255,255,255,0.3);
   > h2 {
     width: 100%;
     font-size: 1rem;
     font-weight: 900;
     display: flex;
     justify-content: space-between;
+    text-shadow: 1px 1px 10px #dee9f5;
   }
   > h3 {
     width: 100%;
@@ -149,22 +155,31 @@ h1 {
     display: inline-block;
     text-align: right;
   }
+  > h5 {
+    position: relative;
+    width: 100%;
+    img {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
 }
-.orange {
-  background: linear-gradient(40deg, Violet, Orange);
-}
-.blue {
-  background: linear-gradient(40deg, lightCyan, skyBlue, deepSkyBlue);
-}
-.green {
-  background: linear-gradient(40deg, yellow, lightGreen);
-}
-.pink {
-  background: linear-gradient(40deg, lightCyan, pink);
-}
-.red {
-  background: linear-gradient(40deg, lightCyan, red);
-}
+// .orange {
+//   background: linear-gradient(40deg, #fff);
+// }
+// .blue {
+//   background: linear-gradient(40deg, #fff);
+// }
+// .green {
+//   background: linear-gradient(40deg, #fff);
+// }
+// .pink {
+//   background: linear-gradient(40deg, #fff);
+// }
+// .red {
+//   background: linear-gradient(40deg, #fff);
+// }
 
 .Modal {
   display: none;

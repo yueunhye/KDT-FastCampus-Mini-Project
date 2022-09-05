@@ -2,7 +2,7 @@ import {
   LockOutline,
   MailOutline,
   UserOutline,
-  PhonebookOutline,
+  PhonebookOutline
 } from 'antd-mobile-icons'
 import React, { useEffect, useState } from 'react'
 import styles from '~/scss/SignUpPage.module.scss'
@@ -42,7 +42,7 @@ function SignUpPage() {
       name,
       email: id + '@' + email,
       password,
-      phoneNumber: phone,
+      phoneNumber: phone
     }
 
     try {

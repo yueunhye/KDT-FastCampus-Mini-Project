@@ -7,20 +7,19 @@ import Products from '../pages/Products'
 import Recomendation from '../pages/Recomendation'
 import SignUpPage from '~/components/signup'
 import SignIn from '~/components/signin'
-import Basket from '../pages/Basket'
+import Cart from '../pages/Cart'
 import Consume from '../pages/Consume'
 import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
 import Application from '../pages/Application'
 import { CookiesProvider } from 'react-cookie'
-import RequireAuth from '../pages/RequireAuth'
 
 const AppRouter = () => {
   return (
     <CookiesProvider>
       <NavTop />
       <Routes>
-        <Route path='/' element={<Products />} />
+        <Route path='/' element={<Main />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/signin' element={<SignIn />} />
 
