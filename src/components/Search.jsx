@@ -36,9 +36,9 @@ function Search() {
   // useEffect(() => {
   //   getData()
   // }, [])
-
+  const [ search, {data: getSearch, error, loading } ] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
-  console.log(products)
+  console.log('products', products)
 
   const asyncUpFetch = () => {
     setIsClicked(true)
