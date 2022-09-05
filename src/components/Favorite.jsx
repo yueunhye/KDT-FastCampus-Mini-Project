@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useGetFavoriteQuery } from '../store/slices/favoriteApiSlice'
+import { useGetFavoriteQuery } from '../store/api/favoriteApiSlice'
 import Card from './Card'
 
 const Favorite = () => {

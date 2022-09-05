@@ -7,7 +7,7 @@ import {
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
   useGetFavoriteQuery
-} from '../store/slices/favoriteApiSlice'
+} from '../store/api/favoriteApiSlice'
 
 const Card = ({ productData, openModal }) => {
   const { data: favorite } = useGetFavoriteQuery()

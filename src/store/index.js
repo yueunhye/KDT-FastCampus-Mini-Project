@@ -3,7 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { createLogger } from 'redux-logger'
 import { apiSlice } from './api/apiSlice'
 import { financeApi } from './api/financeApi'
-import { favoriteApiSlice } from './slices/favoriteApiSlice'
+import { favoriteApiSlice } from './api/favoriteApiSlice'
 import userReducer from './slices/userSlice'
 
 const logger = createLogger()
