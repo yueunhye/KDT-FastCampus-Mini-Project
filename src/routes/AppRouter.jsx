@@ -14,11 +14,11 @@ import Consume from '../pages/Consume'
 import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
 import Application from '../pages/Application'
-
+import { CookiesProvider } from 'react-cookie'
 
 const AppRouter = () => {
   return (
-    <>
+    <CookiesProvider>
       <NavTop />
       <Routes>
         <Route path='/' element={<Main />} />
@@ -35,7 +35,7 @@ const AppRouter = () => {
         <Route path='/application' element={<Application />} />
       </Routes>
       <NavBottom />
-    </>
+    </CookiesProvider>
   )
 }
 
