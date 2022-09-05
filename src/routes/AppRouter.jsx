@@ -19,7 +19,7 @@ const AppRouter = () => {
     <CookiesProvider>
       <NavTop />
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<Products />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/signin' element={<SignIn />} />
 
