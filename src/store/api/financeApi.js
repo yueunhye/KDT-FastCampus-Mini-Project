@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const financeApi = createApi({
   reducerPath: 'financeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api'
+  baseUrl: import.meta.env.VITE_API_URL
   }),
   endpoints: builder => ({
     getProducts: builder.query({
@@ -23,7 +23,6 @@ export const financeApi = createApi({
         url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,
         method: 'GET'
       }),
-      query: () => `products`,
       transformResponse: response => {
         return response.data
       }
