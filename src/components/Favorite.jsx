@@ -1,25 +1,22 @@
 import React, { useEffect } from 'react'
+import { useGetFavoriteQuery } from '../store/slices/favoriteApiSlice'
 import Card from './Card'
 
 const Favorite = () => {
-  useEffect(() => {}, [])
-
-  useEffect(() => {
-    getFavorite()
-    // addFavorite()
-  }, [])
+  const { data: favorite, isLoading, isError } = useGetFavoriteQuery()
+  console.log(favorite)
 
   return (
     <div>
-      {/* {favoriteArr.length ? (
+      {favorite.length ? (
         <div style={{ marginTop: '80px' }}>
-          {favoriteArr.map(item => (
+          {favorite.map(item => (
             <Card key={item.id} productData={item} />
           ))}
         </div>
       ) : (
-        <h1>즐겨찾기가 없습니다.</h1>
-      )} */}
+        <h1 style={{ marginTop: '300px' }}>즐겨찾기가 없습니다.</h1>
+      )}
     </div>
   )
 }

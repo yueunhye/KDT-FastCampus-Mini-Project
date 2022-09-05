@@ -21,14 +21,11 @@ const AppRouter = () => {
     <CookiesProvider>
       <NavTop />
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<Products />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/userdetail' element={<UserDetailPage />} />
         <Route path='/recomendation' element={<Recomendation />} />
-        <Route path='/auth' element={<Auth />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/userinfo' element={<UserInfo />} />
         <Route path='/consume' element={<Consume />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/favorite' element={<Favorite />} />
