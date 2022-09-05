@@ -3,7 +3,8 @@
 .navContainer {
   position: fixed;
   bottom: 0;
-  background-color: #55a3ff;
+  background-color: $mainBG;
+  box-shadow: 0px -4px 2px -0.5px rgba(0, 0, 0, 0.18);
   height: 64px;
   width: 100vw;
   border-top-left-radius: 12px;
@@ -21,11 +22,12 @@
 
       .activeItem {
         text-align: center;
-        color: #f6fff8;
+        color: $blue;
       }
 
       .normalItem {
         text-align: center;
+        color: $hbgBarColor;
       }
     }
   }
