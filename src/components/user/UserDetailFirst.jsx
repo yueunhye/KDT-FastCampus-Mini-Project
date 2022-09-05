@@ -4,7 +4,8 @@ import React, { useState } from 'react'
 import { jobs, houses, assets, pay, interests } from '~/data/userDetails'
 import styles from '~/scss/UserDetailFirst.module.scss'
 import Alert from '~/components/modal/Alert'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUserDetailMutation } from '../../store/slices/userApiSlice'
 
 function UserDetailFirst() {
   const [birth, setBirth] = useState('')
@@ -18,6 +19,8 @@ function UserDetailFirst() {
   const [visible1, setVisible1] = useState(false)
   const [visible2, setVisible2] = useState(false)
   const [interest, setInterest] = useState([])
+  const [submitUserDetail, { isLoading }] = useUserDetailMutation()
+  const navigate = useNavigate()
 
   const changeButton = (tag, event) => {
     if (interest.includes(tag)) {
@@ -29,7 +32,7 @@ function UserDetailFirst() {
     }
   }
 
-  const submit = () => {
+  const submit = async () => {
     if (birth === '' || car === '') {
       console.log('birth or car')
       setVisible1(true)
@@ -59,6 +62,13 @@ function UserDetailFirst() {
     const data = { age, job, realEstate, car, asset, salary, interest }
 
     console.log(data)
+    try {
+      await submitUserDetail(data)
+      console.log('successsssssss')
+      navigate('/products')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

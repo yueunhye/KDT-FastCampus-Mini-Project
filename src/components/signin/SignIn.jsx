@@ -1,20 +1,25 @@
 import { LockOutline, MailOutline } from 'antd-mobile-icons'
 import React, { useState } from 'react'
 import styles from '~/scss/SignIn.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLoginMutation } from '../../store/slices/userApiSlice'
+import userSlice, { openModal, setUser } from '../../store/slices/userSlice'
 
 function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [alert, setAlert] = useState(false)
+  const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isOpen = useSelector(state => userSlice.modalVisible)
 
   const signIn = async () => {
     if (!email || !password) {
-      setAlert(true)
-      console.log(alert)
+      dispatch(openModal(true))
+      console.log(isOpen)
       return
     }
     const data = {
@@ -23,12 +28,16 @@ function SignIn() {
     }
 
     try {
-      const res = await axios.post('https://conan.pll0123.com/login', data)
-      console.log(res)
+      const userData = await login(data).unwrap()
+      console.log(userData)
+      dispatch(setUser(userData))
+      setEmail('')
+      setPassword('')
+      navigate('/userdetail')
     } catch (error) {
-      setAlert(true)
+      dispatch(openModal(true))
+      console.log('error: ', error)
     }
-    console.log(data)
   }
 
   return (
@@ -81,12 +90,11 @@ function SignIn() {
           <span>Shall We?</span>
         </Link>
       </div>
-      {alert ? (
+      {isOpen ? (
         <Alert
           title={'존재하지 않는 회원정보'}
           detail={'아이디와 비밀번호를 다시 확인해주세요.'}
           confirm={'확인'}
-          open={alert}
         />
       ) : null}
     </div>
