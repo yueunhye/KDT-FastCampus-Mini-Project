@@ -21,7 +21,7 @@ const NavBottom = () => {
     },
     {
       title: '금융 상품',
-      path: '/products',
+      path: '/',
       icons: (
         <ShoppingFilled style={{ fontSize: '24px', marginBottom: '4px' }} />
       ),
