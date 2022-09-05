@@ -33,7 +33,7 @@ function SignIn() {
       dispatch(setUser(userData))
       setEmail('')
       setPassword('')
-      navigate('/userdetail')
+      userData.isNotFirst ? navigate('/') : navigate('/userdetail')
     } catch (error) {
       dispatch(openModal(true))
       console.log('error: ', error)
