@@ -68,7 +68,11 @@ const RecommendList = () => {
           <Swiper.Item>
             <div>
               {deList.map((item, idx) => (
-                <div>
+                <div
+                  onClick={() => {
+                    detail(item.id)
+                  }}
+                >
                   <Card productData={item} key={idx} />
                 </div>
               ))}
@@ -77,7 +81,11 @@ const RecommendList = () => {
           <Swiper.Item>
             <div>
               {countList.map((item, idx) => (
-                <div>
+                <div
+                  onClick={() => {
+                    detail(item.id)
+                  }}
+                >
                   <Card productData={item} key={idx} />
                 </div>
               ))}
@@ -86,7 +94,11 @@ const RecommendList = () => {
           <Swiper.Item>
             <div>
               {fundList.map((item, idx) => (
-                <div>
+                <div
+                  onClick={() => {
+                    detail(item.id)
+                  }}
+                >
                   <Card productData={item} key={idx} />
                 </div>
               ))}

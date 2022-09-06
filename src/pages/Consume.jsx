@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 
 const tagData = [
   { key: 'card', title: '카드' },
-  { key: 'membership', title: '맴버십' }
+  { key: 'membership', title: '멤버십' }
 ]
 
 const Consume = () => {

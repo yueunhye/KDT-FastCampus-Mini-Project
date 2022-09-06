@@ -6,14 +6,12 @@ import {
 } from 'antd-mobile-icons'
 import React, { useEffect, useState } from 'react'
 import styles from '~/scss/SignUpPage.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
-import { useSignUpMutation } from '../../store/slices/userApiSlice'
-import { useSelector } from 'react-redux'
-import userSlice from '../../store/slices/userSlice'
-
-import { useNavigate } from 'react-router-dom'
+import { useSignUpMutation } from '../../store/api/userApiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { openModal } from '../../store/slices/userSlice'
 
 function SignUpPage() {
   const [name, setName] = useState('')
@@ -22,11 +20,10 @@ function SignUpPage() {
   const [password, setPassword] = useState('')
   const [phone, setPhone] = useState('')
   const [direct, setDirect] = useState(true)
-  const [alert, setAlert] = useState(false)
-  const [submitSignUp, { isLoadgin }] = useSignUpMutation()
-  const isOpen = useSelector(state => userSlice.modalVisible)
-
+  const [submitSignUp, { isLoading }] = useSignUpMutation()
+  const isOpen = useSelector(state => state.user).modalVisible
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (email === '') {
@@ -116,6 +113,11 @@ function SignUpPage() {
               className={styles.select}
               onChange={e => {
                 setEmail(e.target.value)
+                if (e.target.name === 'direct') {
+                  setDirect(true)
+                } else {
+                  setDirect(false)
+                }
               }}
               value={email}
             >
@@ -123,7 +125,9 @@ function SignUpPage() {
               <option value='naver.com'>naver</option>
               <option value='nate.com'>nate</option>
               <option value='kakao.com'>kakao</option>
-              <option value=''>직접입력</option>
+              <option name='direct' value=''>
+                직접입력
+              </option>
             </select>
           </div>
           <div className={styles.input}>
@@ -169,7 +173,6 @@ function SignUpPage() {
           title={'회원가입 실패'}
           detail={'정보를 모두 입력했는지 확인해주세요.'}
           confirm={'확인'}
-          open={alert}
         />
       ) : null}
     </div>

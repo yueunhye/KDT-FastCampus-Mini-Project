@@ -18,7 +18,10 @@ const RecommedModal = () => {
   }, [])
 
   return (
-    <div className={style.RecommendModal}>
+    <div
+      className={style.RecommendModal}
+      onClick={() => dispatch(openModal(false))}
+    >
       <section>
         <header>
           <div className={style.cart}>

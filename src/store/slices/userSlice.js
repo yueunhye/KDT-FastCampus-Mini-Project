@@ -19,6 +19,7 @@ export const userSlice = createSlice({
       Object.keys(action.payload).forEach(key => {
         state[key] = action.payload[key]
       })
+      console.log(action.payload)
       setCookie({
         accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken
