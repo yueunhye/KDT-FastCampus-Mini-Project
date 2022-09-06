@@ -12,11 +12,6 @@ const logger = createLogger()
 const rootReducer = combineReducers({
   [financeApi.reducerPath]: financeApi.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
-<<<<<<< HEAD
-  [favoriteApiSlice.reducerPath]: favoriteApiSlice.reducer,
-  [cartApiSlice.reducerPath]: cartApiSlice.reducer,
-=======
->>>>>>> 7ab361acd8747d2167fc6586a1f5271f1dd220f3
   user: userReducer
 })
 
@@ -26,13 +21,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat([
       logger,
       financeApi.middleware,
-<<<<<<< HEAD
-      apiSlice.middleware,
-      favoriteApiSlice.middleware,
-      cartApiSlice.middleware
-=======
       apiSlice.middleware
->>>>>>> 7ab361acd8747d2167fc6586a1f5271f1dd220f3
     ])
 })
 
