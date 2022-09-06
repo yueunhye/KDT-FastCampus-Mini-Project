@@ -4,6 +4,7 @@ import { createLogger } from 'redux-logger'
 import { apiSlice } from './api/apiSlice'
 import { financeApi } from './api/financeApi'
 import { favoriteApiSlice } from './api/favoriteApiSlice'
+import { cartApiSlice } from './api/cartApiSlice'
 import userReducer from './slices/userSlice'
 
 const logger = createLogger()
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   [financeApi.reducerPath]: financeApi.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   [favoriteApiSlice.reducerPath]: favoriteApiSlice.reducer,
+  [cartApiSlice.reducerPath]: cartApiSlice.reducer,
   user: userReducer
 })
 
@@ -22,7 +24,8 @@ export const store = configureStore({
       logger,
       financeApi.middleware,
       apiSlice.middleware,
-      favoriteApiSlice.middleware
+      favoriteApiSlice.middleware,
+      cartApiSlice.middleware
     ])
 })
 
