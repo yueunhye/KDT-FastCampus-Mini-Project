@@ -69,11 +69,9 @@ function UserDetailFirst() {
 
     const data = { age, job, realEstate, car, asset, salary, interest }
 
-    console.log(data)
     try {
       await submitUserDetail(data)
-      console.log('successsssssss')
-      navigate('/products')
+      navigate('/')
     } catch (error) {
       console.log(error)
     }

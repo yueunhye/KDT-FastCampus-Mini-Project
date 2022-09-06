@@ -48,20 +48,25 @@ const NavTop = () => {
     setOptions(notLogin)
     navigate('/')
   }
+
+  const refreshLogin = async () => {
+    try {
+      const user = await refresh().unwrap()
+      dispatch(setUser(user))
+    } catch (error) {
+      navigate('/signin')
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
-          <button
-            className={styles.refresh}
-            onClick={async () => {
-              const user = await refresh().unwrap()
-              dispatch(setUser(user))
-            }}
-          >
-            로그인 연장
-          </button>
+          {accessToken ? (
+            <button className={styles.refresh} onClick={refreshLogin}>
+              로그인 연장
+            </button>
+          ) : null}
           <Space>
             <Link to='/'>
               <SearchOutline
