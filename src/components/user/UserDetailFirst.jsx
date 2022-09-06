@@ -6,6 +6,8 @@ import styles from '~/scss/UserDetailFirst.module.scss'
 import Alert from '~/components/modal/Alert'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUserDetailMutation } from '../../store/slices/userApiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { openModal } from '../../store/slices/userSlice'
 
 function UserDetailFirst() {
   const [birth, setBirth] = useState('')
@@ -21,6 +23,8 @@ function UserDetailFirst() {
   const [interest, setInterest] = useState([])
   const [submitUserDetail, { isLoading }] = useUserDetailMutation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
   const changeButton = (tag, event) => {
     if (interest.includes(tag)) {
@@ -35,13 +39,13 @@ function UserDetailFirst() {
   const submit = async () => {
     if (birth === '' || car === '') {
       console.log('birth or car')
-      setVisible1(true)
+      dispatch(openModal(true))
       return
     }
 
     if (!agree || !over14) {
       console.log('agree or over14')
-      setVisible2(true)
+      dispatch(openModal(true))
       return
     }
 
@@ -78,7 +82,7 @@ function UserDetailFirst() {
           <div className={styles.nextSet}>다음에 설정하기</div>
           <DoubleRightOutlined style={{ color: '#888888' }} />
         </Link>
-        <div className={styles.title}>홍길동 님에 대해 알고 싶어요!</div>
+        <div className={styles.title}>{user.name} 님에 대해 알고 싶어요!</div>
         <div className={styles.subTitle}>
           (다양한 서비스를 제공해드리기 위한 필수 정보수집 입니다.)
         </div>
@@ -150,7 +154,7 @@ function UserDetailFirst() {
                     '--font-size': '13px',
                     '--gap': '6px',
                     backgroundColor: '#fff',
-                    fontFamily: 'sans-serif',
+                    fontFamily: 'sans-serif'
                   }}
                 >
                   예
@@ -161,7 +165,7 @@ function UserDetailFirst() {
                     '--icon-size': '18px',
                     '--font-size': '13px',
                     '--gap': '6px',
-                    fontFamily: 'sans-serif',
+                    fontFamily: 'sans-serif'
                   }}
                 >
                   아니요
@@ -262,24 +266,20 @@ function UserDetailFirst() {
           </button>
         </div>
       </div>
-      {visible1 ? (
+      {user.modalVisible && visible1 ? (
         <Alert
           title={'모든 항목 기입 확인'}
           detail={'모든 항목에 답변 하셔야 합니다.'}
           confirm={'확인'}
         />
-      ) : (
-        ''
-      )}
-      {visible2 ? (
+      ) : null}
+      {user.modalVisible && visible2 ? (
         <Alert
           title={'SHARE WE'}
           detail={'이용약관에 동의하세요.'}
           confirm={'확인'}
         />
-      ) : (
-        ''
-      )}
+      ) : null}
     </div>
   )
 }
