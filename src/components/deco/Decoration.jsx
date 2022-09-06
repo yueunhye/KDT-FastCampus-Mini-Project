@@ -1,6 +1,6 @@
 import React from 'react'
-import cards from '~/assets/cards.png'
-import box from '~/assets/box.png'
+import cards from '../../../public/assets/cards.png'
+import box from '../../../public/assets/box.png'
 import styles from '~/scss/Decoration.module.scss'
 
 function Decoration() {
