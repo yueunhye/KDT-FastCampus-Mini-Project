@@ -131,13 +131,13 @@
   p {
     padding: 10px 3px;
   }
-  .select {
+  select {
     width: 83px;
     height: 31.4px;
     border: 0.7px solid $inputBorder;
     border-radius: 10px;
     background-color: $inputBG;
-    padding: 2.5px 0 2.5px 6px;
+    padding: 2.5px 20px 2.5px 0px;
     font-size: 13px;
     margin-left: 5px;
     &::placeholder {
