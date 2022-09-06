@@ -10,7 +10,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
 import { useSignUpMutation } from '../../store/api/userApiSlice'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { openModal } from '../../store/slices/userSlice'
 
 function SignUpPage() {
   const [name, setName] = useState('')
@@ -22,13 +23,14 @@ function SignUpPage() {
   const [submitSignUp, { isLoading }] = useSignUpMutation()
   const isOpen = useSelector(state => state.user).modalVisible
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    // if (email === '') {
-    //   setDirect(false)
-    // } else {
-    //   setDirect(true)
-    // }
+    if (email === '') {
+      setDirect(false)
+    } else {
+      setDirect(true)
+    }
   }, [email])
 
   const signUp = async () => {

@@ -77,7 +77,6 @@ const RecommendList = ({ name }) => {
               {deList.map((item, idx) => (
                 <div
                   onClick={() => {
-                    dispatch(openModal(true))
                     detail(item.id)
                   }}
                 >
@@ -91,7 +90,6 @@ const RecommendList = ({ name }) => {
               {countList.map((item, idx) => (
                 <div
                   onClick={() => {
-                    dispatch(openModal(true))
                     detail(item.id)
                   }}
                 >
@@ -105,7 +103,6 @@ const RecommendList = ({ name }) => {
               {fundList.map((item, idx) => (
                 <div
                   onClick={() => {
-                    dispatch(openModal(true))
                     detail(item.id)
                   }}
                 >
