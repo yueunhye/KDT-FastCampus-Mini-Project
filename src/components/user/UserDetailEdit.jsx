@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   useEditUserDataMutation,
   useInquireUserDataQuery
-} from '../../store/slices/userApiSlice'
+} from '../../store/api/userApiSlice'
 import { useEffect } from 'react'
 
 function UserDetailEdit() {

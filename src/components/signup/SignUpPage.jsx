@@ -9,7 +9,7 @@ import styles from '~/scss/SignUpPage.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
-import { useSignUpMutation } from '../../store/slices/userApiSlice'
+import { useSignUpMutation } from '../../store/api/userApiSlice'
 import { useSelector } from 'react-redux'
 
 function SignUpPage() {
