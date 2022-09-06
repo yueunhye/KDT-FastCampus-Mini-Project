@@ -1,9 +1,9 @@
 import { getCookie } from '../../utils/cookie'
-import { apiSlice } from '../api/apiSlice'
+import { apiSlice } from './apiSlice'
 
 const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['User'] })
 
-export const userApiSlice = apiSlice.injectEndpoints({
+export const userApiSlice = apiWithTags.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: ({ email, password }) => ({

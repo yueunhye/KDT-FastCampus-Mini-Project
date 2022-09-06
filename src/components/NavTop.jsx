@@ -9,7 +9,7 @@ import { getCookie } from '../utils/cookie'
 import {
   useLogoutMutation,
   useRefreshDataMutation
-} from '../store/slices/userApiSlice'
+} from '../store/api/userApiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../store/slices/userSlice'
 import { setUser } from '../store/slices/userSlice'

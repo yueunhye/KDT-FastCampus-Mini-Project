@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLoginMutation } from '../../store/slices/userApiSlice'
+import { useLoginMutation } from '../../store/api/userApiSlice'
 import { openModal, setUser } from '../../store/slices/userSlice'
 
 function SignIn() {

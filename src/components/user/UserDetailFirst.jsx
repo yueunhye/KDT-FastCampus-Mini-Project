@@ -5,7 +5,7 @@ import { jobs, houses, assets, pay, interests } from '~/data/userDetails'
 import styles from '~/scss/UserDetailFirst.module.scss'
 import Alert from '~/components/modal/Alert'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUserDetailMutation } from '../../store/slices/userApiSlice'
+import { useUserDetailMutation } from '../../store/api/userApiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '../../store/slices/userSlice'
 
