@@ -24,7 +24,19 @@ const RecommedModal = ({ getDetail }) => {
           </div>
         </header>
         <main>
-          <div>{getDetail && getDetail.data.companyName}</div>
+          {getDetail && (
+            <div className={style.logo}>
+              <img src={getDetail.data.logo} alt='logo' />
+              <h3>{getDetail.data.companyName}</h3>
+            </div>
+          )}
+
+          {getDetail && (
+            <div className={style.detail}>
+              <p>{getDetail.data.productName}</p>
+              <span>{getDetail.data.details}</span>
+            </div>
+          )}
         </main>
         <footer>
           <button type='button'>장바구니 담기</button>

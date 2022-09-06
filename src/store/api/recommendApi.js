@@ -1,5 +1,7 @@
 import { apiSlice } from '../api/apiSlice'
 
+const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['getRecommend'] })
+
 export const recommendApi = apiSlice.injectEndpoints({
   endpoints: builder => ({
     setRecommend: builder.query({
@@ -27,7 +29,8 @@ export const recommendApi = apiSlice.injectEndpoints({
         transformResponse: response => {
           return response.data
         }
-      })
+      }),
+      invalidatesTags: ['getRecommend']
     })
   })
 })
