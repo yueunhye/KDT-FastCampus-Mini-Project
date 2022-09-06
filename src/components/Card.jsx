@@ -11,7 +11,7 @@ import {
 } from '../store/api/favoriteApiSlice'
 
 const Card = ({ productData, openModal }) => {
-  const { data: favorite } = useGetFavoriteQuery()
+  const { data: favorite, isLoading, isError } = useGetFavoriteQuery()
   const isFavorite = favorite?.find(item => item.id === productData.id)
   const [addFavorite] = useAddFavoriteMutation()
   const [deleteFavorite] = useDeleteFavoriteMutation()
@@ -21,6 +21,7 @@ const Card = ({ productData, openModal }) => {
     isFavorite ? deleteFavorite(id) : addFavorite(id)
     console.log(id)
   }
+  // isError && alert('로그인 시간이 만료되었습니다. 다시 로그인 해주세요!')
   return (
     <div className={style.Card}>
       <div

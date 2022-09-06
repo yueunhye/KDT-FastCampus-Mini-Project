@@ -1,0 +1,49 @@
+@import 'main.scss';
+
+.detailContainer {
+  margin: 120px auto 0;
+  width: 360px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 1rem;
+  background-color: #bde0fe;
+  border-radius: 0.8rem;
+  box-shadow: 0px 2px 5px #999;
+  font-family: 'SDGothicA';
+  color: #495057;
+  .title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .productContainer {
+    margin-top: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    .iconBackground {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      &.icon1 {
+        background-color: #3a5a40;
+      }
+      &.icon2 {
+        background-color: #003566;
+      }
+      &.icon3 {
+        background-color: #f6bd60;
+      }
+      &.icon4 {
+        background-color: #e07a5f;
+      }
+    }
+
+    .productTitle {
+      margin-left: 4px;
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+  }
+}
