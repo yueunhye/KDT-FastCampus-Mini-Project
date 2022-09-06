@@ -8,6 +8,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { email, password },
       }),
+      transformResponse: response => {
+        return response.data
+      },
     }),
     signUp: builder.mutation({
       query: data => ({
@@ -22,6 +25,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...data },
       }),
+      transformResponse: response => {
+        return response.data
+      },
     }),
     userDetail: builder.mutation({
       query: data => ({
@@ -41,12 +47,21 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: 'members',
         method: 'GET',
       }),
+      transformResponse: response => {
+        return response.data
+      },
     }),
     editUserData: builder.mutation({
       query: data => ({
         url: 'members',
         method: 'PATCH',
         body: { ...data },
+      }),
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: 'logout',
+        method: 'POST',
       }),
     }),
   }),
@@ -60,4 +75,5 @@ export const {
   useDetailPassQuery,
   useInquireUserDataQuery,
   useEditUserDataMutation,
+  useLogoutMutation,
 } = userApiSlice
