@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
-import iPhone from '../assets/iphone.png'
+import iPhone from '../../public/assets/iphone.png'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { SearchOutline } from 'antd-mobile-icons'
 import { Space, Popup } from 'antd-mobile'
