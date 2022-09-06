@@ -13,6 +13,8 @@ import { useSignUpMutation } from '../../store/slices/userApiSlice'
 import { useSelector } from 'react-redux'
 import userSlice from '../../store/slices/userSlice'
 
+import { useNavigate } from 'react-router-dom'
+
 function SignUpPage() {
   const [name, setName] = useState('')
   const [id, setId] = useState('')
@@ -23,6 +25,8 @@ function SignUpPage() {
   const [alert, setAlert] = useState(false)
   const [submitSignUp, { isLoadgin }] = useSignUpMutation()
   const isOpen = useSelector(state => userSlice.modalVisible)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (email === '') {

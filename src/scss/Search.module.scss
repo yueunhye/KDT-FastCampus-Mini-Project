@@ -117,8 +117,10 @@ h1 {
 }
 .Card {
   width: 19rem;
+
   height: 12rem;
   padding: 0.1rem 1.3rem;
+
   box-sizing: border-box;
   display: flex;
   border-radius: 0.8rem;
@@ -126,11 +128,13 @@ h1 {
   line-height: 1.3rem;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.3);
+
   box-shadow: 20px 20px 40px -6px rgb(0 0 0 / 20%);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   flex-direction: column;
   justify-content: flex-end;
+
   > h2 {
     width: 100%;
     font-size: 1rem;
@@ -143,16 +147,16 @@ h1 {
     width: 100%;
     font-weight: 700;
     font-size: 0.9rem;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   > h4 {
     width: 100%;
     font-size: 0.8rem;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-bottom: 10px;
   }
   > p {
@@ -244,23 +248,27 @@ h1 {
 }
 // recommend modal
 .RecommendModal {
-  display: none;
   position: fixed;
+  overflow: hidden;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 99;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-bg-show 0.3s;
   > section {
     width: 90%;
-    max-width: 39rem;
     margin: 0 auto;
     border-radius: 0.7rem;
     background-color: #fff;
     /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-show 0.3s;
-    overflow: hidden;
     > header {
       padding: 1.2rem;
       color: #868686;
@@ -298,12 +306,6 @@ h1 {
       margin-left: 10px;
     }
   }
-}
-.OpenModal {
-  display: flex;
-  align-items: center;
-  /* 팝업이 열릴때 스르륵 열리는 효과 */
-  animation: modal-bg-show 0.3s;
 }
 @keyframes modal-show {
   from {
