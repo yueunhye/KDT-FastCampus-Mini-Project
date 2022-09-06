@@ -23,13 +23,14 @@ const Card = ({ productData, openModal }) => {
 
   return (
     <div className={style.Card}>
-      <h5>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginBottom: '12px'
+        }}
+      >
         <img src={productData?.logo}></img>
-      </h5>
-      <h2>{productData?.companyName}</h2>
-      <h3>{productData?.productName}</h3>
-      <h4>{productData?.description}</h4>
-      <p style={{ display: 'flex', justifyContent: 'space-between' }}>
         <button
           id={style.favStar}
           onClick={() => onFavoriteHandler(productData.id)}
@@ -40,6 +41,11 @@ const Card = ({ productData, openModal }) => {
             <StarOutlined style={{ fontSize: '20px' }} />
           )}
         </button>
+      </div>
+      <h2>{productData?.companyName}</h2>
+      <h3>{productData?.productName}</h3>
+      <h4>{productData?.description}</h4>
+      <p style={{ display: 'flex', justifyContent: 'space-between' }}>
         <p onClick={openModal}>
           <span>신청하기</span>
           <SwapRightOutlined />
