@@ -10,6 +10,7 @@ import {
 import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
 import { useSelector } from 'react-redux'
 import RecommedModal from './modal/RecommendModal'
+import { useSetDetailProductMutation } from '../store/api/recommendApi'
 
 function Search() {
   const [visible, setVisible] = useState(false)
@@ -26,6 +27,7 @@ function Search() {
     tag: checkedTag,
     tagContent: checkedTagContent
   }
+  const [detail, { data: getDetail }] = useSetDetailProductMutation()
 
   const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
@@ -120,23 +122,34 @@ function Search() {
         <div>에러발생</div>
       ) : isClicked === false ? (
         products?.map((product, index) => (
-          <Card key={index} productData={product} />
+          <div
+            onClick={() => {
+              detail(product.id)
+            }}
+          >
+            <Card key={index} productData={product} />
+          </div>
         ))
       ) : (
         getSearch &&
         getSearch.map((product, index) => (
-          <Card key={index} productData={product} />
+          <div
+            onClick={() => {
+              detail(product.id)
+            }}
+          >
+            <Card key={index} productData={product} />
+          </div>
         ))
       )}
       {/* // 로그인 했을시 */}
-      {modalTest && accessToken ? <RecommedModal /> : null}
+      {modalTest && accessToken ? (
+        <RecommedModal getDetail={getDetail} />
+      ) : null}
       {/* // 로그인 안했을시 */}
       {modalTest && (Boolean(!accessToken) || accessToken === 'undefinded') ? (
         <Modal />
       ) : null}
-
-      
-      
     </section>
   )
 }
