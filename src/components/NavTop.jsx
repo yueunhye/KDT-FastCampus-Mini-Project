@@ -5,30 +5,42 @@ import iPhone from '../assets/iphone.png'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { SearchOutline } from 'antd-mobile-icons'
 import { Space, Popup } from 'antd-mobile'
+import { getCookie } from '../utils/cookie'
+import { useLogoutMutation } from '../store/slices/userApiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import userSlice, { logOut } from '../store/slices/userSlice'
 
 const NavTop = () => {
   const notLogin = [
     { label: '회원가입', route: 'signup' },
-    { label: '로그인', route: 'signin' },
+    { label: '로그인', route: 'signin' }
   ]
   const logined = [
-    { label: '회원정보 수정', route: 'edit' },
-    { label: '관심상품', route: 'liked' },
-    { label: '로그아웃', route: 'logout' },
+    { label: '회원정보 수정', route: 'userdetail' },
+    { label: '관심상품', route: 'favorite' },
+    { label: '로그아웃', route: 'logout' }
   ]
+
+  const [useLogout, { isLoading }] = useLogoutMutation()
+  const userName = useSelector(state => state.user).name
+  const dispatch = useDispatch()
+  console.log(userName)
 
   const [visible, setVisible] = useState(false)
   const [options, setOptions] = useState(notLogin)
 
-  const isLogin = window.sessionStorage.getItem('token')
+  const accessToken = getCookie('accessToken')
+  console.log(accessToken)
 
   useEffect(() => {
-    if (isLogin) {
+    if (accessToken) {
       setOptions(logined)
     }
-  }, [isLogin])
+  }, [accessToken])
 
   const logout = () => {
+    useLogout()
+    dispatch(logOut())
     console.log('Logout!')
     setOptions(notLogin)
   }
@@ -44,7 +56,7 @@ const NavTop = () => {
                   fontSize: '20px',
                   color: '#888888',
                   marginTop: '1px',
-                  fontWeight: 700,
+                  fontWeight: 700
                 }}
               />
             </Link>
@@ -74,14 +86,14 @@ const NavTop = () => {
         }}
         bodyStyle={{
           maxHeight: '60vh',
-          backgroundColor: 'transparent',
+          backgroundColor: 'transparent'
         }}
       >
         <div className={styles.menuContainer}>
           <div className={styles.menuTitle}>
-            {isLogin ? (
+            {accessToken ? (
               <p>
-                <span>홍길동 님, 환영합니다.</span>
+                <span>{userName} 님, 환영합니다.</span>
                 <br /> 오늘의 추천 상품을 확인해보세요!
               </p>
             ) : (
@@ -98,8 +110,8 @@ const NavTop = () => {
                   key={option.route}
                   className={styles.logout}
                   onClick={() => {
-                    setVisible(false)
                     logout()
+                    setVisible(false)
                   }}
                 >
                   {option.label}

@@ -12,6 +12,7 @@ import Decoration from '../deco/Decoration'
 import { useSignUpMutation } from '../../store/slices/userApiSlice'
 import { useSelector } from 'react-redux'
 import userSlice from '../../store/slices/userSlice'
+
 import { useNavigate } from 'react-router-dom'
 
 function SignUpPage() {
@@ -49,7 +50,7 @@ function SignUpPage() {
     }
 
     try {
-      await submitSignUp(data).unwrap()
+      await submitSignUp(data)
       setName('')
       setId('')
       setEmail('naver.com')
