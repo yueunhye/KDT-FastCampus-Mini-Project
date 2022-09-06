@@ -7,13 +7,13 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: headers => {
     const accessToken = getCookie('accessToken')
     if (accessToken) {
-      headers.set('authorization', `Bearer ${accessToken}`)
+      headers.set('Authorization', `Bearer ${accessToken}`)
     }
     return headers
-  },
+  }
 })
 
 export const apiSlice = createApi({
   baseQuery,
-  endpoints: builder => ({}),
+  endpoints: builder => ({})
 })
