@@ -1,6 +1,8 @@
 import { getCookie } from '../../utils/cookie'
 import { apiSlice } from '../api/apiSlice'
 
+const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['User'] })
+
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
@@ -21,10 +23,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       })
     }),
     refreshData: builder.mutation({
-      query: data => ({
+      query: () => ({
         url: 'reissue',
         method: 'POST',
-        body: { ...data }
+        body: {
+          accessToken: getCookie('accessToken'),
+          refreshToken: getCookie('refreshToken')
+        }
       }),
       transformResponse: response => {
         return response.data
@@ -38,26 +43,22 @@ export const userApiSlice = apiSlice.injectEndpoints({
       })
     }),
     detailPass: builder.query({
-      query: () => ({
-        url: 'join/detail-skip',
-        method: 'GET'
-      })
+      query: () => 'join/detail-skip'
     }),
     inquireUserData: builder.query({
-      query: () => ({
-        url: 'members',
-        method: 'GET'
-      }),
+      query: () => ({ url: 'members' }),
       transformResponse: response => {
         return response.data
-      }
+      },
+      invalidatesTags: ['User']
     }),
     editUserData: builder.mutation({
       query: data => ({
         url: 'members',
         method: 'PATCH',
         body: { ...data }
-      })
+      }),
+      providesTags: ['User']
     }),
     logout: builder.mutation({
       query: () => ({

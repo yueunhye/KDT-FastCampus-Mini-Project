@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
 import iPhone from '../assets/iphone.png'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { SearchOutline } from 'antd-mobile-icons'
 import { Space, Popup } from 'antd-mobile'
 import { getCookie } from '../utils/cookie'
-import { useLogoutMutation } from '../store/slices/userApiSlice'
+import {
+  useLogoutMutation,
+  useRefreshDataMutation
+} from '../store/slices/userApiSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import userSlice, { logOut } from '../store/slices/userSlice'
+import { logOut } from '../store/slices/userSlice'
+import { setUser } from '../store/slices/userSlice'
 
 const NavTop = () => {
+  const dispatch = useDispatch()
+  const accessToken = getCookie('accessToken')
+  const [refresh, { data: userData, isError }] = useRefreshDataMutation()
+
   const notLogin = [
     { label: '회원가입', route: 'signup' },
     { label: '로그인', route: 'signin' }
@@ -23,17 +31,13 @@ const NavTop = () => {
 
   const [useLogout, { isLoading }] = useLogoutMutation()
   const userName = useSelector(state => state.user).name
-  const dispatch = useDispatch()
-  console.log(userName)
+  const navigate = useNavigate()
 
   const [visible, setVisible] = useState(false)
   const [options, setOptions] = useState(notLogin)
 
-  const accessToken = getCookie('accessToken')
-  console.log(accessToken)
-
   useEffect(() => {
-    if (accessToken) {
+    if (accessToken && userName) {
       setOptions(logined)
     }
   }, [accessToken])
@@ -41,16 +45,25 @@ const NavTop = () => {
   const logout = () => {
     useLogout()
     dispatch(logOut())
-    console.log('Logout!')
     setOptions(notLogin)
+    navigate('/')
   }
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
+          <button
+            className={styles.refresh}
+            onClick={async () => {
+              const user = await refresh().unwrap()
+              dispatch(setUser(user))
+            }}
+          >
+            로그인 연장
+          </button>
           <Space>
-            <Link to='products'>
+            <Link to='/'>
               <SearchOutline
                 style={{
                   fontSize: '20px',
@@ -91,7 +104,7 @@ const NavTop = () => {
       >
         <div className={styles.menuContainer}>
           <div className={styles.menuTitle}>
-            {accessToken ? (
+            {accessToken && userName ? (
               <p>
                 <span>{userName} 님, 환영합니다.</span>
                 <br /> 오늘의 추천 상품을 확인해보세요!
