@@ -42,8 +42,11 @@ export const userApiSlice = apiWithTags.injectEndpoints({
         body: { ...data }
       })
     }),
-    detailPass: builder.query({
-      query: () => 'join/detail-skip'
+    detailPass: builder.mutation({
+      query: () => ({
+        url: 'join/detail-skip',
+        method: 'GET'
+      })
     }),
     inquireUserData: builder.query({
       query: () => ({ url: 'members' }),
@@ -78,7 +81,7 @@ export const {
   useSignUpMutation,
   useRefreshDataMutation,
   useUserDetailMutation,
-  useDetailPassQuery,
+  useDetailPassMutation,
   useInquireUserDataQuery,
   useEditUserDataMutation,
   useLogoutMutation
