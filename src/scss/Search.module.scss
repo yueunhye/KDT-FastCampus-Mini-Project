@@ -86,10 +86,6 @@ h1 {
       color: #fff;
       justify-content: center;
       width: 3.5rem;
-      // &:hover {
-      //   cursor: pointer;
-      //   background-color: #5da8ff;
-      // }
     }
   }
   .kategorie {
@@ -117,10 +113,8 @@ h1 {
 }
 .Card {
   width: 19rem;
-
   height: 12rem;
   padding: 0.1rem 1.3rem;
-
   box-sizing: border-box;
   display: flex;
   border-radius: 0.8rem;
@@ -128,7 +122,6 @@ h1 {
   line-height: 1.3rem;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.3);
-
   box-shadow: 20px 20px 40px -6px rgb(0 0 0 / 20%);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -159,7 +152,7 @@ h1 {
     text-overflow: ellipsis;
     margin-bottom: 10px;
   }
-  > p {
+  > div {
     width: 100%;
     margin-bottom: 20px;
     font-size: 0.9rem;
@@ -179,7 +172,11 @@ h1 {
 }
 
 .Modal {
-  display: none;
+  // display: none;
+  display: flex;
+  align-items: center;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-bg-show 0.3s;
   position: fixed;
   top: 0;
   right: 0;
@@ -208,7 +205,7 @@ h1 {
       padding: 0.9rem 1rem;
       text-align: center;
     }
-    > footer p {
+    > footer div {
       display: inline-block;
       padding: 6px 12px;
       color: #868686;
@@ -217,12 +214,7 @@ h1 {
     }
   }
 }
-.OpenModal {
-  display: flex;
-  align-items: center;
-  /* 팝업이 열릴때 스르륵 열리는 효과 */
-  animation: modal-bg-show 0.3s;
-}
+
 @keyframes modal-show {
   from {
     opacity: 0;

@@ -3,13 +3,13 @@ import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import Card from './Card'
 import { getCookie } from '../utils/cookie'
-import RecommendModal from '../components/modal/RecommendModal'
-import {useInquireUserDataQuery} from '~/store/slices/userApiSlice'
 import {
   useGetProductsQuery,
   useGetSearchMutation
 } from '~/store/api/searchApiSlice'
 import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
+import { useSelector } from 'react-redux'
+import RecommedModal from './modal/RecommendModal'
 
 function Search() {
   const [visible, setVisible] = useState(false)
@@ -19,12 +19,8 @@ function Search() {
   const [checkedTagContent, setCheckedTagContent] = useState([])
   const [searchInput, setSearchInput] = useState('')
   const [isClicked, setIsClicked] = useState(false)
-  const [modal, setModal] = useState(false)
-  const [isToken, setIsToken] = useState()
-
-
+  const modalTest = useSelector(state => state.user).modalVisible
   const accessToken = getCookie('accessToken')
-
   const data = {
     query: searchInput,
     tag: checkedTag,
@@ -33,7 +29,7 @@ function Search() {
   const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
   console.log('products', products)
-
+  console.log('modalTest', modalTest, Boolean(!accessToken))
   const asyncUpFetch = () => {
     setIsClicked(true)
     search(data)
@@ -43,19 +39,6 @@ function Search() {
       asyncUpFetch()
     }
   }
-
-  
-
-  const openModal = () => {
-    
-    setModal(true)
-    document.body.style.overflow = 'hidden'
-  }
-  const closeModal = () => {
-    setModal(false)
-    document.body.style.overflow = 'unset'
-  }
-
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
@@ -136,19 +119,21 @@ function Search() {
         <div>에러발생</div>
       ) : isClicked === false ? (
         products?.map((product, index) => (
-          <Card key={index} productData={product} openModal={openModal} />
+          <Card key={index} productData={product} />
         ))
       ) : (
         getSearch &&
         getSearch.map((product, index) => (
-          <Card key={index} productData={product} openModal={openModal} />
+          <Card key={index} productData={product} />
         ))
       )}
-      {
-        accessToken === undefined ?
-        <Modal open={modal} close={closeModal} />
-        :<RecommendModal />
-      }
+      {/* // 로그인 했을시 */}
+      {modalTest && accessToken ? <RecommedModal /> : null}
+      {/* // 로그인 안했을시 */}
+      {modalTest && (Boolean(!accessToken) || accessToken === 'undefinded') ? (
+        <Modal />
+      ) : null}
+
       
       
     </section>
