@@ -5,7 +5,6 @@ import { getCookie } from '../utils/cookie'
 
 function RequireAuth() {
   const accessToken = getCookie('accessToken')
-  console.log(Boolean(accessToken))
   return accessToken ? <Outlet /> : <SignIn />
 }
 

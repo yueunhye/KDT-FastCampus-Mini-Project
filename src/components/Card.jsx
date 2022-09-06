@@ -12,6 +12,7 @@ import { openModal } from '../store/slices/userSlice'
 import { useDispatch } from 'react-redux'
 import { useSetDetailProductMutation } from '../store/api/recommendApi'
 
+
 const Card = ({ productData }) => {
   const { data: favorite } = useGetFavoriteQuery()
   const isFavorite = favorite?.find(item => item.id === productData.id)
@@ -20,6 +21,7 @@ const Card = ({ productData }) => {
   const dispatch = useDispatch()
   const [detailId, { data: detailData }] = useSetDetailProductMutation()
   console.log(detailData)
+
 
   const onFavoriteHandler = id => {
     console.log(isFavorite)
@@ -65,6 +67,15 @@ const Card = ({ productData }) => {
           <SwapRightOutlined />
         </div>
       </p>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div onClick={() => dispatch(openModal(true)) }>
+          <span>신청하기</span>
+          <SwapRightOutlined />
+        </div>
+      </div>
+      
+
     </div>
   )
 }
