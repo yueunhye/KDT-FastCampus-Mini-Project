@@ -12,8 +12,6 @@ import Decoration from '../deco/Decoration'
 import { useSignUpMutation } from '../../store/slices/userApiSlice'
 import { useSelector } from 'react-redux'
 
-import { useNavigate } from 'react-router-dom'
-
 function SignUpPage() {
   const [name, setName] = useState('')
   const [id, setId] = useState('')
@@ -23,8 +21,6 @@ function SignUpPage() {
   const [direct, setDirect] = useState(true)
   const [submitSignUp, { isLoading }] = useSignUpMutation()
   const isOpen = useSelector(state => state.user).modalVisible
-  const navigate = useNavigate()
-
   const navigate = useNavigate()
 
   useEffect(() => {
