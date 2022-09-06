@@ -13,12 +13,12 @@ import userSlice, { logOut } from '../store/slices/userSlice'
 const NavTop = () => {
   const notLogin = [
     { label: '회원가입', route: 'signup' },
-    { label: '로그인', route: 'signin' },
+    { label: '로그인', route: 'signin' }
   ]
   const logined = [
     { label: '회원정보 수정', route: 'userdetail' },
-    { label: '관심상품', route: 'liked' },
-    { label: '로그아웃', route: 'logout' },
+    { label: '관심상품', route: 'favorite' },
+    { label: '로그아웃', route: 'logout' }
   ]
 
   const [useLogout, { isLoading }] = useLogoutMutation()
@@ -56,7 +56,7 @@ const NavTop = () => {
                   fontSize: '20px',
                   color: '#888888',
                   marginTop: '1px',
-                  fontWeight: 700,
+                  fontWeight: 700
                 }}
               />
             </Link>
@@ -86,7 +86,7 @@ const NavTop = () => {
         }}
         bodyStyle={{
           maxHeight: '60vh',
-          backgroundColor: 'transparent',
+          backgroundColor: 'transparent'
         }}
       >
         <div className={styles.menuContainer}>

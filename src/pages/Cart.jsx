@@ -1,10 +1,8 @@
 import React from 'react'
 import style from '~/scss/Cart.module.scss'
 import Card from '~/components/Card'
-import { useGetFavoriteQuery } from '../store/api/financeApi'
 
 const Cart = () => {
-  const { data, isLoading, isError } = useGetFavoriteQuery()
   console.log(data)
   return (
     <section className={style.cartSection}>

@@ -3,7 +3,7 @@ import { Space } from 'antd-mobile'
 import {
   CreditCardFilled,
   ShoppingFilled,
-  WalletFilled,
+  WalletFilled
 } from '@ant-design/icons'
 import styles from '~/scss/NavBottom.module.scss'
 import { Link, useLocation } from 'react-router-dom'
@@ -17,20 +17,20 @@ const NavBottom = () => {
       path: '/recomendation',
       icons: (
         <CreditCardFilled style={{ fontSize: '24px', marginBottom: '4px' }} />
-      ),
+      )
     },
     {
       title: '금융 상품',
       path: '/',
       icons: (
         <ShoppingFilled style={{ fontSize: '24px', marginBottom: '4px' }} />
-      ),
+      )
     },
     {
       title: '현명한 소비',
       path: '/consume',
-      icons: <WalletFilled style={{ fontSize: '24px', marginBottom: '4px' }} />,
-    },
+      icons: <WalletFilled style={{ fontSize: '24px', marginBottom: '4px' }} />
+    }
   ]
 
   return (

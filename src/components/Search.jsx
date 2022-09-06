@@ -2,17 +2,15 @@ import React, { useState } from 'react'
 import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import Card from './Card'
-import { useNavigate } from 'react-router-dom'
 
 import {
   useGetProductsQuery,
   useGetSearchMutation
-} from '~/store/api/financeApi'
+} from '~/store/api/searchApiSlice'
 import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
 
 function Search() {
   const [visible, setVisible] = useState(false)
-  const navigate = useNavigate()
   const tags = ['대출', '펀드', '카드', '멤버십', '적금']
   const tagContents = ['청년', '재테크', '코로나', '문화', '담보']
   const [checkedTag, setCheckedTag] = useState([])
@@ -21,22 +19,12 @@ function Search() {
   const [isClicked, setIsClicked] = useState(false)
   const [modal, setModal] = useState(false)
 
-  // const [products, setProducts] = useState([])
-
   const data = {
     query: searchInput,
     tag: checkedTag,
     tagContent: checkedTagContent
   }
-  console.log(data)
-  // const getData = async () => {
-  //   const { data } = await getProduct()
-  //   setProducts(data)
-  // }
-  // useEffect(() => {
-  //   getData()
-  // }, [])
-  const [ search, {data: getSearch, error, loading } ] = useGetSearchMutation()
+  const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
   console.log('products', products)
 
@@ -62,9 +50,6 @@ function Search() {
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
-      {/* <div style={{ display: 'flex', jusrifyContent: 'center'}}>
-        <button onClick={() => navigate('/favorite')}>관심상품 이동</button>
-      </div> */}
       <div className={style.searchContainer}>
         <div className={style.search} onKeyPress={handlerKeyPress}>
           <input
