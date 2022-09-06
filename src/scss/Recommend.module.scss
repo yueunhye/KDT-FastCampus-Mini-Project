@@ -28,10 +28,11 @@
   }
 }
 .contentTop {
-  display: block;
+  display: flex;
+  justify-content: flex-start;
   line-height: 20px;
   text-align: left;
-  // border: 1px solid $menuTitle;
+  flex-direction: column;
   width: 286px;
   height: 74px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -43,37 +44,12 @@
     font-family: 'SDGothicB';
     line-height: 22px;
     margin-top: 12px;
+    color: $blue;
   }
   & p {
     font-size: 14px;
-    font-weight: 600;
-    font-family: 'SDGothicB';
-  }
-}
-.contentMiddle {
-  display: block;
-  line-height: 20px;
-  text-align: left;
-  // border: 1px solid $menuTitle;
-  width: 286px;
-  height: 74px;
-  margin-top: 22px;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  box-sizing: border-box;
-  padding-left: 12px;
-  & h2 {
-    font-size: 16px;
     font-weight: 700;
     font-family: 'SDGothicB';
-    line-height: 22px;
-    margin-top: 12px;
-  }
-  & p {
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'SDGothicB';
-    color: $inputFocus;
   }
 }
 .recommendCard {

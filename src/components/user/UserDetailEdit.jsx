@@ -4,17 +4,23 @@ import { LeftOutline } from 'antd-mobile-icons'
 import { jobs, houses, assets, pay, interests } from '~/data/userDetails'
 import styles from '~/scss/UserDetailEdit.module.scss'
 import { useNavigate } from 'react-router-dom'
+import {
+  useEditUserDataMutation,
+  useInquireUserDataQuery
+} from '../../store/api/userApiSlice'
+import { useEffect } from 'react'
 
 function UserDetailEdit() {
   const navigate = useNavigate()
-
-  const [birth, setBirth] = useState('')
+  const { data: userDetail, isError, isFetching } = useInquireUserDataQuery()
   const [job, setJob] = useState('회사원')
   const [realEstate, setRealEstate] = useState('없음')
   const [car, setCar] = useState('')
   const [asset, setAsset] = useState('1억 미만')
   const [salary, setSalary] = useState('~2천만')
   const [interest, setInterest] = useState([])
+  const [changeData, setChangeData] = useState({})
+  const [submitEdit, { _ }] = useEditUserDataMutation()
 
   const changeButton = (tag, event) => {
     if (interest.includes(tag)) {
@@ -26,10 +32,13 @@ function UserDetailEdit() {
     }
   }
 
-  const submit = () => {
-    const data = { job, realEstate, car, asset, salary, interest }
+  useEffect(() => {
+    setChangeData({ job, realEstate, car, asset, salary, interest })
+  }, [job, realEstate, car, asset, salary, interest])
 
-    console.log(data)
+  const submit = async () => {
+    await submitEdit(changeData)
+    navigate('/')
   }
   return (
     <div>
@@ -48,7 +57,6 @@ function UserDetailEdit() {
         <div className={styles.listContainer}>
           <div className={styles.labels}>
             <label htmlFor='password'>새 비밀번호</label>
-            <label htmlFor='birth'>생년월일</label>
             <label htmlFor='job'>직업</label>
             <label htmlFor='house'>부동산</label>
             <label>자동차</label>
@@ -63,23 +71,16 @@ function UserDetailEdit() {
               placeholder='미변경시, 빈칸으로 두세요.'
               className={styles.input}
             />
-            <input
-              className={styles.input}
-              value={birth}
-              onChange={e => setBirth(e.target.value)}
-              type='number'
-              placeholder='생년월일 8자리를 입력해주세요.'
-            />
             <select
               className={styles.select}
               value={job}
               name='job'
               onChange={e => setJob(e.target.value)}
             >
-              {jobs.map(job => {
+              {jobs.map(item => {
                 return (
-                  <option value={job} key={job}>
-                    {job}
+                  <option value={item} key={item}>
+                    {item}
                   </option>
                 )
               })}
@@ -109,7 +110,7 @@ function UserDetailEdit() {
                     backgroundColor: '#fff',
                     borderRadius: '9px',
                     fontFamily: 'sans-serif',
-                    margin: '9px 0',
+                    margin: '9px 0'
                   }}
                 >
                   유
@@ -121,7 +122,7 @@ function UserDetailEdit() {
                     '--font-size': '14px',
                     '--gap': '6px',
                     fontFamily: 'sans-serif',
-                    margin: '9px 0',
+                    margin: '9px 0'
                   }}
                 >
                   무

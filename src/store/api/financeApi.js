@@ -13,12 +13,6 @@ export const financeApi = apiSlice.injectEndpoints({
         return response.data
       }
     }),
-    getRecommend: builder.query({
-      query: () => '/products/customized',
-      transformResponse: response => {
-        return response.data
-      }
-    }),
     getSearch: builder.mutation({
       query: ({ query, tag, tagContent }) => ({
         url: `/products?query=${query}&tag=${tag}&tagContent=${tagContent}`,

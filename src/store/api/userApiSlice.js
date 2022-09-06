@@ -1,7 +1,9 @@
 import { getCookie } from '../../utils/cookie'
-import { apiSlice } from '../api/apiSlice'
+import { apiSlice } from './apiSlice'
 
-export const userApiSlice = apiSlice.injectEndpoints({
+const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['User'] })
+
+export const userApiSlice = apiWithTags.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: ({ email, password }) => ({
@@ -21,10 +23,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       })
     }),
     refreshData: builder.mutation({
-      query: data => ({
+      query: () => ({
         url: 'reissue',
         method: 'POST',
-        body: { ...data }
+        body: {
+          accessToken: getCookie('accessToken'),
+          refreshToken: getCookie('refreshToken')
+        }
       }),
       transformResponse: response => {
         return response.data
@@ -37,27 +42,26 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: { ...data }
       })
     }),
-    detailPass: builder.query({
+    detailPass: builder.mutation({
       query: () => ({
         url: 'join/detail-skip',
         method: 'GET'
       })
     }),
     inquireUserData: builder.query({
-      query: () => ({
-        url: 'members',
-        method: 'GET'
-      }),
+      query: () => ({ url: 'members' }),
       transformResponse: response => {
         return response.data
-      }
+      },
+      invalidatesTags: ['User']
     }),
     editUserData: builder.mutation({
       query: data => ({
         url: 'members',
         method: 'PATCH',
         body: { ...data }
-      })
+      }),
+      providesTags: ['User']
     }),
     logout: builder.mutation({
       query: () => ({
@@ -77,7 +81,7 @@ export const {
   useSignUpMutation,
   useRefreshDataMutation,
   useUserDetailMutation,
-  useDetailPassQuery,
+  useDetailPassMutation,
   useInquireUserDataQuery,
   useEditUserDataMutation,
   useLogoutMutation

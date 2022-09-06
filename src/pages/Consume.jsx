@@ -1,64 +1,52 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
-import { getProduct } from '../utils/getProduct'
 import styles from '../scss/Consume.module.scss'
 import { Tabs, Swiper } from 'antd-mobile'
 import { useRef } from 'react'
 import RecommedModal from '../components/modal/RecommendModal'
+import { useSetMenberShipQuery } from '../store/api/recommendApi'
+import { useSetDetailProductMutation } from '../store/api/recommendApi'
+import { useDispatch } from 'react-redux'
+import { openModal } from '../store/slices/userSlice'
+import { useSelector } from 'react-redux'
 
 const tagData = [
   { key: 'card', title: '카드' },
-  { key: 'membership', title: '맴버십' },
+  { key: 'membership', title: '맴버십' }
 ]
 
 const Consume = () => {
-  const [consumProduct, setConsumProduct] = useState([])
-  const [userName, setUserName] = useState([{ id: 1, title: '신문수' }])
   const [card, setCard] = useState([])
   const [memBerShip, setMemBerShip] = useState([])
   const [activeIndex, setActiveIndex] = useState(1)
+  const [detail, { data: getDetail }] = useSetDetailProductMutation()
+  const { data: membership, isError, isLoading } = useSetMenberShipQuery()
+  const guLinModal = useSelector(state => state.user).modalVisible
+  const getName = useSelector(state => state.user).name
+
+  console.log('멤버십', membership)
+  console.log('get??', getDetail)
   const conSumRef = useRef(null)
-  const [modal, setModal] = useState(false)
-
-  const modalClose = () => {
-    if (modal) {
-      setModal()
-    } else {
-      setModal(!modal)
-    }
-  }
-
-  const getData = async () => {
-    const { data } = await getProduct()
-    setConsumProduct(data)
-  }
-  console.log('consumProduct?', consumProduct)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (consumProduct) {
-      setCard(consumProduct.filter(item => item.tag[0] === '카드'))
-      setMemBerShip(consumProduct.filter(item => item.tag[0] === '멤버십'))
+    if (membership) {
+      setCard(membership.data.cards)
+      setMemBerShip(membership.data.memberships)
     }
-  }, [consumProduct])
-
-  useEffect(() => {
-    getData()
   }, [])
 
   return (
     <>
       <div className={styles.consumeContent}>
         <div className={styles.consumeText}>
-          {userName.map((name, idx) => (
-            <h3 key={idx}>{name.title}</h3>
-          ))}
+          <h3>{getName}</h3>
           <p>
             회원님에 현명한 소비를 위한
             <br />
             맞춤형 카드와 멤버십 상품을 추천 드립니다.
           </p>
         </div>
-
         <div className={styles.tabsBox}>
           <div className={styles.tabs}>
             <Tabs
@@ -86,23 +74,33 @@ const Consume = () => {
             }}
           >
             <Swiper.Item>
-              <div onClick={modalClose}>
-                {card.map(item => (
-                  <Card productData={item} key={item.title} />
-                ))}
-              </div>
+              {card.map((item, idx) => (
+                <div
+                  onClick={() => {
+                    dispatch(openModal(true))
+                    detail(item.id)
+                  }}
+                >
+                  <Card productData={item} key={idx} />
+                </div>
+              ))}
             </Swiper.Item>
             <Swiper.Item>
-              <div onClick={modalClose}>
-                {memBerShip.map(item => (
-                  <Card productData={item} key={item.title} />
-                ))}
-              </div>
+              {memBerShip.map((item, idx) => (
+                <div
+                  onClick={() => {
+                    dispatch(openModal(true))
+                    detail(item.id)
+                  }}
+                >
+                  <Card productData={item} key={idx} />
+                </div>
+              ))}
             </Swiper.Item>
           </Swiper>
         </div>
       </div>
-      <div>{modal && <RecommedModal modalClose={modalClose} />}</div>
+      {guLinModal ? <RecommedModal getDetail={getDetail} /> : null}
     </>
   )
 }
