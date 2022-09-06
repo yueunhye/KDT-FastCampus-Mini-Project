@@ -1,0 +1,183 @@
+@import './main.scss';
+
+.firstAsk {
+  width: 100vw;
+  height: fit-content;
+  overflow-y: auto;
+  margin: 0 0 60px;
+  padding-top: 160px;
+  position: relative;
+  span {
+    color: $blue;
+  }
+  select {
+    appearance: none;
+    background: $inputBG url('../assets/down-arrow.png') right 10px center
+      no-repeat;
+    background-size: 15px;
+    width: fit-content;
+    padding: 2.5px 30px 2.5px 20px;
+    outline: 0 none;
+    option {
+      padding: 3px auto;
+    }
+  }
+}
+
+.passbtn {
+  display: flex;
+  position: absolute;
+  right: 30px;
+  top: 112px;
+  .nextSet {
+    margin-right: 3px;
+    color: $hbgBarColor;
+    font-size: 14px;
+  }
+}
+
+.title {
+  font-family: 'SDGothicEB';
+  font-size: 22px;
+  text-align: center;
+}
+
+.subTitle {
+  font-family: 'SDGothicL';
+  font-size: 11px;
+  text-align: center;
+  margin: 8px 0 40px;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px auto 30px;
+}
+
+.label {
+  font-size: 15px;
+  font-family: 'SDGothicB';
+  margin-bottom: 10px;
+}
+
+.select {
+  height: 33.4px;
+  border: 0.7px solid $inputBorder;
+  border-radius: 10px;
+  font-size: 12px;
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+}
+
+.input {
+  width: 180px;
+  height: 26px;
+  border: 0.7px solid $inputBorder;
+  border-radius: 10px;
+  background-color: $inputBG;
+  padding: 3px 13px;
+  font-size: 12px;
+  text-align: center;
+  &::placeholder {
+    color: #d1d1d6;
+  }
+  &:focus {
+    border: 0.7px solid $inputFocus;
+    outline: none;
+    box-shadow: 0 0 1.5px $inputFocus;
+  }
+}
+
+.lastCheck {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 8px;
+  align-items: center;
+  .checkboxLable {
+    font-family: 'SDGothicL';
+  }
+  .checkbox {
+    width: 13px;
+    height: 13px;
+    margin-left: 6px;
+  }
+}
+
+input[type='checkbox'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 16px;
+  background: $inputBG;
+  outline: $iconColor solid 0.5px;
+  width: 16px;
+}
+
+input[type='checkbox']::after {
+  border: solid #fff;
+  border-width: 0 1.95px 1.99px 0;
+  content: '';
+  display: none;
+  height: 40%;
+  left: 35%;
+  position: relative;
+  top: 20%;
+  transform: rotate(45deg);
+  width: 15%;
+}
+
+input[type='checkbox']:checked {
+  background: $blue;
+  outline: 0;
+}
+
+input[type='checkbox']:checked::after {
+  display: block;
+}
+
+.ButtonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  & > input[type='button'] {
+    display: flex;
+    border: none;
+    border-radius: 0.9rem;
+    margin: 0.1rem;
+    padding: 0.4rem 0.9rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    &:hover {
+      cursor: pointer;
+      background-color: #82bcff;
+    }
+  }
+}
+.On {
+  background-color: #55a3ff;
+}
+.Off {
+  background-color: #a6cfff;
+}
+
+.btn {
+  height: 40px;
+  width: 160px;
+  border-radius: 5px;
+  margin: 30px auto 50px;
+  border: none;
+  background-color: $blue;
+  color: #fff;
+  font-size: 17px;
+  font-family: 'SDGothicB';
+}

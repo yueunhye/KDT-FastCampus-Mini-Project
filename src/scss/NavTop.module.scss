@@ -1,11 +1,20 @@
 @import './main.scss';
 
 $hbgBarHeight: 2px;
+
+.container {
+  display: flex;
+  justify-content: center;
+}
 .top {
   display: block;
   position: fixed;
+  padding-bottom: 10px;
   top: 0;
+  z-index: 9;
   font-family: 'Nanum Gothic', sans-serif;
+  background-color: $mainBG;
+  box-shadow: 0px 3px 2px -0.5px rgba(0, 0, 0, 0.18);
 }
 .notch {
   display: block;
@@ -71,6 +80,9 @@ $hbgBarHeight: 2px;
     text-decoration: none;
     color: $menuList;
     padding: 20px;
+    &:hover {
+      background-color: $menuHover;
+    }
   }
   .logout {
     display: block;
@@ -92,4 +104,15 @@ $hbgBarHeight: 2px;
   margin: 10px 10px 20px;
   font-family: 'SDGothicM';
   color: $blue;
+}
+
+.refresh {
+  position: absolute;
+  left: 20px;
+  top: 48px;
+  border: none;
+  background-color: $hbgBarHeight;
+  height: 30px;
+  border-radius: 8px;
+  font-family: 'SDGothicB';
 }

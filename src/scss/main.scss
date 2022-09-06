@@ -2,7 +2,16 @@
 @import './color';
 
 .App {
-  background-color: $mainBG;
   width: 100vw;
-  height: 100vh;
+  background-color: $mainBG;
+  position: absolute;
+  z-index: -4;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'SDGothicM';
 }

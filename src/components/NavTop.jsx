@@ -1,48 +1,79 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
 import iPhone from '../assets/iphone.png'
-import { ShoppingCartOutlined, SearchOutlined } from '@ant-design/icons'
+import { ShoppingCartOutlined } from '@ant-design/icons'
+import { SearchOutline } from 'antd-mobile-icons'
 import { Space, Popup } from 'antd-mobile'
+import { getCookie } from '../utils/cookie'
+import {
+  useLogoutMutation,
+  useRefreshDataMutation
+} from '../store/api/userApiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { logOut } from '../store/slices/userSlice'
+import { setUser } from '../store/slices/userSlice'
 
 const NavTop = () => {
+  const dispatch = useDispatch()
+  const accessToken = getCookie('accessToken')
+  const [refresh, { data: userData, isError }] = useRefreshDataMutation()
+
   const notLogin = [
     { label: '회원가입', route: 'signup' },
-    { label: '로그인', route: 'signin' },
+    { label: '로그인', route: 'signin' }
   ]
   const logined = [
-    { label: '회원정보 수정', route: 'edit' },
-    { label: '관심상품', route: 'liked' },
-    { label: '로그아웃', route: 'logout' },
+    { label: '회원정보 수정', route: 'userdetail' },
+    { label: '관심상품', route: 'favorite' },
+    { label: '로그아웃', route: 'logout' }
   ]
+
+  const [useLogout, { isLoading }] = useLogoutMutation()
+  const userName = useSelector(state => state.user).name
+  const navigate = useNavigate()
 
   const [visible, setVisible] = useState(false)
   const [options, setOptions] = useState(notLogin)
 
-  const isLogin = window.sessionStorage.getItem('token')
-
   useEffect(() => {
-    if (isLogin) {
+    if (accessToken && userName) {
       setOptions(logined)
     }
-  }, [isLogin])
+  }, [accessToken])
 
   const logout = () => {
-    console.log('Logout!')
+    useLogout()
+    dispatch(logOut())
     setOptions(notLogin)
+    navigate('/')
   }
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.top}>
         <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
+          <button
+            className={styles.refresh}
+            onClick={async () => {
+              const user = await refresh().unwrap()
+              dispatch(setUser(user))
+            }}
+          >
+            로그인 연장
+          </button>
           <Space>
-            <Link to='products'>
-              <SearchOutlined
-                style={{ fontSize: '20px', color: '#888888', marginTop: '1px' }}
+            <Link to='/'>
+              <SearchOutline
+                style={{
+                  fontSize: '20px',
+                  color: '#888888',
+                  marginTop: '1px',
+                  fontWeight: 700
+                }}
               />
             </Link>
-            <Link to='basket'>
+            <Link to='/cart'>
               <ShoppingCartOutlined
                 style={{ fontSize: '22px', color: '#888888' }}
               />
@@ -68,14 +99,14 @@ const NavTop = () => {
         }}
         bodyStyle={{
           maxHeight: '60vh',
-          backgroundColor: 'transparent',
+          backgroundColor: 'transparent'
         }}
       >
         <div className={styles.menuContainer}>
           <div className={styles.menuTitle}>
-            {isLogin ? (
+            {accessToken && userName ? (
               <p>
-                <span>홍길동 님, 환영합니다.</span>
+                <span>{userName} 님, 환영합니다.</span>
                 <br /> 오늘의 추천 상품을 확인해보세요!
               </p>
             ) : (
@@ -91,14 +122,22 @@ const NavTop = () => {
                 <div
                   key={option.route}
                   className={styles.logout}
-                  onClick={logout}
+                  onClick={() => {
+                    logout()
+                    setVisible(false)
+                  }}
                 >
                   {option.label}
                 </div>
               )
             }
             return (
-              <div key={option.route}>
+              <div
+                key={option.route}
+                onClick={() => {
+                  setVisible(false)
+                }}
+              >
                 <Link className={styles.menuList} to={option.route}>
                   {option.label}
                 </Link>
