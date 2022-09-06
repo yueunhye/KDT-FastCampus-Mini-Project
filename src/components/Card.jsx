@@ -23,18 +23,16 @@ const Card = ({ productData, openModal }) => {
     <div
       className={style.Card}>
       <h5><img src={productData?.logo}></img></h5>
-      <h2>
-        {productData?.companyName}
-        <button id={style.favStar} onClick={() => onStarClick(productData)}>
+        {/* <button id={style.favStar} onClick={() => onStarClick(productData)}> */}
           {/* {isFavorite ? (
             <StarFilled style={{ fontSize: '20px' }} />
             ) : (
               <StarOutlined style={{ fontSize: '20px' }} />
             )} */}
-        </button>
-      </h2>
+        {/* </button> */}
       <h3>{productData?.productName}</h3>
       <h4>{productData?.description}</h4>
+      <h2>{productData?.companyName}</h2>
       <p onClick={openModal}>
         신청하기
         <SwapRightOutlined />
