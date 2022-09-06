@@ -6,9 +6,6 @@ import { useState } from 'react'
 import { Tabs, Swiper } from 'antd-mobile'
 import { useRef } from 'react'
 import { useSetRecommendQuery } from '../store/api/recommendApi'
-import { useSetDetailProductMutation } from '../store/api/recommendApi'
-import { openModal } from '../store/slices/userSlice'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 const tagData = [
   { key: 'loan', title: '대출' },
@@ -16,20 +13,16 @@ const tagData = [
   { key: 'fund', title: '펀드' }
 ]
 
-const RecommendList = ({ name }) => {
+const RecommendList = () => {
   const [deList, setDeList] = useState([])
   const [fundList, setFundList] = useState([])
   const [countList, setCountList] = useState([])
   const [activeIndex, setActiveIndex] = useState(1)
   const clickRef = useRef(null)
   const { data: recommend, error, loading } = useSetRecommendQuery()
-  const [detail, { data: getDetail }] = useSetDetailProductMutation()
   const guLinModal = useSelector(state => state.user).modalVisible
-  const getName = useSelector(state => state.user).name
-  console.log('get??', getDetail)
 
-  const dispatch = useDispatch()
-  console.log('와라', recommend)
+  const getName = useSelector(state => state.user).name
 
   useEffect(() => {
     if (recommend) {
@@ -75,12 +68,7 @@ const RecommendList = ({ name }) => {
           <Swiper.Item>
             <div>
               {deList.map((item, idx) => (
-                <div
-                  onClick={() => {
-                    dispatch(openModal(true))
-                    detail(item.id)
-                  }}
-                >
+                <div>
                   <Card productData={item} key={idx} />
                 </div>
               ))}
@@ -89,12 +77,7 @@ const RecommendList = ({ name }) => {
           <Swiper.Item>
             <div>
               {countList.map((item, idx) => (
-                <div
-                  onClick={() => {
-                    dispatch(openModal(true))
-                    detail(item.id)
-                  }}
-                >
+                <div>
                   <Card productData={item} key={idx} />
                 </div>
               ))}
@@ -103,12 +86,7 @@ const RecommendList = ({ name }) => {
           <Swiper.Item>
             <div>
               {fundList.map((item, idx) => (
-                <div
-                  onClick={() => {
-                    dispatch(openModal(true))
-                    detail(item.id)
-                  }}
-                >
+                <div>
                   <Card productData={item} key={idx} />
                 </div>
               ))}
@@ -116,7 +94,8 @@ const RecommendList = ({ name }) => {
           </Swiper.Item>
         </Swiper>
       </div>
-      {guLinModal ? <RecommedModal getDetail={getDetail} /> : null}
+
+      {guLinModal ? <RecommedModal /> : null}
     </div>
   )
 }

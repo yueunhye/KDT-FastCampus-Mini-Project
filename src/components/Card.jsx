@@ -3,18 +3,23 @@ import React from 'react'
 import style from '~/scss/Search.module.scss'
 import { StarOutlined, StarFilled, SwapRightOutlined } from '@ant-design/icons'
 
-import { useState } from 'react'
 import {
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
   useGetFavoriteQuery
 } from '../store/api/favoriteApiSlice'
+import { openModal } from '../store/slices/userSlice'
+import { useDispatch } from 'react-redux'
+import { useSetDetailProductMutation } from '../store/api/recommendApi'
 
-const Card = ({ productData, openModal }) => {
+const Card = ({ productData }) => {
   const { data: favorite } = useGetFavoriteQuery()
   const isFavorite = favorite?.find(item => item.id === productData.id)
   const [addFavorite] = useAddFavoriteMutation()
   const [deleteFavorite] = useDeleteFavoriteMutation()
+  const dispatch = useDispatch()
+  const [detailId, { data: detailData }] = useSetDetailProductMutation()
+  console.log(detailData)
 
   const onFavoriteHandler = id => {
     console.log(isFavorite)
@@ -46,10 +51,19 @@ const Card = ({ productData, openModal }) => {
       <h3>{productData?.productName}</h3>
       <h4>{productData?.description}</h4>
       <p style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <p onClick={openModal}>
-          <span>신청하기</span>
+        <div>
+          <span
+            onClick={e => {
+              dispatch(openModal(true))
+              detailId(productData.id)
+              console.log(productData.id)
+              e.preventDefault()
+            }}
+          >
+            신청하기
+          </span>
           <SwapRightOutlined />
-        </p>
+        </div>
       </p>
     </div>
   )
