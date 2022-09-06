@@ -1,9 +1,9 @@
 import { getCookie } from '../../utils/cookie'
-import { apiSlice } from '../api/apiSlice'
+import { apiSlice } from './apiSlice'
 
 const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['User'] })
 
-export const userApiSlice = apiSlice.injectEndpoints({
+export const userApiSlice = apiWithTags.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: ({ email, password }) => ({
@@ -42,8 +42,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: { ...data }
       })
     }),
-    detailPass: builder.query({
-      query: () => 'join/detail-skip'
+    detailPass: builder.mutation({
+      query: () => ({
+        url: 'join/detail-skip',
+        method: 'GET'
+      })
     }),
     inquireUserData: builder.query({
       query: () => ({ url: 'members' }),
@@ -78,7 +81,7 @@ export const {
   useSignUpMutation,
   useRefreshDataMutation,
   useUserDetailMutation,
-  useDetailPassQuery,
+  useDetailPassMutation,
   useInquireUserDataQuery,
   useEditUserDataMutation,
   useLogoutMutation

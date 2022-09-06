@@ -5,7 +5,10 @@ import { jobs, houses, assets, pay, interests } from '~/data/userDetails'
 import styles from '~/scss/UserDetailFirst.module.scss'
 import Alert from '~/components/modal/Alert'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUserDetailMutation } from '../../store/slices/userApiSlice'
+import {
+  useDetailPassMutation,
+  useUserDetailMutation
+} from '../../store/api/userApiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '../../store/slices/userSlice'
 
@@ -25,6 +28,7 @@ function UserDetailFirst() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
+  const [detailPass, { isError }] = useDetailPassMutation()
 
   const changeButton = (tag, event) => {
     if (interest.includes(tag)) {
@@ -78,7 +82,7 @@ function UserDetailFirst() {
   return (
     <div>
       <div className={styles.firstAsk}>
-        <Link to='/' className={styles.passbtn}>
+        <Link to='/' className={styles.passbtn} onClick={detailPass}>
           <div className={styles.nextSet}>다음에 설정하기</div>
           <DoubleRightOutlined style={{ color: '#888888' }} />
         </Link>
