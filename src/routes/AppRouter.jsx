@@ -13,6 +13,7 @@ import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
 import Application from '../pages/Application'
 import { CookiesProvider } from 'react-cookie'
+import RequireAuth from '../pages/RequireAuth'
 
 const AppRouter = () => {
   return (
@@ -29,7 +30,7 @@ const AppRouter = () => {
           <Route path='/recomendation' element={<Recomendation />} />
           <Route path='/userinfo' element={<UserInfo />} />
           <Route path='/consume' element={<Consume />} />
-          <Route path='/basket' element={<Basket />} />
+          <Route path='/cart' element={<Cart />} />
           <Route path='/favorite' element={<Favorite />} />
           <Route path='/application' element={<Application />} />
         </Route>
