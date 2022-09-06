@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Modal from '~/components/modal/Modal'
 import style from '~/scss/Search.module.scss'
 import Card from './Card'
-import { useNavigate } from 'react-router-dom'
 
 import {
   useGetProductsQuery,
@@ -20,14 +19,12 @@ function Search() {
   const [isClicked, setIsClicked] = useState(false)
   const [modal, setModal] = useState(false)
 
-  const navigate = useNavigate()
-
   const data = {
     query: searchInput,
     tag: checkedTag,
     tagContent: checkedTagContent
   }
-  const [ search, {data: getSearch} ] = useGetSearchMutation()
+  const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
   console.log('products', products)
 
@@ -53,7 +50,6 @@ function Search() {
   return (
     <section>
       <h1>상품을 검색해주세요</h1>
-      <button onClick={() => navigate('/favorite')}>장바구니로 이동</button>
       <div className={style.searchContainer}>
         <div className={style.search} onKeyPress={handlerKeyPress}>
           <input
