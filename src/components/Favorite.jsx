@@ -8,10 +8,10 @@ const Favorite = () => {
 
   return (
     <div>
-      {favorite.length ? (
-        <div style={{ marginTop: '80px' }}>
-          {favorite.map(item => (
-            <Card key={item.id} productData={item} />
+      {!favorite?.length == 0 ? (
+        <div style={{ marginTop: '80px', marginBottom: '70px' }}>
+          {favorite?.map((item, index) => (
+            <Card key={index} productData={item} />
           ))}
         </div>
       ) : (

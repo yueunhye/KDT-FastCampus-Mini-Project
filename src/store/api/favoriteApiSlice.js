@@ -1,24 +1,29 @@
 import { apiSlice } from '../api/apiSlice'
 
-export const favoriteApiSlice = apiSlice.injectEndpoints({
+const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['Favorite'] })
+
+export const favoriteApiSlice = apiWithTags.injectEndpoints({
   endpoints: builder => ({
     getFavorite: builder.query({
       query: () => 'products/concern',
-      transformResponse: response => response.data
+      transformResponse: response => response.data,
+      providesTags: ['Favorite']
     }),
     addFavorite: builder.mutation({
       query: id => ({
         url: 'products/concern',
         method: 'POST',
-        body: { ...id }
-      })
+        body: { id }
+      }),
+      invalidatesTags: ['Favorite']
     }),
     deleteFavorite: builder.mutation({
       query: id => ({
         url: 'products/concern',
         method: 'DELETE',
-        body: { id: String(id) }
-      })
+        body: { id }
+      }),
+      invalidatesTags: ['Favorite']
     })
   })
 })

@@ -16,8 +16,9 @@ const Card = ({ productData, openModal }) => {
   const [deleteFavorite] = useDeleteFavoriteMutation()
 
   const onFavoriteHandler = id => {
-    isFavorite ? deleteFavorite(String(id)) : addFavorite(String(id))
-    console.log(String(id))
+    console.log(isFavorite)
+    isFavorite ? deleteFavorite(id) : addFavorite(id)
+    console.log(id)
   }
 
   return (
