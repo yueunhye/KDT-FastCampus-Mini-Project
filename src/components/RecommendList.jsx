@@ -6,9 +6,10 @@ import { useState } from 'react'
 import { Tabs, Swiper } from 'antd-mobile'
 import { useRef } from 'react'
 import { useSetRecommendQuery } from '../store/api/recommendApi'
-
+import { useSelector } from 'react-redux'
 import { useSetDetailProductMutation } from '../store/api/recommendApi'
-
+import { openModal } from '../store/slices/userSlice'
+import { useDispatch } from 'react-redux'
 const tagData = [
   { key: 'loan', title: '대출' },
   { key: 'saving', title: '적금' },
@@ -21,22 +22,13 @@ const RecommendList = ({ name }) => {
   const [countList, setCountList] = useState([])
   const [activeIndex, setActiveIndex] = useState(1)
   const clickRef = useRef(null)
-  const [modal, setModal] = useState(false)
   const { data: recommend, error, loading } = useSetRecommendQuery()
   const [detail, { data: getDetail }] = useSetDetailProductMutation()
-  console.log('와라', recommend)
+  const guLinModal = useSelector(state => state.user).modalVisible
+  console.log('get??', getDetail)
 
-  const modalClose = id => {
-    console.log('모달', modal)
-    if (modal) {
-      setModal()
-      console.log('id??', id)
-      detail(id)
-      console.log('getDetail', getDetail, id)
-    } else {
-      setModal(!modal)
-    }
-  }
+  const dispatch = useDispatch()
+  console.log('와라', recommend)
 
   useEffect(() => {
     if (recommend) {
@@ -90,39 +82,48 @@ const RecommendList = ({ name }) => {
           <Swiper.Item>
             <div>
               {deList.map((item, idx) => (
-                <Card
-                  productData={item}
-                  key={idx}
-                  onClick={() => modalClose(item.id)}
-                />
+                <div
+                  onClick={() => {
+                    dispatch(openModal(true))
+                    detail(item.id)
+                  }}
+                >
+                  <Card productData={item} key={idx} />
+                </div>
               ))}
             </div>
           </Swiper.Item>
           <Swiper.Item>
             <div>
               {countList.map((item, idx) => (
-                <Card
-                  productData={item}
-                  key={idx}
-                  onClick={() => modalClose(item.id)}
-                />
+                <div
+                  onClick={() => {
+                    dispatch(openModal(true))
+                    detail(item.id)
+                  }}
+                >
+                  <Card productData={item} key={idx} />
+                </div>
               ))}
             </div>
           </Swiper.Item>
           <Swiper.Item>
             <div>
               {fundList.map((item, idx) => (
-                <Card
-                  productData={item}
-                  key={idx}
-                  onClick={() => modalClose(item.id)}
-                />
+                <div
+                  onClick={() => {
+                    dispatch(openModal(true))
+                    detail(item.id)
+                  }}
+                >
+                  <Card productData={item} key={idx} />
+                </div>
               ))}
             </div>
           </Swiper.Item>
         </Swiper>
       </div>
-      {modal && <RecommedModal modalClose={modalClose} open={modal} />}
+      {guLinModal ? <RecommedModal getDetail={getDetail} /> : null}
     </div>
   )
 }

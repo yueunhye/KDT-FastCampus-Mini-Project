@@ -27,7 +27,6 @@ const AppRouter = () => {
         <Route element={<RequireAuth />}>
           <Route path='/userdetail' element={<UserDetailPage />} />
           <Route path='/recomendation' element={<Recomendation />} />
-          <Route path='/userinfo' element={<UserInfo />} />
           <Route path='/consume' element={<Consume />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/favorite' element={<Favorite />} />
