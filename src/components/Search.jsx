@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   useGetProductsQuery,
   useGetSearchMutation
-} from '~/store/api/financeApi'
+} from '~/store/api/searchApiSlice'
 import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
 
 function Search() {
@@ -22,22 +22,12 @@ function Search() {
 
   const navigate = useNavigate()
 
-  // const [products, setProducts] = useState([])
-
   const data = {
     query: searchInput,
     tag: checkedTag,
     tagContent: checkedTagContent
   }
-  console.log(data)
-  // const getData = async () => {
-  //   const { data } = await getProduct()
-  //   setProducts(data)
-  // }
-  // useEffect(() => {
-  //   getData()
-  // }, [])
-  const [search, { data: getSearch, error, loading }] = useGetSearchMutation()
+  const [ search, {data: getSearch} ] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
   console.log('products', products)
 
