@@ -10,7 +10,7 @@ const logger = createLogger()
 const rootReducer = combineReducers({
   [financeApi.reducerPath]: financeApi.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
-  user: userReducer,
+  user: userReducer
 })
 
 export const store = configureStore({
@@ -19,8 +19,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat([
       logger,
       financeApi.middleware,
-      apiSlice.middleware,
-    ]),
+      apiSlice.middleware
+    ])
 })
 
 setupListeners(store.dispatch)

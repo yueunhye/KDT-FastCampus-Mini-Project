@@ -2,15 +2,17 @@ import {
   LockOutline,
   MailOutline,
   UserOutline,
-  PhonebookOutline,
+  PhonebookOutline
 } from 'antd-mobile-icons'
 import React, { useEffect, useState } from 'react'
 import styles from '~/scss/SignUpPage.module.scss'
 import { Link } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
-import axios from 'axios'
 import { useSignUpMutation } from '../../store/slices/userApiSlice'
+import { useSelector } from 'react-redux'
+import userSlice from '../../store/slices/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 function SignUpPage() {
   const [name, setName] = useState('')
@@ -22,6 +24,8 @@ function SignUpPage() {
   const [alert, setAlert] = useState(false)
   const [submitSignUp, { isLoadgin }] = useSignUpMutation()
   const isOpen = useSelector(state => userSlice.modalVisible)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (email === '') {
@@ -41,7 +45,7 @@ function SignUpPage() {
       name,
       email: id + '@' + email,
       password,
-      phoneNumber: phone,
+      phoneNumber: phone
     }
 
     try {
@@ -51,7 +55,7 @@ function SignUpPage() {
       setEmail('naver.com')
       setPassword('')
       setPhone('')
-      navigate('/login')
+      navigate('/signin')
     } catch (error) {
       console.log(error)
     }

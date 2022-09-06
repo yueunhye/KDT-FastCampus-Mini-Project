@@ -3,9 +3,8 @@ import style from '~/scss/Search.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { ShopbagOutline } from 'antd-mobile-icons'
 
-const RecommedModal = ({ modalClose }) => {
+const RecommedModal = ({ modalClose, open }) => {
   const navigate = useNavigate()
-
   const applicationHandler = () => {
     navigate('/application')
   }
@@ -21,14 +20,11 @@ const RecommedModal = ({ modalClose }) => {
         <header>
           <div className={style.cart}>
             <span>신청카드 정보</span>
-            <ShopbagOutline className={style.cartIcon} />
           </div>
         </header>
         <main>카드 내용</main>
         <footer>
-          <button type='button' onClick={applicationHandler}>
-            신청하기
-          </button>
+          <button type='button'>장바구니 담기</button>
           <button type='button' onClick={modalClose}>
             취소하기
           </button>

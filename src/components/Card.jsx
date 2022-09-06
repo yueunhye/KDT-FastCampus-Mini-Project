@@ -2,6 +2,7 @@ import React from 'react'
 
 import style from '~/scss/Search.module.scss'
 import { StarOutlined, StarFilled, SwapRightOutlined } from '@ant-design/icons'
+
 // import { addFavorite, removeFavorite } from '~/store/slices/favoriteSlice'
 
 const Card = ({ productData, openModal }) => {
@@ -20,9 +21,10 @@ const Card = ({ productData, openModal }) => {
   // }
 
   return (
-    <div
-      className={style.Card}>
-      <h5><img src={productData?.logo}></img></h5>
+    <div className={style.Card}>
+      <h5>
+        <img src={productData?.logo}></img>
+      </h5>
       <h2>
         {productData?.companyName}
         <button id={style.favStar} onClick={() => onStarClick(productData)}>

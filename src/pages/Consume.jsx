@@ -5,18 +5,22 @@ import styles from '../scss/Consume.module.scss'
 import { Tabs, Swiper } from 'antd-mobile'
 import { useRef } from 'react'
 import RecommedModal from '../components/modal/RecommendModal'
+import { useSetMenberShipQuery } from '../store/api/recommendApi'
 
 const tagData = [
   { key: 'card', title: '카드' },
-  { key: 'membership', title: '맴버십' },
+  { key: 'membership', title: '맴버십' }
 ]
 
 const Consume = () => {
-  const [consumProduct, setConsumProduct] = useState([])
   const [userName, setUserName] = useState([{ id: 1, title: '신문수' }])
   const [card, setCard] = useState([])
   const [memBerShip, setMemBerShip] = useState([])
   const [activeIndex, setActiveIndex] = useState(1)
+  const { data: membership, isError, isLoading } = useSetMenberShipQuery()
+
+  console.log('멤버십', membership)
+
   const conSumRef = useRef(null)
   const [modal, setModal] = useState(false)
 
@@ -28,22 +32,12 @@ const Consume = () => {
     }
   }
 
-  const getData = async () => {
-    const { data } = await getProduct()
-    setConsumProduct(data)
-  }
-  console.log('consumProduct?', consumProduct)
-
   useEffect(() => {
-    if (consumProduct) {
-      setCard(consumProduct.filter(item => item.tag[0] === '카드'))
-      setMemBerShip(consumProduct.filter(item => item.tag[0] === '멤버십'))
+    if (membership) {
+      setCard(membership.data.cards)
+      setMemBerShip(membership.data.memberships)
     }
-  }, [consumProduct])
-
-  useEffect(() => {
-    getData()
-  }, [])
+  }, [membership])
 
   return (
     <>
@@ -87,15 +81,15 @@ const Consume = () => {
           >
             <Swiper.Item>
               <div onClick={modalClose}>
-                {card.map(item => (
-                  <Card productData={item} key={item.title} />
+                {card.map((item, idx) => (
+                  <Card productData={item} key={idx} />
                 ))}
               </div>
             </Swiper.Item>
             <Swiper.Item>
               <div onClick={modalClose}>
-                {memBerShip.map(item => (
-                  <Card productData={item} key={item.title} />
+                {memBerShip.map((item, idx) => (
+                  <Card productData={item} key={idx} />
                 ))}
               </div>
             </Swiper.Item>

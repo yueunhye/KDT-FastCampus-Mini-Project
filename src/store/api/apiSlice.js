@@ -9,10 +9,10 @@ const baseQuery = fetchBaseQuery({
       headers.set('authorization', `Bearer ${accessToken}`)
     }
     return headers
-  },
+  }
 })
 
 export const apiSlice = createApi({
   baseQuery,
-  endpoints: builder => ({}),
+  endpoints: builder => ({})
 })
