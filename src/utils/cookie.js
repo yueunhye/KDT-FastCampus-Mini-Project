@@ -9,7 +9,6 @@ export const setCookie = ({ accessToken, refreshToken }) => {
 }
 
 export const getCookie = token => {
-  console.log(token, cookies.get(token))
   return cookies.get(token)
 }
 

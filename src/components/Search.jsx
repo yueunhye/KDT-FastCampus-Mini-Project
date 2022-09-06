@@ -26,6 +26,7 @@ function Search() {
     tag: checkedTag,
     tagContent: checkedTagContent
   }
+
   const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
   console.log('products', products)

@@ -5,8 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../modal/Alert'
 import Decoration from '../deco/Decoration'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLoginMutation } from '../../store/slices/userApiSlice'
-import userSlice, { openModal, setUser } from '../../store/slices/userSlice'
+import { useLoginMutation } from '../../store/api/userApiSlice'
+import { openModal, setUser } from '../../store/slices/userSlice'
 
 function SignIn() {
   const [email, setEmail] = useState('')
@@ -14,17 +14,17 @@ function SignIn() {
   const [login, { isLoading }] = useLoginMutation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const isOpen = useSelector(state => userSlice.modalVisible)
+  const isOpen = useSelector(state => state.user).modalVisible
 
   const signIn = async () => {
     if (!email || !password) {
       dispatch(openModal(true))
-      console.log(isOpen)
+      console.log('안열림 ', isOpen)
       return
     }
     const data = {
       email,
-      password,
+      password
     }
 
     try {
