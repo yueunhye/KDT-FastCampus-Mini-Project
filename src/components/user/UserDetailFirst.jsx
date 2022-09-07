@@ -14,6 +14,7 @@ import { openModal } from '../../store/slices/userSlice'
 
 function UserDetailFirst() {
   const [birth, setBirth] = useState('')
+  const [age, setAge] = useState('19~34')
   const [job, setJob] = useState('회사원')
   const [realEstate, setRealEstate] = useState('없음')
   const [car, setCar] = useState('')
@@ -53,27 +54,22 @@ function UserDetailFirst() {
       return
     }
 
-    let age
     const justAge = new Date().getFullYear() - Number(birth.substring(0, 4))
 
-    switch (justAge) {
-      case justAge < 35:
-        age = '19~34'
-        break
-      case 35 <= justAge < 60:
-        age = '35~60'
-        break
-      case 60 <= justAge:
-        age = '60~'
+    if (justAge < 35) {
+      setAge(data => (data = '19~34'))
+    } else if (35 <= justAge < 60) {
+      console.log(justAge)
+      setAge(data => (data = '35~60'))
+    } else {
+      setAge(data => (data = '60~'))
     }
 
     const data = { age, job, realEstate, car, asset, salary, interest }
 
-    console.log(data)
     try {
       await submitUserDetail(data)
-      console.log('successsssssss')
-      navigate('/products')
+      navigate('/')
     } catch (error) {
       console.log(error)
     }

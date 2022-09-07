@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
-import iPhone from '../assets/iphone.png'
+import iPhone from '../../public/assets/iphone.png'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { SearchOutline } from 'antd-mobile-icons'
 import { Space, Popup } from 'antd-mobile'
@@ -48,20 +48,25 @@ const NavTop = () => {
     setOptions(notLogin)
     navigate('/')
   }
+
+  const refreshLogin = async () => {
+    try {
+      const user = await refresh().unwrap()
+      dispatch(setUser(user))
+    } catch (error) {
+      navigate('/signin')
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
-          <button
-            className={styles.refresh}
-            onClick={async () => {
-              const user = await refresh().unwrap()
-              dispatch(setUser(user))
-            }}
-          >
-            로그인 연장
-          </button>
+          {accessToken ? (
+            <button className={styles.refresh} onClick={refreshLogin}>
+              로그인 연장
+            </button>
+          ) : null}
           <Space>
             <Link to='/'>
               <SearchOutline
