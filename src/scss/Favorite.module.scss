@@ -1,20 +1,37 @@
 @import 'main.scss';
 
+.favorite {
+  // height: 100vh;
+  margin-top: 300px;
+  margin-bottom: 70px;
+}
+
+.noData {
+  height: 100vh;
+  margin-top: 300px;
+}
+
 .FavoriteDetail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
   .detailContainer {
-    margin: 120px auto 0;
-    width: 360px;
+    margin: 0 auto;
+    width: 340px;
     font-size: 1.2rem;
     font-weight: 700;
     padding: 1rem;
-    background-color: #bde0fe;
+    background-color: #edf6f9;
     border-radius: 0.8rem;
     box-shadow: 0px 2px 5px #999;
     font-family: 'SDGothicA';
     color: #495057;
     .title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       text-align: center;
+      color: #023047;
     }
     .productContainer {
       margin-top: 1.4rem;
@@ -45,6 +62,12 @@
         margin-left: 6px;
         font-size: 1.2rem;
         line-height: 2rem;
+      }
+      .productCount {
+        font-size: 1.2rem;
+        line-height: 2rem;
+        margin-left: 2px;
+        color: #03045e;
       }
     }
   }
