@@ -16,7 +16,9 @@ const Cart = () => {
           </div>
         </>
       ) : (
-        <h1>즐겨찾기가 없습니다.</h1>
+        <h1 style={{ height: '100vh', marginTop: '300px' }}>
+          즐겨찾기가 없습니다.
+        </h1>
       )}
     </div>
   )
