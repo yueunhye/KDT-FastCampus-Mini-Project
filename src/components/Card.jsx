@@ -1,7 +1,12 @@
 import React from 'react'
 
 import style from '~/scss/Search.module.scss'
-import { StarOutlined, StarFilled, SwapRightOutlined } from '@ant-design/icons'
+import {
+  StarOutlined,
+  StarFilled,
+  SwapRightOutlined,
+  DeleteOutlined
+} from '@ant-design/icons'
 import {
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
@@ -9,21 +14,33 @@ import {
 } from '../store/api/favoriteApiSlice'
 import { openModal } from '../store/slices/userSlice'
 import { useDispatch } from 'react-redux'
-
+import { useLocation } from 'react-router-dom'
+import { useDeleteCartMutation } from '../store/api/cartApiSlice'
 
 const Card = ({ productData }) => {
   const { data: favorite } = useGetFavoriteQuery()
-  const isFavorite = favorite?.find(item => item.id === productData.id)
+  const [deleteCart] = useDeleteCartMutation()
   const [addFavorite] = useAddFavoriteMutation()
   const [deleteFavorite] = useDeleteFavoriteMutation()
   const dispatch = useDispatch()
+  const location = useLocation()
 
+  const isFavorite = favorite?.find(item => item.id === productData.id)
 
   const onFavoriteHandler = id => {
     console.log(isFavorite)
     isFavorite ? deleteFavorite(id) : addFavorite(id)
     console.log(id)
   }
+
+  const onCartHandler = id => {
+    if (confirm('장바구니에서 삭제하시겠습니까?')) {
+      deleteCart(id)
+    } else {
+      return
+    }
+  }
+
   return (
     <div className={style.Card}>
       <div
@@ -49,12 +66,21 @@ const Card = ({ productData }) => {
       <h3>{productData?.productName}</h3>
       <h4>{productData?.description}</h4>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div onClick={() => dispatch(openModal(true)) }>
+        <div onClick={() => dispatch(openModal(true))}>
           <span>신청하기</span>
           <SwapRightOutlined />
         </div>
+        {location.pathname === '/cart' ? (
+          <div>
+            <DeleteOutlined
+              onClick={() => onCartHandler(productData.id)}
+              style={{ fontSize: '20px', color: '#e63946', marginRight: '6px' }}
+            />
+          </div>
+        ) : (
+          ''
+        )}
       </div>
-      
     </div>
   )
 }

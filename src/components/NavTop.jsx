@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from '~/scss/NavTop.module.scss'
-import iPhone from '../assets/iphone.png'
+import iPhone from '../../public/assets/iphone.png'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { SearchOutline } from 'antd-mobile-icons'
-import { Space, Popup } from 'antd-mobile'
+import { Space, Popup, Badge } from 'antd-mobile'
 import { getCookie } from '../utils/cookie'
 import {
   useLogoutMutation,
@@ -13,11 +13,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../store/slices/userSlice'
 import { setUser } from '../store/slices/userSlice'
+import { useGetCartQuery } from '../store/api/cartApiSlice'
 
 const NavTop = () => {
   const dispatch = useDispatch()
   const accessToken = getCookie('accessToken')
   const [refresh, { data: userData, isError }] = useRefreshDataMutation()
+  const { data: cart } = useGetCartQuery()
 
   const notLogin = [
     { label: '회원가입', route: 'signup' },
@@ -48,20 +50,25 @@ const NavTop = () => {
     setOptions(notLogin)
     navigate('/')
   }
+
+  const refreshLogin = async () => {
+    try {
+      const user = await refresh().unwrap()
+      dispatch(setUser(user))
+    } catch (error) {
+      navigate('/signin')
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <img className={styles.notch} src={iPhone} alt='iphone notch' />
         <div className={styles.navbar}>
-          <button
-            className={styles.refresh}
-            onClick={async () => {
-              const user = await refresh().unwrap()
-              dispatch(setUser(user))
-            }}
-          >
-            로그인 연장
-          </button>
+          {accessToken ? (
+            <button className={styles.refresh} onClick={refreshLogin}>
+              로그인 연장
+            </button>
+          ) : null}
           <Space>
             <Link to='/'>
               <SearchOutline
@@ -74,9 +81,11 @@ const NavTop = () => {
               />
             </Link>
             <Link to='/cart'>
-              <ShoppingCartOutlined
-                style={{ fontSize: '22px', color: '#888888' }}
-              />
+              <Badge content={cart?.length === 0 ? '' : cart.length}>
+                <ShoppingCartOutlined
+                  style={{ fontSize: '22px', color: '#888888' }}
+                />
+              </Badge>
             </Link>
             <div
               className={styles.lineGroup}

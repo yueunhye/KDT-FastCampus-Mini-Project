@@ -12,8 +12,8 @@
   }
   select {
     appearance: none;
-    background: $inputBG url('../assets/down-arrow.png') right 10px center
-      no-repeat;
+    background: $inputBG url('../../public/assets/down-arrow.png') right 10px
+      center no-repeat;
     background-size: 15px;
     width: fit-content;
     padding: 2.5px 30px 2.5px 20px;

@@ -2,9 +2,23 @@ import React, { forwardRef, useState, useEffect } from 'react'
 import style from '~/scss/Search.module.scss'
 import { useDispatch } from 'react-redux'
 import { openModal } from '../../store/slices/userSlice'
+import {
+  useAddCartMutation,
+  useDeleteCartMutation,
+  useGetCartQuery
+} from '../../store/api/cartApiSlice'
 
 const RecommedModal = ({ getDetail }) => {
-  console.log('상세정보', getDetail)
+  const [addCart] = useAddCartMutation()
+
+  const addCartHandler = id => {
+    if (!id) return
+    if (confirm('장바구니에 담으시겠습니까?')) {
+      addCart(id)
+    } else {
+      return
+    }
+  }
 
   //모달 스크롤 방지
   useEffect(() => {
@@ -42,7 +56,12 @@ const RecommedModal = ({ getDetail }) => {
           )}
         </main>
         <footer>
-          <button type='button'>장바구니 담기</button>
+          <button
+            type='button'
+            onClick={() => addCartHandler(getDetail.data.id)}
+          >
+            장바구니 담기
+          </button>
           <button type='button' onClick={() => dispatch(openModal(false))}>
             취소하기
           </button>

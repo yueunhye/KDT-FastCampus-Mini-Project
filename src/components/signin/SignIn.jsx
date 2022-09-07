@@ -19,7 +19,6 @@ function SignIn() {
   const signIn = async () => {
     if (!email || !password) {
       dispatch(openModal(true))
-      console.log('안열림 ', isOpen)
       return
     }
     const data = {

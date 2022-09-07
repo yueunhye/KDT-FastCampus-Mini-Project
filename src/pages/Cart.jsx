@@ -1,16 +1,24 @@
 import React from 'react'
-import style from '~/scss/Cart.module.scss'
-import Card from '~/components/Card'
+import Card from '../components/Card'
+import { useGetCartQuery } from '../store/api/cartApiSlice'
 
 const Cart = () => {
-  console.log(data)
+  const { data: cart, isLoading, isError } = useGetCartQuery()
+
   return (
-    <section className={style.cartSection}>
-      <div>
-        <h1 className={style.title}>장바구니 목록이 비어있습니다.</h1>
-      </div>
-      <div className='content'>{/* <Card /> */}</div>
-    </section>
+    <div>
+      {cart?.length !== 0 ? (
+        <>
+          <div style={{ marginTop: '120px', marginBottom: '100px' }}>
+            {cart?.map((item, index) => (
+              <Card key={index} productData={item} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <h1>즐겨찾기가 없습니다.</h1>
+      )}
+    </div>
   )
 }
 

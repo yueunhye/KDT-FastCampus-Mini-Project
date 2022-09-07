@@ -2,7 +2,6 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { apiSlice } from './api/apiSlice'
 import { financeApi } from './api/financeApi'
-import { favoriteApiSlice } from './api/favoriteApiSlice'
 import userReducer from './slices/userSlice'
 
 const rootReducer = combineReducers({
