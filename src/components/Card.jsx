@@ -10,7 +10,6 @@ import {
 import { openModal } from '../store/slices/userSlice'
 import { useDispatch } from 'react-redux'
 
-
 const Card = ({ productData }) => {
   const { data: favorite } = useGetFavoriteQuery()
   const isFavorite = favorite?.find(item => item.id === productData.id)
@@ -18,12 +17,12 @@ const Card = ({ productData }) => {
   const [deleteFavorite] = useDeleteFavoriteMutation()
   const dispatch = useDispatch()
 
-
   const onFavoriteHandler = id => {
     console.log(isFavorite)
     isFavorite ? deleteFavorite(id) : addFavorite(id)
     console.log(id)
   }
+  // isError && alert('로그인 시간이 만료되었습니다. 다시 로그인 해주세요!')
   return (
     <div className={style.Card}>
       <div
@@ -49,12 +48,11 @@ const Card = ({ productData }) => {
       <h3>{productData?.productName}</h3>
       <h4>{productData?.description}</h4>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div onClick={() => dispatch(openModal(true)) }>
+        <div onClick={() => dispatch(openModal(true))}>
           <span>신청하기</span>
           <SwapRightOutlined />
         </div>
       </div>
-      
     </div>
   )
 }

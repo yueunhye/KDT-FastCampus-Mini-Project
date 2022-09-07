@@ -9,7 +9,7 @@ import SignIn from '~/components/signin'
 import Cart from '../pages/Cart'
 import Consume from '../pages/Consume'
 import UserDetailPage from '~/components/user/UserDetailPage'
-import Favorite from '../components/Favorite'
+import Favorite from '../components/favorite/Favorite'
 import Application from '../pages/Application'
 
 import { CookiesProvider } from 'react-cookie'
