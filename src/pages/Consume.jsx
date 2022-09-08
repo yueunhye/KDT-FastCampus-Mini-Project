@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import styles from '../scss/Consume.module.scss'
-import { Tabs, Swiper } from 'antd-mobile'
+import { Tabs, Swiper, Skeleton } from 'antd-mobile'
 import { useRef } from 'react'
 import RecommedModal from '../components/modal/RecommendModal'
 import { useSetMenberShipQuery } from '../store/api/recommendApi'
 import { useSetDetailProductMutation } from '../store/api/recommendApi'
-import { useDispatch } from 'react-redux'
-import { openModal } from '../store/slices/userSlice'
 import { useSelector } from 'react-redux'
 
 const tagData = [
@@ -19,22 +17,28 @@ const Consume = () => {
   const [card, setCard] = useState([])
   const [memBerShip, setMemBerShip] = useState([])
   const [activeIndex, setActiveIndex] = useState(1)
+  const conSumRef = useRef(null)
   const [detail, { data: getDetail }] = useSetDetailProductMutation()
-  const { data: membership, isError, isLoading } = useSetMenberShipQuery()
+  const { data: membership, isError } = useSetMenberShipQuery()
   const guLinModal = useSelector(state => state.user).modalVisible
   const getName = useSelector(state => state.user).name
+  const [isLoading, setIsLoading] = useState(false)
+  useEffect(() => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+  }, [])
 
   console.log('멤버십', membership)
   console.log('get??', getDetail)
-  const conSumRef = useRef(null)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     if (membership) {
       setCard(membership.data.cards)
       setMemBerShip(membership.data.memberships)
     }
-  }, [])
+  }, [membership])
 
   return (
     <>
@@ -74,28 +78,38 @@ const Consume = () => {
             }}
           >
             <Swiper.Item>
-              {card.map((item, idx) => (
-                <div
-                  onClick={() => {
-                    dispatch(openModal(true))
-                    detail(item.id)
-                  }}
-                >
-                  <Card productData={item} key={idx} />
-                </div>
-              ))}
+              <div>
+                {card?.map((item, idx) => (
+                  <div
+                    onClick={() => {
+                      detail(item.id)
+                    }}
+                  >
+                    {isLoading ? (
+                      <Skeleton animated className={styles.Skeleton}></Skeleton>
+                    ) : (
+                      <Card productData={item} key={item.id} />
+                    )}
+                  </div>
+                ))}
+              </div>
             </Swiper.Item>
             <Swiper.Item>
-              {memBerShip.map((item, idx) => (
-                <div
-                  onClick={() => {
-                    dispatch(openModal(true))
-                    detail(item.id)
-                  }}
-                >
-                  <Card productData={item} key={idx} />
-                </div>
-              ))}
+              <div>
+                {memBerShip?.map((item, idx) => (
+                  <div
+                    onClick={() => {
+                      detail(item.id)
+                    }}
+                  >
+                    {isLoading ? (
+                      <Skeleton animated className={styles.Skeleton}></Skeleton>
+                    ) : (
+                      <Card productData={item} key={item.id} />
+                    )}
+                  </div>
+                ))}
+              </div>
             </Swiper.Item>
           </Swiper>
         </div>
