@@ -167,3 +167,13 @@
 .swiper {
   margin-top: 18px;
 }
+
+.Skeleton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 19rem;
+  height: 12rem;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+}

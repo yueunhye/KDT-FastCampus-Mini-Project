@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../scss/Recommend.module.scss'
 import RecommedModal from './modal/RecommendModal'
 import Card from '../components/Card'
-import { useState } from 'react'
-import { Tabs, Swiper } from 'antd-mobile'
+import { Tabs, Swiper, Skeleton } from 'antd-mobile'
 import { useRef } from 'react'
 import { useSetRecommendQuery } from '../store/api/recommendApi'
 import { useSetDetailProductMutation } from '../store/api/recommendApi'
-import { openModal } from '../store/slices/userSlice'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+
 const tagData = [
   { key: 'loan', title: '대출' },
   { key: 'saving', title: '적금' },
   { key: 'fund', title: '펀드' }
 ]
 
-const RecommendList = ({ name }) => {
+const RecommendList = () => {
   const [deList, setDeList] = useState([])
   const [fundList, setFundList] = useState([])
   const [countList, setCountList] = useState([])
@@ -26,10 +24,16 @@ const RecommendList = ({ name }) => {
   const [detail, { data: getDetail }] = useSetDetailProductMutation()
   const guLinModal = useSelector(state => state.user).modalVisible
   const getName = useSelector(state => state.user).name
-  console.log('get??', getDetail)
-
-  const dispatch = useDispatch()
-  console.log('와라', recommend)
+  const [isLoading, setIsLoading] = useState(false)
+  useEffect(() => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+  }, [])
+  console.log('로딩트루', isLoading)
+  // console.log('get??', getDetail)
+  // console.log('와라', recommend)
 
   useEffect(() => {
     if (recommend) {
@@ -80,7 +84,11 @@ const RecommendList = ({ name }) => {
                     detail(item.id)
                   }}
                 >
-                  <Card productData={item} key={idx} />
+                  {isLoading ? (
+                    <Skeleton animated className={styles.Skeleton}></Skeleton>
+                  ) : (
+                    <Card productData={item} key={item.id} />
+                  )}
                 </div>
               ))}
             </div>
@@ -93,7 +101,11 @@ const RecommendList = ({ name }) => {
                     detail(item.id)
                   }}
                 >
-                  <Card productData={item} key={idx} />
+                  {isLoading ? (
+                    <Skeleton animated className={styles.Skeleton}></Skeleton>
+                  ) : (
+                    <Card productData={item} key={item.id} />
+                  )}
                 </div>
               ))}
             </div>
@@ -106,7 +118,11 @@ const RecommendList = ({ name }) => {
                     detail(item.id)
                   }}
                 >
-                  <Card productData={item} key={idx} />
+                  {isLoading ? (
+                    <Skeleton animated className={styles.Skeleton}></Skeleton>
+                  ) : (
+                    <Card productData={item} key={item.id} />
+                  )}
                 </div>
               ))}
             </div>
