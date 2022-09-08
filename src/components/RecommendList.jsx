@@ -31,6 +31,7 @@ const RecommendList = () => {
       setIsLoading(false)
     }, 1000)
   }, [])
+
   console.log('로딩트루', isLoading)
   // console.log('get??', getDetail)
   // console.log('와라', recommend)
