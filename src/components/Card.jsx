@@ -1,5 +1,4 @@
 import React from 'react'
-
 import style from '~/scss/Search.module.scss'
 import {
   StarOutlined,
@@ -17,6 +16,7 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useDeleteCartMutation } from '../store/api/cartApiSlice'
 
+
 const Card = ({ productData }) => {
   const { data: favorite } = useGetFavoriteQuery()
   const [deleteCart] = useDeleteCartMutation()
@@ -24,6 +24,7 @@ const Card = ({ productData }) => {
   const [deleteFavorite] = useDeleteFavoriteMutation()
   const dispatch = useDispatch()
   const location = useLocation()
+
 
   const isFavorite = favorite?.find(item => item.id === productData.id)
 
@@ -33,6 +34,7 @@ const Card = ({ productData }) => {
     console.log(id)
   }
 
+
   const onCartHandler = id => {
     if (confirm('장바구니에서 삭제하시겠습니까?')) {
       deleteCart(id)
@@ -40,7 +42,6 @@ const Card = ({ productData }) => {
       return
     }
   }
-
   return (
     <div className={style.Card}>
       <div
