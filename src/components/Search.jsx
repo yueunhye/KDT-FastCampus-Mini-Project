@@ -31,8 +31,7 @@ function Search() {
 
   const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
-  console.log('products', products)
-  console.log('modalTest', modalTest, Boolean(!accessToken))
+
   const asyncUpFetch = () => {
     setIsClicked(true)
     search(data)

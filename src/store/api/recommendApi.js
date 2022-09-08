@@ -2,7 +2,7 @@ import { apiSlice } from '../api/apiSlice'
 
 const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['getRecommend'] })
 
-export const recommendApi = apiSlice.injectEndpoints({
+export const recommendApi = apiWithTags.injectEndpoints({
   endpoints: builder => ({
     setRecommend: builder.query({
       query: () => ({
@@ -29,8 +29,7 @@ export const recommendApi = apiSlice.injectEndpoints({
         transformResponse: response => {
           return response.data
         }
-      }),
-      invalidatesTags: ['getRecommend']
+      })
     })
   })
 })
@@ -38,5 +37,6 @@ export const recommendApi = apiSlice.injectEndpoints({
 export const {
   useSetRecommendQuery,
   useSetMenberShipQuery,
-  useSetDetailProductMutation
+  useSetDetailProductMutation,
+  useGetDetailProudctQuery
 } = recommendApi
