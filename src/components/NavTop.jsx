@@ -81,7 +81,7 @@ const NavTop = () => {
               />
             </Link>
             <Link to='/cart'>
-              <Badge content={cart?.length === 0 ? '' : cart.length}>
+              <Badge content={cart?.length === 0 ? '' : cart?.length}>
                 <ShoppingCartOutlined
                   style={{ fontSize: '22px', color: '#888888' }}
                 />
