@@ -6,7 +6,10 @@ import { useState } from 'react'
 import { Tabs, Swiper } from 'antd-mobile'
 import { useRef } from 'react'
 import { useSetRecommendQuery } from '../store/api/recommendApi'
+import { useSetDetailProductMutation } from '../store/api/recommendApi'
 import { useSelector } from 'react-redux'
+import { Skeleton } from 'antd-mobile'
+
 const tagData = [
   { key: 'loan', title: '대출' },
   { key: 'saving', title: '적금' },
@@ -20,9 +23,13 @@ const RecommendList = () => {
   const [activeIndex, setActiveIndex] = useState(1)
   const clickRef = useRef(null)
   const { data: recommend, error, loading } = useSetRecommendQuery()
+  const [detail, { data: getDetail }] = useSetDetailProductMutation()
   const guLinModal = useSelector(state => state.user).modalVisible
-
   const getName = useSelector(state => state.user).name
+  const { isLoading } = useSetRecommendQuery()
+  console.log('로딩트루', isLoading)
+  // console.log('get??', getDetail)
+  // console.log('와라', recommend)
 
   useEffect(() => {
     if (recommend) {
@@ -73,7 +80,11 @@ const RecommendList = () => {
                     detail(item.id)
                   }}
                 >
-                  <Card productData={item} key={idx} />
+                  {!isLoading ? (
+                    <Skeleton animated className={styles.Skeleton}></Skeleton>
+                  ) : (
+                    <Card productData={item} key={idx} />
+                  )}
                 </div>
               ))}
             </div>
@@ -86,7 +97,11 @@ const RecommendList = () => {
                     detail(item.id)
                   }}
                 >
-                  <Card productData={item} key={idx} />
+                  {!isLoading ? (
+                    <Skeleton animated className={styles.Skeleton}></Skeleton>
+                  ) : (
+                    <Card productData={item} key={idx} />
+                  )}
                 </div>
               ))}
             </div>
@@ -99,15 +114,18 @@ const RecommendList = () => {
                     detail(item.id)
                   }}
                 >
-                  <Card productData={item} key={idx} />
+                  {!isLoading ? (
+                    <Skeleton animated className={styles.Skeleton}></Skeleton>
+                  ) : (
+                    <Card productData={item} key={idx} />
+                  )}
                 </div>
               ))}
             </div>
           </Swiper.Item>
         </Swiper>
       </div>
-
-      {guLinModal ? <RecommedModal /> : null}
+      {guLinModal ? <RecommedModal getDetail={getDetail} /> : null}
     </div>
   )
 }

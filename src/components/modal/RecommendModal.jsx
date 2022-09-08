@@ -2,12 +2,9 @@ import React, { forwardRef, useState, useEffect } from 'react'
 import style from '~/scss/Search.module.scss'
 import { useDispatch } from 'react-redux'
 import { openModal } from '../../store/slices/userSlice'
-import { useSetDetailProductMutation } from '../../store/api/recommendApi'
 
-const RecommedModal = () => {
-  const [_, { data: getDetail }] = useSetDetailProductMutation()
+const RecommedModal = ({ getDetail }) => {
   console.log('상세정보', getDetail)
-  const dispatch = useDispatch()
 
   //모달 스크롤 방지
   useEffect(() => {
@@ -17,6 +14,7 @@ const RecommedModal = () => {
     }
   }, [])
 
+  const dispatch = useDispatch()
   return (
     <div
       className={style.RecommendModal}
@@ -31,15 +29,15 @@ const RecommedModal = () => {
         <main>
           {getDetail && (
             <div className={style.logo}>
-              <img src={getDetail?.data.logo} alt='logo' />
-              <h3>{getDetail?.data.companyName}</h3>
+              <img src={getDetail.data.logo} alt='logo' />
+              <h3>{getDetail.data.companyName}</h3>
             </div>
           )}
 
           {getDetail && (
             <div className={style.detail}>
-              <p>{getDetail?.data.productName}</p>
-              <span>{getDetail?.data.details}</span>
+              <p>{getDetail.data.productName}</p>
+              <span>{getDetail.data.details}</span>
             </div>
           )}
         </main>

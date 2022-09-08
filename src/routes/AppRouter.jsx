@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import NavBottom from '../components/NavBottom'
 import NavTop from '../components/NavTop'
@@ -11,7 +11,6 @@ import Consume from '../pages/Consume'
 import UserDetailPage from '~/components/user/UserDetailPage'
 import Favorite from '../components/Favorite'
 import Application from '../pages/Application'
-
 import { CookiesProvider } from 'react-cookie'
 import RequireAuth from '../pages/RequireAuth'
 

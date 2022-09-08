@@ -1,5 +1,4 @@
 import React from 'react'
-
 import style from '~/scss/Search.module.scss'
 import { StarOutlined, StarFilled, SwapRightOutlined } from '@ant-design/icons'
 import {
@@ -22,6 +21,7 @@ const Card = ({ productData }) => {
     isFavorite ? deleteFavorite(id) : addFavorite(id)
     console.log(id)
   }
+
   return (
     <div className={style.Card}>
       <div

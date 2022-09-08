@@ -73,7 +73,7 @@ function UserDetailFirst() {
     try {
       await submitUserDetail(data)
       console.log('successsssssss')
-      navigate('/products')
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
