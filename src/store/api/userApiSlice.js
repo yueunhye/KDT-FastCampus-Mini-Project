@@ -13,7 +13,8 @@ export const userApiSlice = apiWithTags.injectEndpoints({
       }),
       transformResponse: response => {
         return response.data
-      }
+      },
+      invalidatesTags: ['User']
     }),
     signUp: builder.mutation({
       query: data => ({
