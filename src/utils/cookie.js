@@ -3,8 +3,10 @@ import { Cookies } from 'react-cookie'
 const cookies = new Cookies()
 
 export const setCookie = ({ accessToken, refreshToken }) => {
+  const expires = new Date()
+  expires.setMinutes(expires.getMinutes() + 30)
   cookies.set('refreshToken', refreshToken, { path: '/' })
-  cookies.set('accessToken', accessToken, { path: '/' })
+  cookies.set('accessToken', accessToken, { path: '/', expires })
   return
 }
 

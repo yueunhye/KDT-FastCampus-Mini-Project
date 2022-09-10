@@ -31,8 +31,7 @@ function Search() {
 
   const [search, { data: getSearch }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
-  console.log('products', products)
-  console.log('modalTest', modalTest, Boolean(!accessToken))
+
   const asyncUpFetch = () => {
     setIsClicked(true)
     search(data)
@@ -121,24 +120,24 @@ function Search() {
       ) : isError ? (
         <div>에러발생</div>
       ) : isClicked === false ? (
-        products?.map((product, index) => (
+        products?.map(product => (
           <div
             onClick={() => {
               detail(product.id)
             }}
           >
-            <Card key={index} productData={product} />
+            <Card key={product.id} productData={product} />
           </div>
         ))
       ) : (
         getSearch &&
-        getSearch.map((product, index) => (
+        getSearch.map(product => (
           <div
             onClick={() => {
               detail(product.id)
             }}
           >
-            <Card key={index} productData={product} />
+            <Card key={product.id} productData={product} />
           </div>
         ))
       )}
