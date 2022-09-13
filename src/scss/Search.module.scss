@@ -171,6 +171,18 @@ h1 {
   }
 }
 
+.skeletonContainer{
+  .customSkeleton {
+    width: 19rem;
+    height: 12rem;
+    padding: 0.1rem 1.3rem;
+    box-sizing: border-box;
+    border-radius: 0.8rem;
+    margin: 1.5rem auto;
+    line-height: 1.3rem;
+  }
+}
+
 .Modal {
   // display: none;
   display: flex;
