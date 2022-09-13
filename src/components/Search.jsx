@@ -29,7 +29,7 @@ function Search() {
     tagContent: checkedTagContent
   }
   const [detail, { data: getDetail }] = useSetDetailProductMutation()
-  const [search, { data: getSearch, loading }] = useGetSearchMutation()
+  const [search, { data: getSearch, isLoading: loading, isError: error }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
 
   const asyncUpFetch = () => {
@@ -74,8 +74,8 @@ function Search() {
                   !checkedTag.includes(item)
                     ? setCheckedTag(checkedTag => [...checkedTag, item])
                     : setCheckedTag(
-                        checkedTag.filter(button => button !== item)
-                      )
+                      checkedTag.filter(button => button !== item)
+                    )
                 }}
                 className={
                   checkedTag.includes(item) ? `${style.On}` : `${style.Off}`
@@ -92,12 +92,12 @@ function Search() {
                 onClick={() => {
                   !checkedTagContent.includes(item)
                     ? setCheckedTagContent(checkedTagContent => [
-                        ...checkedTagContent,
-                        item
-                      ])
+                      ...checkedTagContent,
+                      item
+                    ])
                     : setCheckedTagContent(
-                        checkedTagContent.filter(button => button !== item)
-                      )
+                      checkedTagContent.filter(button => button !== item)
+                    )
                 }}
                 className={
                   checkedTagContent.includes(item)
@@ -117,15 +117,17 @@ function Search() {
       ) : null}
       {isLoading ? (
         <div className={style.skeletonContainer}>
-          <Skeleton animated className={style.customSkeleton}/>
-          <Skeleton animated className={style.customSkeleton}/>
-          <Skeleton animated className={style.customSkeleton}/>
+          <Skeleton animated className={style.customSkeleton} />
+          <Skeleton animated className={style.customSkeleton} />
+          <Skeleton animated className={style.customSkeleton} />
+          <Skeleton animated className={style.customSkeleton} />
         </div>
       ) : isError ? (
         <div className={style.skeletonContainer}>
-          <Skeleton animated className={style.customSkeleton}/>
-          <Skeleton animated className={style.customSkeleton}/>
-          <Skeleton animated className={style.customSkeleton}/>
+          <Skeleton animated className={style.customSkeleton} />
+          <Skeleton animated className={style.customSkeleton} />
+          <Skeleton animated className={style.customSkeleton} />
+          <Skeleton animated className={style.customSkeleton} />
         </div>
       ) : isClicked === false ? (
         products?.map(product => (
@@ -137,19 +139,19 @@ function Search() {
             <Card key={product.id} productData={product} />
           </div>
         ))
-      ) : (
+      ) : ( 
         getSearch &&
         getSearch.map(product => (
           <div
             onClick={() => {
               detail(product.id)
             }}
-          >{
-            loading ? (
-              <div className={style.skeletonContainer}></div>
-            )
-            : <Card key={product.id} productData={product} />
-          }
+          >
+            { 
+              loading ? <Skeleton animated className={style.customSkeleton} /> 
+              : error ? <Skeleton animated className={style.customSkeleton} />
+              : <Card key={product.id} productData={product} />
+            }
           </div>
         ))
       )}
