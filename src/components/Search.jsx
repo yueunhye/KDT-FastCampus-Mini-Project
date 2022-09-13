@@ -11,6 +11,7 @@ import { FilterOutline, RightOutline, SearchOutline } from 'antd-mobile-icons'
 import { useSelector } from 'react-redux'
 import RecommedModal from './modal/RecommendModal'
 import { useSetDetailProductMutation } from '../store/api/recommendApi'
+import { Skeleton } from 'antd-mobile'
 
 function Search() {
   const [visible, setVisible] = useState(false)
@@ -20,7 +21,7 @@ function Search() {
   const [checkedTagContent, setCheckedTagContent] = useState([])
   const [searchInput, setSearchInput] = useState('')
   const [isClicked, setIsClicked] = useState(false)
-  const modalTest = useSelector(state => state.user).modalVisible
+  const modal = useSelector(state => state.user).modalVisible
   const accessToken = getCookie('accessToken')
   const data = {
     query: searchInput,
@@ -28,8 +29,7 @@ function Search() {
     tagContent: checkedTagContent
   }
   const [detail, { data: getDetail }] = useSetDetailProductMutation()
-
-  const [search, { data: getSearch }] = useGetSearchMutation()
+  const [search, { data: getSearch, loading }] = useGetSearchMutation()
   const { data: products, isLoading, isError } = useGetProductsQuery()
 
   const asyncUpFetch = () => {
@@ -116,9 +116,17 @@ function Search() {
         </div>
       ) : null}
       {isLoading ? (
-        <div>로딩...</div>
+        <div className={style.skeletonContainer}>
+          <Skeleton animated className={style.customSkeleton}/>
+          <Skeleton animated className={style.customSkeleton}/>
+          <Skeleton animated className={style.customSkeleton}/>
+        </div>
       ) : isError ? (
-        <div>에러발생</div>
+        <div className={style.skeletonContainer}>
+          <Skeleton animated className={style.customSkeleton}/>
+          <Skeleton animated className={style.customSkeleton}/>
+          <Skeleton animated className={style.customSkeleton}/>
+        </div>
       ) : isClicked === false ? (
         products?.map(product => (
           <div
@@ -136,17 +144,21 @@ function Search() {
             onClick={() => {
               detail(product.id)
             }}
-          >
-            <Card key={product.id} productData={product} />
+          >{
+            loading ? (
+              <div className={style.skeletonContainer}></div>
+            )
+            : <Card key={product.id} productData={product} />
+          }
           </div>
         ))
       )}
       {/* // 로그인 했을시 */}
-      {modalTest && accessToken ? (
+      {modal && accessToken ? (
         <RecommedModal getDetail={getDetail} />
       ) : null}
       {/* // 로그인 안했을시 */}
-      {modalTest && (Boolean(!accessToken) || accessToken === 'undefinded') ? (
+      {modal && (Boolean(!accessToken) || accessToken === 'undefinded') ? (
         <Modal />
       ) : null}
     </section>
