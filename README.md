@@ -67,7 +67,7 @@
 
 - 찜하기
 
-<image src="https://user-images.githubusercontent.com/90392240/190913655-365ea8b4-4d3e-4fde-b0bf-ba87e3601e41.gif" width="200" />
+  <image src="https://user-images.githubusercontent.com/90392240/190913655-365ea8b4-4d3e-4fde-b0bf-ba87e3601e41.gif" width="200" />
 
 - 찜한 금융상품을 모아서 볼 수 있음
 - 금융상품 종류별로 개수 보여주는 기능
