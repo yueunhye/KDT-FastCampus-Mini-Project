@@ -30,6 +30,10 @@
 
 - [피그마 시안 링크](https://www.figma.com/file/dU8vLAjRevb7hmCLzblX4q?embed_host=notion&kind=&node-id=0%3A1&viewer=1)
 
+## 작업 기록
+
+- [노션](https://quickest-asterisk-75d.notion.site/Front-End-4f24f7a994094a8682951692c22e2d08)
+
 ## 백엔드와 협업 내용
 
 > 기획 방향
