@@ -34,7 +34,7 @@
 <image src="" width="200" />
 <image src="" width="200" />
 <image src="" width="200" />
-<image src="" width="200" />
+
 > 기획 방향
 
 - 금융상품을 소개하고, 맞춤형 금융 상품 제공
