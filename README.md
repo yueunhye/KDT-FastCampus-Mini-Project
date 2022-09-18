@@ -2,8 +2,10 @@
 
 > 백엔드와 협업 미니 프로젝트
 
+<div style={{display: "flex"}}>
 <image src="https://user-images.githubusercontent.com/90392240/190893467-8a03c0dd-f18f-4647-907a-d824c9c4c993.png" width="200" />
 <image src="https://user-images.githubusercontent.com/90392240/190893398-72f70664-b5e5-4aa2-aca6-71393f7a5cfa.png" width="200"/>
+</div>
 
 ## 🛠 사용기술
 
@@ -58,15 +60,17 @@
 
 - 금융상품 검색하기
 
+  <image src="https://user-images.githubusercontent.com/90392240/190896210-87e45088-f1b9-4274-b3aa-ee43cb591351.gif" width="200" />
+
   - 태그를 통해 금융상품 필터링 가능
   - 금융상품 직접 검색
 
-  <image src="https://user-images.githubusercontent.com/90392240/190896210-87e45088-f1b9-4274-b3aa-ee43cb591351.gif" width="200" />
-
 - 찜하기
 
-  - 찜한 금융상품을 모아서 볼 수 있음
-  - 금융상품 종류별로 개수 보여주는 기능
+<image src="https://user-images.githubusercontent.com/90392240/190913655-365ea8b4-4d3e-4fde-b0bf-ba87e3601e41.gif" width="200" />
+
+- 찜한 금융상품을 모아서 볼 수 있음
+- 금융상품 종류별로 개수 보여주는 기능
 
 - 장바구니 담기
 
@@ -76,5 +80,7 @@
   - 헤더 네이베이션바에서 장바구니에 담긴 금융상품 개수 보여주는 기능
 
 - 로딩
+
+  <image src="https://user-images.githubusercontent.com/90392240/190913802-1720bf4d-c725-4d6e-9da2-f880a4293ea2.gif" width="200" />
 
   - 로딩시 스켈레톤 UI 적용
