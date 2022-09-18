@@ -17,7 +17,7 @@ const Cart = () => {
         </>
       ) : (
         <h1 style={{ height: '100vh', marginTop: '300px' }}>
-          즐겨찾기가 없습니다.
+          장바구니에 상품이 없습니다.
         </h1>
       )}
     </div>
