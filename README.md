@@ -30,11 +30,6 @@
 
 ## 백엔드와 협업 내용
 
-<image src="" width="200" />
-<image src="" width="200" />
-<image src="" width="200" />
-<image src="" width="200" />
-
 > 기획 방향
 
 - 금융상품을 소개하고, 맞춤형 금융 상품 제공
@@ -66,6 +61,8 @@
   - 태그를 통해 금융상품 필터링 가능
   - 금융상품 직접 검색
 
+  <image src="https://user-images.githubusercontent.com/90392240/190896210-87e45088-f1b9-4274-b3aa-ee43cb591351.gif" width="200" />
+
 - 찜하기
 
   - 찜한 금융상품을 모아서 볼 수 있음
@@ -73,7 +70,7 @@
 
 - 장바구니 담기
 
-  <image src="https://im2.ezgif.com/tmp/ezgif-2-4d5985ccff.gif" width="200" />
+  <image src="https://user-images.githubusercontent.com/90392240/190898852-3c185eaf-22ce-4738-b8a3-4f7376c87486.gif" width="200" />
 
   - 장바구니에 담은 금융상품을 모아서 볼 수 있음
   - 헤더 네이베이션바에서 장바구니에 담긴 금융상품 개수 보여주는 기능
